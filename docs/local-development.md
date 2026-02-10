@@ -172,6 +172,7 @@ This adds `reverse_proxy` (Nginx TLS terminator) and exposes:
 Important:
 - When `ENABLE_HTTPS=1`, open the frontend on `https://localhost:8443`.
 - Do not use `http://localhost:5173` in this mode; API calls may be redirected to an internal container hostname (for example `https://backend:8000/...`) that your browser cannot resolve.
+- If you switched between secure and non-secure modes and still see `backend:8000` errors in browser devtools, clear site data for `localhost` (or use a private window) and reload.
 
 The reverse proxy auto-generates a self-signed cert when missing and stores it in the `nginx_certs` volume.
 

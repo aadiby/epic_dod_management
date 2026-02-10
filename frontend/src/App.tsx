@@ -175,6 +175,14 @@ function getCookieValue(name: string): string {
   return match ? decodeURIComponent(match[1]) : ''
 }
 
+function apiFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+  return window.fetch(input, {
+    cache: 'no-store',
+    credentials: 'same-origin',
+    ...(init ?? {}),
+  })
+}
+
 function getDashboardGate(props: DashboardPageProps) {
   const { loading, error, metrics } = props
 
@@ -773,7 +781,7 @@ function AppContent() {
 
     const loadHealth = async () => {
       try {
-        const response = await fetch('/api/health', {
+        const response = await apiFetch('/api/health', {
           signal: controller.signal,
           credentials: 'same-origin',
         })
@@ -812,7 +820,7 @@ function AppContent() {
     const loadSession = async () => {
       setSessionLoading(true)
       try {
-        const response = await fetch('/api/auth/session', {
+        const response = await apiFetch('/api/auth/session', {
           signal: controller.signal,
           credentials: 'same-origin',
         })
@@ -894,15 +902,15 @@ function AppContent() {
 
       try {
         const [metricsResponse, nonCompliantResponse, historyResponse] = await Promise.all([
-          fetch(`/api/metrics${queryString}`, {
+          apiFetch(`/api/metrics${queryString}`, {
             signal: controller.signal,
             credentials: 'same-origin',
           }),
-          fetch(`/api/epics/non-compliant${queryString}`, {
+          apiFetch(`/api/epics/non-compliant${queryString}`, {
             signal: controller.signal,
             credentials: 'same-origin',
           }),
-          fetch(`/api/nudges/history${historyQueryString}`, {
+          apiFetch(`/api/nudges/history${historyQueryString}`, {
             signal: controller.signal,
             credentials: 'same-origin',
           }),
@@ -956,7 +964,7 @@ function AppContent() {
       }
 
       try {
-        const response = await fetch('/api/sync/status', {
+        const response = await apiFetch('/api/sync/status', {
           signal: controller.signal,
           credentials: 'same-origin',
         })
@@ -989,7 +997,7 @@ function AppContent() {
       }
 
       try {
-        const response = await fetch('/api/teams', {
+        const response = await apiFetch('/api/teams', {
           signal: controller.signal,
           credentials: 'same-origin',
         })
@@ -1154,7 +1162,7 @@ function AppContent() {
         params.set('sprint_snapshot_id', String(metrics.scope.sprint_snapshot_id))
       }
       const query = params.toString()
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/epics/${encodeURIComponent(epicKey)}/nudge${query ? `?${query}` : ''}`,
         {
           method: 'POST',
@@ -1238,7 +1246,7 @@ function AppContent() {
       .filter((item) => item.length > 0)
 
     try {
-      const response = await fetch(`/api/teams/${encodeURIComponent(teamKey)}/recipients`, {
+      const response = await apiFetch(`/api/teams/${encodeURIComponent(teamKey)}/recipients`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: jsonHeaders(),
@@ -1277,7 +1285,7 @@ function AppContent() {
       .filter((item) => item.length > 0)
 
     try {
-      const response = await fetch(`/api/teams/${encodeURIComponent(teamKey)}/scrum-masters`, {
+      const response = await apiFetch(`/api/teams/${encodeURIComponent(teamKey)}/scrum-masters`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: jsonHeaders(),
@@ -1315,7 +1323,7 @@ function AppContent() {
     setSyncFeedback('')
 
     try {
-      const response = await fetch('/api/sync/run', {
+      const response = await apiFetch('/api/sync/run', {
         method: 'POST',
         credentials: 'same-origin',
         headers: jsonHeaders(),
@@ -1359,7 +1367,7 @@ function AppContent() {
     setLoginError('')
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
         credentials: 'same-origin',
         headers: jsonHeaders(),
@@ -1389,7 +1397,7 @@ function AppContent() {
 
   const logoutUser = async () => {
     try {
-      await fetch('/api/auth/logout', {
+      await apiFetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'same-origin',
         headers: jsonHeaders(),
