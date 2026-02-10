@@ -8,6 +8,47 @@ from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+def _load_env_file(path: Path, locked_keys: set[str]) -> None:
+    if not path.is_file():
+        return
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+
+        if line.startswith("export "):
+            line = line[len("export ") :].strip()
+
+        if "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if not key or key in locked_keys:
+            continue
+
+        value = value.strip()
+        if (value.startswith('"') and value.endswith('"')) or (
+            value.startswith("'") and value.endswith("'")
+        ):
+            value = value[1:-1]
+
+        os.environ[key] = value
+
+
+def _load_local_env() -> None:
+    # Keep explicit shell exports authoritative.
+    locked_keys = set(os.environ.keys())
+
+    # Within files, allow backend/.env to override repo-root .env.
+    for env_path in [BASE_DIR.parent / ".env", BASE_DIR / ".env"]:
+        _load_env_file(env_path, locked_keys)
+
+
+_load_local_env()
+
+
 def env_bool(name: str, default: bool) -> bool:
     value = os.getenv(name)
     if value is None:
