@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+backend/.venv/
+
+# Node
+node_modules/
+frontend/node_modules/
+coverage/
+playwright-report/
+frontend/test-results/*
+!frontend/test-results/.gitkeep
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+frontend/dist/

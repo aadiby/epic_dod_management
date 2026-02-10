@@ -1,0 +1,10 @@
+{
+  "ABC-501": [
+    {
+      "object": {
+        "url": "https://wiki.example.internal/threat-model/ABC-500"
+      }
+    }
+  ],
+  "ABC-502": []
+}

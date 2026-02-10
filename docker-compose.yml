@@ -1,0 +1,146 @@
+services:
+  db:
+    image: postgres:16-alpine
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-dod_compliance}
+      POSTGRES_USER: ${POSTGRES_USER:-dod_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dod_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DEBUG: ${DEBUG:-1}
+      USE_SQLITE: ${USE_SQLITE:-1}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-secret-key}
+      ENABLE_ROLE_AUTH: ${ENABLE_ROLE_AUTH:-0}
+      ENABLE_HTTPS: ${ENABLE_HTTPS:-0}
+      ENABLE_LDAP_AUTH: ${ENABLE_LDAP_AUTH:-0}
+      POSTGRES_DB: ${POSTGRES_DB:-dod_compliance}
+      POSTGRES_USER: ${POSTGRES_USER:-dod_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dod_password}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost:5173}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
+    volumes:
+      - ./backend:/app
+    command: >
+      sh -c "until python manage.py migrate; do
+      echo 'Database not ready yet, retrying migrations in 2s...';
+      sleep 2;
+      done;
+      python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - redis
+    ports:
+      - "8000:8000"
+
+  celery_worker:
+    build:
+      context: ./backend
+    environment:
+      DEBUG: ${DEBUG:-1}
+      USE_SQLITE: ${USE_SQLITE:-1}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-secret-key}
+      ENABLE_ROLE_AUTH: ${ENABLE_ROLE_AUTH:-0}
+      ENABLE_HTTPS: ${ENABLE_HTTPS:-0}
+      ENABLE_LDAP_AUTH: ${ENABLE_LDAP_AUTH:-0}
+      POSTGRES_DB: ${POSTGRES_DB:-dod_compliance}
+      POSTGRES_USER: ${POSTGRES_USER:-dod_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dod_password}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://redis:6379/0}
+      JIRA_BASE_URL: ${JIRA_BASE_URL:-}
+      JIRA_API_KEY: ${JIRA_API_KEY:-}
+      JIRA_EMAIL: ${JIRA_EMAIL:-}
+      JIRA_PROJECT_KEY: ${JIRA_PROJECT_KEY:-}
+      SYNC_INTERVAL_MINUTES: ${SYNC_INTERVAL_MINUTES:-15}
+      ENABLE_PERIODIC_SYNC: ${ENABLE_PERIODIC_SYNC:-1}
+    volumes:
+      - ./backend:/app
+    command: celery -A config worker --loglevel=info
+    depends_on:
+      - redis
+      - backend
+
+  celery_beat:
+    build:
+      context: ./backend
+    environment:
+      DEBUG: ${DEBUG:-1}
+      USE_SQLITE: ${USE_SQLITE:-1}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-secret-key}
+      ENABLE_ROLE_AUTH: ${ENABLE_ROLE_AUTH:-0}
+      ENABLE_HTTPS: ${ENABLE_HTTPS:-0}
+      ENABLE_LDAP_AUTH: ${ENABLE_LDAP_AUTH:-0}
+      POSTGRES_DB: ${POSTGRES_DB:-dod_compliance}
+      POSTGRES_USER: ${POSTGRES_USER:-dod_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dod_password}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://redis:6379/0}
+      JIRA_BASE_URL: ${JIRA_BASE_URL:-}
+      JIRA_API_KEY: ${JIRA_API_KEY:-}
+      JIRA_EMAIL: ${JIRA_EMAIL:-}
+      JIRA_PROJECT_KEY: ${JIRA_PROJECT_KEY:-}
+      SYNC_INTERVAL_MINUTES: ${SYNC_INTERVAL_MINUTES:-15}
+      ENABLE_PERIODIC_SYNC: ${ENABLE_PERIODIC_SYNC:-1}
+    volumes:
+      - ./backend:/app
+    command: celery -A config beat --loglevel=info
+    depends_on:
+      - redis
+      - backend
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      VITE_PROXY_TARGET: http://backend:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+  reverse_proxy:
+    profiles: ["secure"]
+    build:
+      context: ./infra/nginx
+    environment:
+      NGINX_ENVSUBST_FILTER: ^(TLS_CERT_FILE|TLS_KEY_FILE|TLS_REDIRECT_PORT|BACKEND_UPSTREAM|FRONTEND_UPSTREAM)$
+      TLS_CERT_FILE: /etc/nginx/certs/dev.crt
+      TLS_KEY_FILE: /etc/nginx/certs/dev.key
+      TLS_REDIRECT_PORT: ${TLS_REDIRECT_PORT:-8443}
+      TLS_CERT_CN: ${TLS_CERT_CN:-localhost}
+      TLS_CERT_DAYS: ${TLS_CERT_DAYS:-3650}
+      BACKEND_UPSTREAM: ${BACKEND_UPSTREAM:-http://backend:8000}
+      FRONTEND_UPSTREAM: ${FRONTEND_UPSTREAM:-http://frontend:5173}
+    depends_on:
+      - backend
+      - frontend
+    volumes:
+      - nginx_certs:/etc/nginx/certs
+    ports:
+      - "${HTTPS_HTTP_PORT:-8080}:80"
+      - "${HTTPS_HTTPS_PORT:-8443}:443"
+
+volumes:
+  postgres_data:
+  nginx_certs:

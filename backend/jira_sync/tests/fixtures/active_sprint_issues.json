@@ -1,0 +1,48 @@
+[
+  {
+    "id": "5001",
+    "key": "ABC-500",
+    "fields": {
+      "summary": "Contract epic",
+      "updated": "2026-02-10T08:30:00.000+0000",
+      "issuetype": { "name": "Epic" },
+      "status": { "name": "In Progress", "statusCategory": { "key": "indeterminate" } },
+      "resolution": null,
+      "labels": ["SQUAD_platform"],
+      "sprint": { "id": 42, "name": "Sprint 42", "state": "active" }
+    }
+  },
+  {
+    "id": "5002",
+    "key": "ABC-501",
+    "fields": {
+      "summary": "DoD - Threat modelling done",
+      "updated": "2026-02-10T08:40:00.000+0000",
+      "issuetype": { "name": "Task" },
+      "parent": {
+        "key": "ABC-500",
+        "fields": { "issuetype": { "name": "Epic" } }
+      },
+      "status": { "name": "Done", "statusCategory": { "key": "done" } },
+      "resolution": { "name": "Done" },
+      "labels": ["squad_platform"],
+      "sprint": { "id": 42, "name": "Sprint 42", "state": "active" }
+    }
+  },
+  {
+    "id": "5003",
+    "key": "ABC-502",
+    "fields": {
+      "summary": "DoD - Manual tests",
+      "updated": "2026-02-10T08:41:00.000+0000",
+      "issuetype": { "name": "Task" },
+      "customfield_10014": "ABC-500",
+      "status": { "name": "In Progress", "statusCategory": { "key": "indeterminate" } },
+      "resolution": null,
+      "labels": ["squad_platform"],
+      "customfield_10020": [
+        { "id": 42, "name": "Sprint 42", "state": "active" }
+      ]
+    }
+  }
+]
