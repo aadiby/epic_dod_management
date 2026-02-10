@@ -71,6 +71,12 @@ class Command(BaseCommand):
             action="store_true",
             help="Exit successfully even when Jira calls fail. Errors are still written.",
         )
+        parser.add_argument(
+            "--fail-on-empty",
+            dest="fail_on_empty",
+            action="store_true",
+            help="Exit non-zero when capture succeeds technically but returns no Jira entities.",
+        )
 
     def handle(self, *args, **options):
         project_key = (options.get("project_key") or "").strip() or None
@@ -85,6 +91,7 @@ class Command(BaseCommand):
         )
         include_children = bool(options.get("include_children"))
         allow_partial = bool(options.get("allow_partial"))
+        fail_on_empty = bool(options.get("fail_on_empty"))
 
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         output_dir_option = options.get("output_dir")
@@ -116,6 +123,13 @@ class Command(BaseCommand):
             output_dir / "active_sprint_issues.json",
             active_issue_payloads,
         )
+        if not active_issue_payloads and not errors:
+            self.stdout.write(
+                self.style.WARNING(
+                    "No active sprint issues were returned by Jira. "
+                    "If there is no active sprint (or no visibility), output files can be empty."
+                )
+            )
 
         discovered_epic_keys = {
             str(getattr(issue, "key", "")).strip()
@@ -200,6 +214,25 @@ class Command(BaseCommand):
                 raise CommandError(
                     f"Capture completed with {len(errors)} Jira error(s). "
                     f"Inspect {output_dir / 'errors.json'} or rerun with --allow-partial."
+                )
+
+        total_entities = (
+            len(active_issue_payloads)
+            + len(epic_details)
+            + sum(len(items) for items in child_issues_by_epic.values())
+            + sum(len(items) for items in remote_links.values())
+        )
+        if total_entities == 0 and not errors:
+            self.stdout.write(
+                self.style.WARNING(
+                    "Capture completed with zero entities. "
+                    "Try adding --project-key <KEY> and/or explicit --epic-key values."
+                )
+            )
+            if fail_on_empty:
+                raise CommandError(
+                    "Capture returned no Jira entities. "
+                    "Use --project-key/--epic-key or rerun without --fail-on-empty."
                 )
 
     def _safe_call(self, *, errors: list[dict[str, Any]], operation: str, fn, default):

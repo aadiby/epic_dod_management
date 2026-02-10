@@ -169,6 +169,10 @@ This adds `reverse_proxy` (Nginx TLS terminator) and exposes:
 - `https://localhost:8443` (primary app entrypoint)
 - `http://localhost:8080` (redirects to HTTPS)
 
+Important:
+- When `ENABLE_HTTPS=1`, open the frontend on `https://localhost:8443`.
+- Do not use `http://localhost:5173` in this mode; API calls may be redirected to an internal container hostname (for example `https://backend:8000/...`) that your browser cannot resolve.
+
 The reverse proxy auto-generates a self-signed cert when missing and stores it in the `nginx_certs` volume.
 
 ### HTTPS smoke test command
@@ -264,6 +268,7 @@ python manage.py capture_jira_payloads \
 Behavior notes:
 - The command now exits non-zero if any Jira API calls fail, but still writes `errors.json` and the other payload files.
 - Use `--allow-partial` if you want it to succeed even with API failures.
+- If Jira returns no active sprint issues, payload files can still be empty with `errors=0`; add `--project-key` and/or `--epic-key`, or use `--fail-on-empty` to make that condition fail.
 
 Generated files:
 - `manifest.json`

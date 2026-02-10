@@ -146,3 +146,26 @@ class CaptureJiraPayloadsCommandTests(SimpleTestCase):
             )
             output = out.getvalue()
             self.assertIn("errors=1", output)
+
+    @patch("jira_sync.management.commands.capture_jira_payloads.JiraClientAdapter.from_env")
+    def test_capture_command_can_fail_on_empty_without_errors(self, from_env_mock: Mock):
+        adapter = Mock()
+        adapter.search_active_sprint_issues.return_value = []
+        adapter.get_issue.return_value = None
+        adapter.get_child_issues.return_value = []
+        adapter.get_issue_remote_links.return_value = []
+        from_env_mock.return_value = adapter
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out = StringIO()
+            with self.assertRaises(CommandError):
+                call_command(
+                    "capture_jira_payloads",
+                    "--output-dir",
+                    tmp_dir,
+                    "--fail-on-empty",
+                    stdout=out,
+                )
+            output = out.getvalue()
+            self.assertIn("errors=0", output)
+            self.assertIn("zero entities", output)

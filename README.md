@@ -53,6 +53,9 @@ docker compose --profile secure up --build
 - App over HTTPS: `https://localhost:8443`
 - HTTP redirect check: `http://localhost:8080`
 
+When `ENABLE_HTTPS=1`, use `https://localhost:8443` as the frontend entrypoint.
+Opening `http://localhost:5173` in this mode can cause API redirect errors (for example `https://backend:8000/...` in the browser).
+
 The secure profile generates a self-signed certificate in the `nginx_certs` Docker volume when none exists.
 
 4. Run smoke validation:
