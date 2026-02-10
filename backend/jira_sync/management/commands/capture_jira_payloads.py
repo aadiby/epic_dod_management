@@ -65,6 +65,12 @@ class Command(BaseCommand):
             default=None,
             help="Output directory path. Default: ./jira_capture_<timestamp>",
         )
+        parser.add_argument(
+            "--allow-partial",
+            dest="allow_partial",
+            action="store_true",
+            help="Exit successfully even when Jira calls fail. Errors are still written.",
+        )
 
     def handle(self, *args, **options):
         project_key = (options.get("project_key") or "").strip() or None
@@ -78,6 +84,7 @@ class Command(BaseCommand):
             }
         )
         include_children = bool(options.get("include_children"))
+        allow_partial = bool(options.get("allow_partial"))
 
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         output_dir_option = options.get("output_dir")
@@ -177,14 +184,23 @@ class Command(BaseCommand):
         self._write_json(output_dir / "manifest.json", manifest)
         self._write_json(output_dir / "errors.json", errors)
 
-        self.stdout.write(self.style.SUCCESS(f"Jira payload capture written to: {output_dir}"))
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"issues={len(active_issue_payloads)} epics={len(epic_keys)} errors={len(errors)}"
-            )
-        )
+        has_errors = bool(errors)
+        path_message = f"Jira payload capture written to: {output_dir}"
+        summary_message = f"issues={len(active_issue_payloads)} epics={len(epic_keys)} errors={len(errors)}"
+        if has_errors:
+            self.stdout.write(self.style.WARNING(path_message))
+            self.stdout.write(self.style.WARNING(summary_message))
+        else:
+            self.stdout.write(self.style.SUCCESS(path_message))
+            self.stdout.write(self.style.SUCCESS(summary_message))
+
         if errors:
             self.stdout.write(self.style.WARNING("Some Jira calls failed; see errors.json."))
+            if not allow_partial:
+                raise CommandError(
+                    f"Capture completed with {len(errors)} Jira error(s). "
+                    f"Inspect {output_dir / 'errors.json'} or rerun with --allow-partial."
+                )
 
     def _safe_call(self, *, errors: list[dict[str, Any]], operation: str, fn, default):
         try:

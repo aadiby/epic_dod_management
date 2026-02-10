@@ -96,7 +96,7 @@ class CaptureJiraPayloadsCommandTests(SimpleTestCase):
             self.assertEqual(errors, [])
 
     @patch("jira_sync.management.commands.capture_jira_payloads.JiraClientAdapter.from_env")
-    def test_capture_command_records_errors_without_crashing(self, from_env_mock: Mock):
+    def test_capture_command_raises_on_errors_by_default(self, from_env_mock: Mock):
         adapter = Mock()
         adapter.search_active_sprint_issues.side_effect = JiraApiError(
             operation="search_active_sprint_issues",
@@ -110,7 +110,8 @@ class CaptureJiraPayloadsCommandTests(SimpleTestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             out = StringIO()
-            call_command("capture_jira_payloads", "--output-dir", tmp_dir, stdout=out)
+            with self.assertRaises(CommandError):
+                call_command("capture_jira_payloads", "--output-dir", tmp_dir, stdout=out)
             output = out.getvalue()
             self.assertIn("errors=1", output)
 
@@ -120,3 +121,28 @@ class CaptureJiraPayloadsCommandTests(SimpleTestCase):
             errors = json.loads((Path(tmp_dir) / "errors.json").read_text(encoding="utf-8"))
             self.assertEqual(errors[0]["operation"], "search_active_sprint_issues")
             self.assertEqual(errors[0]["status_code"], 504)
+
+    @patch("jira_sync.management.commands.capture_jira_payloads.JiraClientAdapter.from_env")
+    def test_capture_command_allows_partial_results_when_flag_set(self, from_env_mock: Mock):
+        adapter = Mock()
+        adapter.search_active_sprint_issues.side_effect = JiraApiError(
+            operation="search_active_sprint_issues",
+            detail="jira timeout",
+            status_code=504,
+        )
+        adapter.get_issue.return_value = None
+        adapter.get_child_issues.return_value = []
+        adapter.get_issue_remote_links.return_value = []
+        from_env_mock.return_value = adapter
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out = StringIO()
+            call_command(
+                "capture_jira_payloads",
+                "--output-dir",
+                tmp_dir,
+                "--allow-partial",
+                stdout=out,
+            )
+            output = out.getvalue()
+            self.assertIn("errors=1", output)

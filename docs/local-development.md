@@ -261,6 +261,10 @@ python manage.py capture_jira_payloads \
   --output-dir ./jira_capture_output
 ```
 
+Behavior notes:
+- The command now exits non-zero if any Jira API calls fail, but still writes `errors.json` and the other payload files.
+- Use `--allow-partial` if you want it to succeed even with API failures.
+
 Generated files:
 - `manifest.json`
 - `active_sprint_issues.json`
