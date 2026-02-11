@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -132,10 +133,10 @@ class Command(BaseCommand):
             )
 
         discovered_epic_keys = {
-            str(getattr(issue, "key", "")).strip()
+            epic_key
             for issue in active_issues
-            if str(getattr(getattr(issue.fields, "issuetype", None), "name", "")).strip().lower()
-            == "epic"
+            for epic_key in [self._extract_epic_key(issue)]
+            if epic_key
         }
         epic_keys = sorted(discovered_epic_keys.union(explicit_epic_keys))
 
@@ -262,3 +263,36 @@ class Command(BaseCommand):
             json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=True),
             encoding="utf-8",
         )
+
+    def _extract_epic_key(self, issue: Any) -> str | None:
+        issue_key = str(getattr(issue, "key", "")).strip()
+        issue_type = str(
+            getattr(getattr(getattr(issue, "fields", None), "issuetype", None), "name", "")
+        ).strip()
+        if issue_key and issue_type.lower() == "epic":
+            return issue_key
+
+        parent = getattr(getattr(issue, "fields", None), "parent", None)
+        if parent is not None:
+            parent_key = str(getattr(parent, "key", "")).strip()
+            parent_type = str(
+                getattr(getattr(getattr(parent, "fields", None), "issuetype", None), "name", "")
+            ).strip()
+            if parent_key and parent_type.lower() == "epic":
+                return parent_key
+
+        configured_field = os.getenv("JIRA_EPIC_LINK_FIELD", "customfield_10014").strip()
+        configured_field = configured_field or "customfield_10014"
+        epic_link = getattr(getattr(issue, "fields", None), configured_field, None)
+        if isinstance(epic_link, str) and epic_link.strip():
+            return epic_link.strip()
+
+        raw_fields = getattr(issue, "raw", None)
+        if isinstance(raw_fields, dict):
+            fields = raw_fields.get("fields")
+            if isinstance(fields, dict):
+                raw_epic_link = fields.get(configured_field)
+                if isinstance(raw_epic_link, str) and raw_epic_link.strip():
+                    return raw_epic_link.strip()
+
+        return None

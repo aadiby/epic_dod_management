@@ -169,3 +169,44 @@ class CaptureJiraPayloadsCommandTests(SimpleTestCase):
             output = out.getvalue()
             self.assertIn("errors=0", output)
             self.assertIn("zero entities", output)
+
+    @patch("jira_sync.management.commands.capture_jira_payloads.JiraClientAdapter.from_env")
+    def test_capture_command_discovers_epics_from_parent_links(self, from_env_mock: Mock):
+        issue_task = SimpleNamespace(
+            key="ABC-101",
+            fields=SimpleNamespace(
+                issuetype=SimpleNamespace(name="Story"),
+                parent=SimpleNamespace(
+                    key="ABC-100",
+                    fields=SimpleNamespace(issuetype=SimpleNamespace(name="Epic")),
+                ),
+            ),
+            raw={"id": "101", "key": "ABC-101"},
+        )
+        adapter = Mock()
+        adapter.search_active_sprint_issues.return_value = [issue_task]
+        adapter.get_issue.return_value = SimpleNamespace(raw={"id": "100", "key": "ABC-100"})
+        adapter.get_child_issues.return_value = [issue_task]
+        adapter.get_issue_remote_links.return_value = []
+        from_env_mock.return_value = adapter
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out = StringIO()
+            call_command(
+                "capture_jira_payloads",
+                "--include-children",
+                "--output-dir",
+                tmp_dir,
+                stdout=out,
+            )
+
+            import json
+            from pathlib import Path
+
+            manifest = json.loads((Path(tmp_dir) / "manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["epic_count"], 1)
+
+            children = json.loads(
+                (Path(tmp_dir) / "child_issues_by_epic.json").read_text(encoding="utf-8")
+            )
+            self.assertIn("ABC-100", children)

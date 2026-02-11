@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-02-10T20:58:44.656126+00:00",
+  "captured_files": [
+    "active_sprint_issues.json",
+    "epic_details.json",
+    "child_issues_by_epic.json",
+    "remote_links.json",
+    "errors.json"
+  ],
+  "epic_count": 0,
+  "include_children": true,
+  "issue_count": 100,
+  "max_results": 200,
+  "project_key": null,
+  "remote_links_limit": 50
+}
