@@ -1,5 +1,6 @@
 import os
 
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from jira_sync.adapter import JiraConfigurationError
@@ -18,7 +19,8 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        project_key = options.get("project_key") or os.getenv("JIRA_PROJECT_KEY")
+        default_project_key = (getattr(settings, "DEFAULT_SYNC_PROJECT_KEY", "") or "").strip()
+        project_key = options.get("project_key") or os.getenv("JIRA_PROJECT_KEY") or default_project_key
 
         try:
             run = execute_sync(

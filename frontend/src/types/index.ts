@@ -1,5 +1,6 @@
 export type HealthStatus = 'loading' | 'healthy' | 'unhealthy'
 export type EpicStatus = 'all' | 'open' | 'done'
+export type ComplianceStatusFilter = 'all' | 'non_compliant' | 'compliant'
 export type UserRole = 'admin' | 'scrum_master' | 'viewer' | 'none'
 
 export type MetricsResponse = {
@@ -38,7 +39,7 @@ export type MetricsResponse = {
   }>
 }
 
-export type NonCompliantEpic = {
+export type EpicOverviewItem = {
   sprint_snapshot_id?: number
   jira_sprint_id?: string
   sprint_name?: string
@@ -47,6 +48,7 @@ export type NonCompliantEpic = {
   status_name: string
   resolution_name: string
   is_done: boolean
+  is_compliant: boolean
   jira_url: string
   teams: string[]
   compliance_reasons: string[]
@@ -69,7 +71,7 @@ export type NonCompliantEpic = {
   }>
 }
 
-export type NonCompliantResponse = {
+export type EpicsResponse = {
   scope: {
     scope_mode?: 'single' | 'aggregate'
     sprint_snapshot_count?: number
@@ -81,8 +83,11 @@ export type NonCompliantResponse = {
     sync_timestamp: string
   } | null
   count: number
-  epics: NonCompliantEpic[]
+  epics: EpicOverviewItem[]
 }
+
+export type NonCompliantEpic = EpicOverviewItem
+export type NonCompliantResponse = EpicsResponse
 
 export type NudgeHistoryEntry = {
   sprint_snapshot_id?: number

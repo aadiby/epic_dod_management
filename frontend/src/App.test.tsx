@@ -48,7 +48,7 @@ const metricsPayload = {
   ],
 }
 
-const nonCompliantPayload = {
+const epicsPayload = {
   scope: {
     sprint_snapshot_id: 1,
     jira_sprint_id: '100',
@@ -56,14 +56,34 @@ const nonCompliantPayload = {
     sprint_state: 'active',
     sync_timestamp: '2026-02-10T12:00:00Z',
   },
-  count: 1,
+  count: 2,
   epics: [
+    {
+      jira_key: 'ABC-201',
+      summary: 'Compliant epic',
+      status_name: 'In Progress',
+      resolution_name: '',
+      is_done: false,
+      is_compliant: true,
+      jira_url: 'https://example.atlassian.net/browse/ABC-201',
+      teams: ['squad_platform'],
+      missing_squad_labels: false,
+      squad_label_warnings: [],
+      compliance_reasons: [],
+      nudge: {
+        cooldown_active: false,
+        seconds_remaining: 0,
+        last_sent_at: null,
+      },
+      failing_dod_tasks: [],
+    },
     {
       jira_key: 'ABC-202',
       summary: 'Non compliant epic',
       status_name: 'In Progress',
       resolution_name: '',
       is_done: false,
+      is_compliant: false,
       jira_url: 'https://example.atlassian.net/browse/ABC-202',
       teams: ['squad_platform'],
       missing_squad_labels: true,
@@ -202,11 +222,11 @@ function mockFetch(
       } as Response)
     }
 
-    if (url.startsWith('/api/epics/non-compliant')) {
+    if (url.startsWith('/api/epics')) {
       return Promise.resolve({
         ok: true,
         status: 200,
-        json: async () => nonCompliantPayload,
+        json: async () => epicsPayload,
       } as Response)
     }
 
@@ -260,7 +280,7 @@ describe('App', () => {
 
     fireEvent.click(screen.getByTestId('nav-epics'))
     expect(await screen.findByTestId('non-compliant-count')).toHaveTextContent(
-      '1 epic(s) require action.',
+      'Showing 2 epic(s) for current filters.',
     )
     expect(screen.getAllByText('ABC-202').length).toBeGreaterThan(0)
     expect(screen.getByText('Missing squad_ label')).toBeInTheDocument()
@@ -374,7 +394,7 @@ describe('App', () => {
         } as Response
       }
 
-      if (url.startsWith('/api/epics/non-compliant')) {
+      if (url.startsWith('/api/epics')) {
         return {
           ok: true,
           status: 200,
@@ -535,6 +555,44 @@ describe('App', () => {
       const init = syncCall?.[1]
       const payload = init?.body ? JSON.parse(String(init.body)) : null
       expect(payload).toEqual({ project_key: 'ABC' })
+    })
+  })
+
+  it('uses CS0100 as the default sync project key', async () => {
+    const fetchMock = mockFetch((url, init) => {
+      if (url.startsWith('/api/sync/run')) {
+        expect(init?.method).toBe('POST')
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            detail: 'Sync finished.',
+            run: {
+              status: 'SUCCESS',
+              sprint_snapshots: 1,
+              epic_snapshots: 2,
+              dod_task_snapshots: 3,
+            },
+          }),
+        } as Response
+      }
+
+      return undefined
+    })
+
+    render(<App />)
+
+    await screen.findByText('Sprint 10')
+    fireEvent.click(screen.getByTestId('nav-sync'))
+    expect(screen.getByTestId('sync-project-key')).toHaveValue('CS0100')
+    fireEvent.click(screen.getByTestId('sync-run-button'))
+
+    await waitFor(() => {
+      const syncCall = fetchMock.mock.calls.find((call) => String(call[0]).startsWith('/api/sync/run'))
+      expect(syncCall).toBeTruthy()
+      const init = syncCall?.[1]
+      const payload = init?.body ? JSON.parse(String(init.body)) : null
+      expect(payload).toEqual({ project_key: 'CS0100' })
     })
   })
 

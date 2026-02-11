@@ -65,7 +65,7 @@ export function SyncPage({
         <div className="mt-4 grid gap-3 sm:grid-cols-[240px_auto]">
           <input
             className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-700"
-            placeholder="Project key (optional)"
+            placeholder="Project key (default: CS0100)"
             value={syncProjectKey}
             onChange={(event) => onProjectChange(event.target.value)}
             data-testid="sync-project-key"

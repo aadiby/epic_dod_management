@@ -21,7 +21,7 @@ class ScheduledSyncTaskTests(SimpleTestCase):
         result = run_scheduled_jira_sync()
 
         execute_sync_mock.assert_called_once_with(
-            project_key=None,
+            project_key="CS0100",
             trigger="schedule",
             triggered_by="celery_beat",
         )

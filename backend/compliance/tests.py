@@ -337,6 +337,29 @@ class ComplianceApiTests(TestCase):
         self.assertEqual(payload["count"], 1)
         self.assertEqual(payload["epics"][0]["jira_key"], "ABC-203")
 
+    def test_epics_endpoint_returns_all_epics_with_compliance_status(self):
+        response = self.client.get("/api/epics")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["count"], 3)
+        keys = [epic["jira_key"] for epic in payload["epics"]]
+        self.assertEqual(keys, ["ABC-201", "ABC-202", "ABC-203"])
+
+        compliance = {epic["jira_key"]: epic["is_compliant"] for epic in payload["epics"]}
+        self.assertEqual(compliance["ABC-201"], True)
+        self.assertEqual(compliance["ABC-202"], False)
+        self.assertEqual(compliance["ABC-203"], False)
+
+    def test_epics_endpoint_supports_compliance_status_filter(self):
+        response = self.client.get("/api/epics?compliance_status=non_compliant")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["count"], 2)
+        keys = [epic["jira_key"] for epic in payload["epics"]]
+        self.assertEqual(keys, ["ABC-202", "ABC-203"])
+
     def test_metrics_endpoint_aggregates_latest_active_snapshot_per_sprint(self):
         sprint_other_active = SprintSnapshot.objects.create(
             jira_sprint_id="777",
@@ -845,6 +868,15 @@ class ComplianceApiEmptyStateTests(TestCase):
 
     def test_non_compliant_endpoint_returns_empty_scope_when_no_snapshots(self):
         response = self.client.get("/api/epics/non-compliant")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertIsNone(payload["scope"])
+        self.assertEqual(payload["count"], 0)
+        self.assertEqual(payload["epics"], [])
+
+    def test_epics_endpoint_returns_empty_scope_when_no_snapshots(self):
+        response = self.client.get("/api/epics")
 
         self.assertEqual(response.status_code, 200)
         payload = response.json()

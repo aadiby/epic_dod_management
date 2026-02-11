@@ -317,6 +317,13 @@ class ComplianceFilterMixin:
         epic: EpicSnapshot,
         evaluation: EpicEvaluation,
     ) -> dict[str, object]:
+        return self._epic_payload(epic, evaluation)
+
+    def _epic_payload(
+        self,
+        epic: EpicSnapshot,
+        evaluation: EpicEvaluation,
+    ) -> dict[str, object]:
         return {
             "sprint_snapshot_id": epic.sprint_snapshot_id,
             "jira_sprint_id": epic.sprint_snapshot.jira_sprint_id,
@@ -326,6 +333,7 @@ class ComplianceFilterMixin:
             "status_name": epic.status_name,
             "resolution_name": epic.resolution_name,
             "is_done": epic.is_done,
+            "is_compliant": evaluation.is_compliant,
             "jira_url": epic.jira_url,
             "teams": sorted([team.key for team in epic.teams.all()]),
             "missing_squad_labels": epic.missing_squad_labels,
@@ -489,6 +497,49 @@ class MetricsView(ComplianceFilterMixin, APIView):
             )
 
         return output
+
+
+class EpicsOverviewView(ComplianceFilterMixin, APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = []
+
+    def get(self, request):
+        guard = self._require_read_access(request)
+        if guard is not None:
+            return guard
+
+        sprint_snapshots = self._resolve_sprint_snapshots(request)
+        category = request.query_params.get("category")
+        compliance_status = (
+            (request.query_params.get("compliance_status") or "all").strip().lower()
+        )
+        if compliance_status not in {"all", "non_compliant", "compliant"}:
+            compliance_status = "all"
+
+        if not sprint_snapshots:
+            return Response({"scope": None, "count": 0, "epics": []})
+
+        epics = list(self._base_epics_queryset(request, sprint_snapshots))
+        payload_epics = []
+
+        for epic in epics:
+            evaluation = self._evaluate_epic(epic, category_filter=category)
+            if evaluation is None:
+                continue
+            if compliance_status == "non_compliant" and evaluation.is_compliant:
+                continue
+            if compliance_status == "compliant" and not evaluation.is_compliant:
+                continue
+
+            payload_epics.append(self._epic_payload(epic, evaluation))
+
+        return Response(
+            {
+                "scope": self._scope_payload(sprint_snapshots),
+                "count": len(payload_epics),
+                "epics": payload_epics,
+            }
+        )
 
 
 class NonCompliantEpicsView(ComplianceFilterMixin, APIView):

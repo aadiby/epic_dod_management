@@ -1,42 +1,61 @@
 import { Info } from 'lucide-react'
 
-import { CategoryBreakdownChart } from '../components/charts/CategoryBreakdownChart'
 import { ComplianceBySquadChart } from '../components/charts/ComplianceBySquadChart'
-import { TopViolations } from '../components/charts/TopViolations'
-import { TrendChart } from '../components/charts/TrendChart'
 import { KpiStrip } from '../components/kpi/KpiStrip'
 import { EmptyState } from '../components/states/EmptyState'
 import { LoadingState } from '../components/states/LoadingState'
-import {
-  deriveByCategory,
-  deriveBySquad,
-  deriveKpis,
-  deriveTopViolations,
-  deriveTrendSeries,
-} from '../lib/mockTransform'
 import { formatDateTime } from '../lib/utils'
-import type { MetricsResponse, NonCompliantResponse, NudgeHistoryResponse } from '../types'
+import type { ComplianceStatusFilter, EpicOverviewItem, EpicsResponse, MetricsResponse } from '../types'
+
+const EPIC_REASON_LABELS: Record<string, string> = {
+  incomplete_dod_tasks: 'Incomplete DoD tasks',
+  no_dod_tasks: 'No DoD tasks',
+}
+
+const TASK_REASON_LABELS: Record<string, string> = {
+  missing_evidence_link: 'Missing evidence links',
+  task_not_done: 'DoD tasks not done',
+}
+
+function toIssueTypes(epic: EpicOverviewItem): string[] {
+  const issues = new Set<string>()
+  for (const reason of epic.compliance_reasons) {
+    issues.add(EPIC_REASON_LABELS[reason] ?? reason)
+  }
+  if (epic.missing_squad_labels) {
+    issues.add('Missing squad labels')
+  }
+  if ((epic.squad_label_warnings?.length ?? 0) > 0) {
+    issues.add('Invalid squad labels')
+  }
+  for (const task of epic.failing_dod_tasks) {
+    if (task.non_compliance_reason) {
+      issues.add(TASK_REASON_LABELS[task.non_compliance_reason] ?? task.non_compliance_reason)
+    }
+  }
+  return Array.from(issues).sort((a, b) => a.localeCompare(b))
+}
 
 type OverviewPageProps = {
   loading: boolean
   error: string | null
   metrics: MetricsResponse | null
-  nonCompliant: NonCompliantResponse | null
-  nudgeHistory: NudgeHistoryResponse | null
+  epics: EpicsResponse | null
   onRunSync: () => void
   onLearnSnapshot: () => void
   onSelectSquad: (squad: string) => void
+  onOpenEpics: (filter: ComplianceStatusFilter) => void
 }
 
 export function OverviewPage({
   loading,
   error,
   metrics,
-  nonCompliant,
-  nudgeHistory,
+  epics,
   onRunSync,
   onLearnSnapshot,
   onSelectSquad,
+  onOpenEpics,
 }: OverviewPageProps) {
   if (loading) {
     return <LoadingState variant="overview" />
@@ -63,11 +82,64 @@ export function OverviewPage({
     )
   }
 
-  const kpis = deriveKpis(metrics, nonCompliant, nudgeHistory)
-  const trend = deriveTrendSeries(metrics, nudgeHistory)
-  const bySquad = deriveBySquad(metrics)
-  const byCategory = deriveByCategory(metrics)
-  const topViolations = deriveTopViolations(nonCompliant)
+  const issuesBySquad = new Map<string, Set<string>>()
+  for (const epic of epics?.epics ?? []) {
+    if (epic.is_compliant) {
+      continue
+    }
+    const issueTypes = toIssueTypes(epic)
+    for (const squad of epic.teams) {
+      const current = issuesBySquad.get(squad) ?? new Set<string>()
+      for (const issue of issueTypes) {
+        current.add(issue)
+      }
+      issuesBySquad.set(squad, current)
+    }
+  }
+
+  const bySquad = [...metrics.by_team]
+    .sort((a, b) => a.rank - b.rank)
+    .map((team) => ({
+      squad: team.team,
+      compliance: team.compliance_percentage,
+      totalEpics: team.total_epics,
+      nonCompliant: team.non_compliant_epics,
+      issueTypes: Array.from(issuesBySquad.get(team.team) ?? []).sort((a, b) => a.localeCompare(b)),
+    }))
+
+  const kpis = [
+    {
+      label: 'Total epics',
+      value: String(metrics.summary.total_epics),
+      hint: 'All epics in latest snapshot scope',
+      onClick: () => onOpenEpics('all'),
+    },
+    {
+      label: 'Compliant epics',
+      value: String(metrics.summary.compliant_epics),
+      hint: 'Meet DoD requirements',
+      onClick: () => onOpenEpics('compliant'),
+    },
+    {
+      label: 'Non-compliant epics',
+      value: String(metrics.summary.non_compliant_epics),
+      hint: 'Require action',
+      onClick: () => onOpenEpics('non_compliant'),
+    },
+    {
+      label: 'Missing squad labels',
+      value: String(metrics.summary.epics_with_missing_squad_labels ?? 0),
+      hint: 'Epics missing squad labels',
+      onClick: () => onOpenEpics('non_compliant'),
+    },
+    {
+      label: 'Invalid squad labels',
+      value: String(metrics.summary.epics_with_invalid_squad_labels ?? 0),
+      hint: 'Epics with malformed squad labels',
+      onClick: () => onOpenEpics('non_compliant'),
+    },
+  ]
+
   const isAggregateScope = metrics.scope.scope_mode === 'aggregate'
   const sprintCount = metrics.scope.sprint_snapshot_count ?? metrics.scope.sprint_snapshot_ids?.length ?? 0
 
@@ -96,7 +168,8 @@ export function OverviewPage({
           kpis={kpis}
           testIds={{
             'Total epics': 'kpi-total-epics',
-            'Compliance rate': 'kpi-compliance-rate',
+            'Compliant epics': 'kpi-compliant-epics',
+            'Non-compliant epics': 'kpi-non-compliant-epics',
             'Missing squad labels': 'kpi-missing-squad-labels',
             'Invalid squad labels': 'kpi-invalid-squad-labels',
           }}
@@ -104,12 +177,9 @@ export function OverviewPage({
       </section>
 
       <section className="space-y-3">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Breakdowns</h3>
-        <div className="grid gap-4 xl:grid-cols-2">
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Compliance by squad</h3>
+        <div className="grid gap-4">
           <ComplianceBySquadChart data={bySquad} onSelectSquad={onSelectSquad} />
-          <TrendChart data={trend} />
-          <CategoryBreakdownChart data={byCategory} />
-          <TopViolations data={topViolations} />
         </div>
       </section>
     </div>

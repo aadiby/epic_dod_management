@@ -4,6 +4,7 @@ import logging
 import os
 
 from celery import shared_task
+from django.conf import settings
 
 from config.observability import audit_log
 
@@ -15,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 @shared_task(name="jira_sync.tasks.run_scheduled_jira_sync")
 def run_scheduled_jira_sync() -> dict[str, object]:
-    project_key = (os.getenv("JIRA_PROJECT_KEY", "").strip() or None)
+    default_project_key = (getattr(settings, "DEFAULT_SYNC_PROJECT_KEY", "") or "").strip()
+    project_key = (os.getenv("JIRA_PROJECT_KEY", "").strip() or default_project_key or None)
     triggered_by = os.getenv("SYNC_SCHEDULE_ACTOR", "celery_beat")
 
     try:

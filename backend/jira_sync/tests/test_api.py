@@ -136,6 +136,35 @@ class SyncApiTests(TestCase):
         self.assertIn("jira timeout", response.json()["detail"])
         self.assertIn("sync.run.failed", "\n".join(captured.output))
 
+    @patch("jira_sync.views.execute_sync")
+    def test_sync_run_uses_default_project_key_when_payload_omits_it(self, execute_sync_mock: Mock):
+        run = SyncRun.objects.create(
+            started_at=timezone.now(),
+            finished_at=timezone.now(),
+            status=SyncRun.STATUS_SUCCESS,
+            trigger="manual",
+            triggered_by="test_actor",
+            project_key="CS0100",
+            sprint_snapshots=1,
+            epic_snapshots=2,
+            dod_task_snapshots=3,
+        )
+        execute_sync_mock.return_value = run
+
+        response = self.client.post(
+            "/api/sync/run",
+            data={},
+            content_type="application/json",
+            HTTP_X_ACTOR="test_actor",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        execute_sync_mock.assert_called_once_with(
+            project_key="CS0100",
+            trigger="manual",
+            triggered_by="test_actor",
+        )
+
 
 @override_settings(ENABLE_ROLE_AUTH=True)
 class SyncApiAuthorizationTests(TestCase):

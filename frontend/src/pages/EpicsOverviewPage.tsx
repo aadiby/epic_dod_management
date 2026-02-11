@@ -6,53 +6,64 @@ import { DataTable } from '../components/table/DataTable'
 import { EmptyState } from '../components/states/EmptyState'
 import { LoadingState } from '../components/states/LoadingState'
 import { formatDateTime } from '../lib/utils'
-import type { MetricsResponse, NonCompliantEpic, NonCompliantResponse } from '../types'
+import type {
+  ComplianceStatusFilter,
+  EpicOverviewItem,
+  EpicsResponse,
+  MetricsResponse,
+} from '../types'
 
-type NonCompliantEpicsPageProps = {
+type EpicsOverviewPageProps = {
   loading: boolean
   error: string | null
   metrics: MetricsResponse | null
-  nonCompliant: NonCompliantResponse | null
+  epics: EpicsResponse | null
+  complianceStatusFilter: ComplianceStatusFilter
+  onComplianceStatusFilterChange: (value: ComplianceStatusFilter) => void
   nudgeFeedback: Record<string, string>
   nudgeInFlight: Record<string, boolean>
   canNudge: boolean
   onRequestNudge: (epicKey: string) => void
-  onViewDetails: (epic: NonCompliantEpic) => void
+  onViewDetails: (epic: EpicOverviewItem) => void
 }
 
 type EpicRow = {
   key: string
-  epic: NonCompliantEpic
+  epic: EpicOverviewItem
   squad: string
+  compliance: string
   status: string
   category: string
   violationsCount: number
   lastUpdated: string
 }
 
-export function NonCompliantEpicsPage({
+export function EpicsOverviewPage({
   loading,
   error,
   metrics,
-  nonCompliant,
+  epics,
+  complianceStatusFilter,
+  onComplianceStatusFilterChange,
   nudgeFeedback,
   nudgeInFlight,
   canNudge,
   onRequestNudge,
   onViewDetails,
-}: NonCompliantEpicsPageProps) {
+}: EpicsOverviewPageProps) {
   const rows: EpicRow[] = useMemo(
     () =>
-      (nonCompliant?.epics ?? []).map((epic) => ({
+      (epics?.epics ?? []).map((epic) => ({
         key: epic.jira_key,
         epic,
         squad: epic.teams.join(', ') || '-',
+        compliance: epic.is_compliant ? 'Compliant' : 'Non-compliant',
         status: epic.status_name || (epic.is_done ? 'Done' : 'Open'),
         category: Array.from(new Set(epic.failing_dod_tasks.map((task) => task.category))).join(', ') || '-',
         violationsCount: epic.failing_dod_tasks.length,
         lastUpdated: epic.nudge?.last_sent_at || metrics?.scope?.sync_timestamp || '',
       })),
-    [metrics?.scope?.sync_timestamp, nonCompliant?.epics],
+    [epics?.epics, metrics?.scope?.sync_timestamp],
   )
 
   const columns = useMemo<ColumnDef<EpicRow, unknown>[]>(
@@ -80,6 +91,15 @@ export function NonCompliantEpicsPage({
       {
         accessorKey: 'squad',
         header: 'Squad',
+      },
+      {
+        accessorKey: 'compliance',
+        header: 'Compliance',
+        cell: ({ row }) => (
+          <Badge tone={row.original.epic.is_compliant ? 'success' : 'warning'}>
+            {row.original.compliance}
+          </Badge>
+        ),
       },
       {
         accessorKey: 'status',
@@ -165,10 +185,15 @@ export function NonCompliantEpicsPage({
                 type="button"
                 className="block rounded-lg border border-teal-600 bg-teal-50 px-2.5 py-1.5 text-xs font-semibold text-teal-700 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-slate-100 disabled:text-slate-500"
                 data-testid={`nudge-button-${epic.jira_key}`}
-                disabled={!canNudge || Boolean(nudgeInFlight[epic.jira_key]) || Boolean(epic.nudge?.cooldown_active)}
+                disabled={
+                  epic.is_compliant ||
+                  !canNudge ||
+                  Boolean(nudgeInFlight[epic.jira_key]) ||
+                  Boolean(epic.nudge?.cooldown_active)
+                }
                 onClick={() => onRequestNudge(epic.jira_key)}
               >
-                {nudgeInFlight[epic.jira_key] ? 'Sending...' : 'Review & nudge'}
+                {epic.is_compliant ? 'Compliant' : nudgeInFlight[epic.jira_key] ? 'Sending...' : 'Review & nudge'}
               </button>
               {epic.nudge?.cooldown_active && (
                 <p className="text-xs text-slate-500">
@@ -207,6 +232,28 @@ export function NonCompliantEpicsPage({
 
   return (
     <div className="space-y-4">
+      <section className="rounded-2xl border border-slate-200/60 bg-white p-4 shadow-sm">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <h3 className="text-base font-semibold text-slate-900">Epics Overview</h3>
+            <p className="text-sm text-slate-500">Filter by compliance and inspect epic-level DoD issues.</p>
+          </div>
+          <label className="text-sm text-slate-600">
+            Compliance filter
+            <select
+              value={complianceStatusFilter}
+              onChange={(event) => onComplianceStatusFilterChange(event.target.value as ComplianceStatusFilter)}
+              className="ml-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700"
+              data-testid="epics-compliance-filter"
+            >
+              <option value="all">All epics</option>
+              <option value="non_compliant">Non-compliant only</option>
+              <option value="compliant">Compliant only</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
       {!canNudge && (
         <p className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
           Your role has read-only access. Nudge action is disabled.
@@ -214,16 +261,16 @@ export function NonCompliantEpicsPage({
       )}
 
       <p className="text-sm text-slate-600" data-testid="non-compliant-count">
-        {nonCompliant?.count ?? 0} epic(s) require action.
+        Showing {epics?.count ?? 0} epic(s) for current filters.
       </p>
 
       <DataTable
-        title="Non-compliant Epics"
+        title="Epics Overview"
         description="Sortable, searchable table with epic drilldowns."
         data={rows}
         columns={columns}
         searchPlaceholder="Search epics, squad, status..."
-        emptyMessage="No non-compliant epics."
+        emptyMessage="No epics match the current filters."
       />
     </div>
   )

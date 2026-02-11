@@ -45,7 +45,7 @@ const metricsPayload = {
   ],
 }
 
-const nonCompliantPayload = {
+const epicsPayload = {
   scope: {
     sprint_snapshot_id: 1,
     jira_sprint_id: '100',
@@ -53,14 +53,34 @@ const nonCompliantPayload = {
     sprint_state: 'active',
     sync_timestamp: '2026-02-10T12:00:00Z',
   },
-  count: 1,
+  count: 2,
   epics: [
+    {
+      jira_key: 'ABC-201',
+      summary: 'Compliant epic',
+      status_name: 'In Progress',
+      resolution_name: '',
+      is_done: false,
+      is_compliant: true,
+      jira_url: 'https://example.atlassian.net/browse/ABC-201',
+      teams: ['squad_platform'],
+      missing_squad_labels: false,
+      squad_label_warnings: [],
+      compliance_reasons: [],
+      nudge: {
+        cooldown_active: false,
+        seconds_remaining: 0,
+        last_sent_at: null,
+      },
+      failing_dod_tasks: [],
+    },
     {
       jira_key: 'ABC-202',
       summary: 'Non compliant epic',
       status_name: 'In Progress',
       resolution_name: '',
       is_done: false,
+      is_compliant: false,
       jira_url: 'https://example.atlassian.net/browse/ABC-202',
       teams: ['squad_platform'],
       missing_squad_labels: true,
@@ -185,11 +205,11 @@ test('renders compliance dashboard and supports filters', async ({ page }) => {
     })
   })
 
-  await page.route('**/api/epics/non-compliant**', async (route) => {
+  await page.route('**/api/epics**', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(nonCompliantPayload),
+      body: JSON.stringify(epicsPayload),
     })
   })
 
@@ -285,13 +305,13 @@ test('renders compliance dashboard and supports filters', async ({ page }) => {
   await expect(page.getByTestId('kpi-total-epics')).toHaveText('3')
   await expect(page.getByTestId('kpi-missing-squad-labels')).toHaveText('1')
   await expect(page.getByTestId('kpi-invalid-squad-labels')).toHaveText('1')
-  await expect(page.getByTestId('team-rank-squad_platform')).toHaveText('1')
+  await expect(page.getByTestId('team-rank-squad_platform')).toHaveText('#1')
 
   await page.getByTestId('filter-squad').fill('squad_platform')
   await page.getByTestId('filter-epic-status').selectOption('done')
 
   await page.getByTestId('nav-epics').click()
-  await expect(page.getByTestId('non-compliant-count')).toHaveText('1 epic(s) require action.')
+  await expect(page.getByTestId('non-compliant-count')).toHaveText('Showing 2 epic(s) for current filters.')
   await expect(page.getByTestId('nudge-button-ABC-202')).toBeVisible()
   await expect(page.getByText('Missing squad_ label')).toBeVisible()
   await expect(page.getByText('Invalid squad labels: squad')).toBeVisible()
@@ -370,11 +390,11 @@ test('shows dashboard error when backend metrics endpoint fails', async ({ page 
     })
   })
 
-  await page.route('**/api/epics/non-compliant**', async (route) => {
+  await page.route('**/api/epics**', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(nonCompliantPayload),
+      body: JSON.stringify(epicsPayload),
     })
   })
 
@@ -442,11 +462,11 @@ test('enforces login when role auth is enabled and shows admin navigation after 
     })
   })
 
-  await page.route('**/api/epics/non-compliant**', async (route) => {
+  await page.route('**/api/epics**', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(nonCompliantPayload),
+      body: JSON.stringify(epicsPayload),
     })
   })
 
@@ -544,11 +564,11 @@ test('shows scrum master scoped view and hides admin-only pages when role auth i
     })
   })
 
-  await page.route('**/api/epics/non-compliant**', async (route) => {
+  await page.route('**/api/epics**', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(nonCompliantPayload),
+      body: JSON.stringify(epicsPayload),
     })
   })
 
@@ -584,5 +604,5 @@ test('shows scrum master scoped view and hides admin-only pages when role auth i
   await expect(page.getByTestId('nav-nudges')).toBeVisible()
   await expect(page.getByTestId('nav-teams')).toHaveCount(0)
   await expect(page.getByTestId('nav-sync')).toHaveCount(0)
-  await expect(page.getByTestId('team-rank-squad_platform')).toHaveText('1')
+  await expect(page.getByTestId('team-rank-squad_platform')).toHaveText('#1')
 })

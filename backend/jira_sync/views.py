@@ -155,7 +155,8 @@ class SyncRunView(APIView):
                 )
 
         request_data = request.data if isinstance(request.data, dict) else {}
-        project_key = (request_data.get("project_key") or "").strip() or None
+        default_project_key = (getattr(settings, "DEFAULT_SYNC_PROJECT_KEY", "") or "").strip()
+        project_key = (request_data.get("project_key") or "").strip() or default_project_key or None
 
         actor = request.headers.get("X-Actor", "").strip() or "anonymous"
         if role_auth_enabled and getattr(request.user, "is_authenticated", False):

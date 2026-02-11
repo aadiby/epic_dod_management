@@ -10,18 +10,19 @@ import { DashboardHeader } from './components/layout/DashboardHeader'
 import { formatDateTime } from './lib/utils'
 import { LoginPage } from './pages/LoginPage'
 import { NudgeHistoryPage } from './pages/NudgeHistoryPage'
-import { NonCompliantEpicsPage } from './pages/NonCompliantEpicsPage'
+import { EpicsOverviewPage } from './pages/EpicsOverviewPage'
 import { OverviewPage } from './pages/OverviewPage'
 import { SyncPage } from './pages/SyncPage'
 import { TeamsPage } from './pages/TeamsPage'
 import type {
   AuthSessionResponse,
+  ComplianceStatusFilter,
   DrawerDetail,
+  EpicOverviewItem,
+  EpicsResponse,
   EpicStatus,
   HealthStatus,
   MetricsResponse,
-  NonCompliantEpic,
-  NonCompliantResponse,
   NudgeHistoryEntry,
   NudgeHistoryResponse,
   SyncStatusResponse,
@@ -67,9 +68,10 @@ function AppContent() {
   const [squadFilter, setSquadFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
   const [epicStatusFilter, setEpicStatusFilter] = useState<EpicStatus>('all')
+  const [complianceStatusFilter, setComplianceStatusFilter] = useState<ComplianceStatusFilter>('all')
 
   const [metrics, setMetrics] = useState<MetricsResponse | null>(null)
-  const [nonCompliant, setNonCompliant] = useState<NonCompliantResponse | null>(null)
+  const [epics, setEpics] = useState<EpicsResponse | null>(null)
   const [dashboardLoading, setDashboardLoading] = useState(true)
   const [dashboardError, setDashboardError] = useState<string | null>(null)
   const [refreshCounter, setRefreshCounter] = useState(0)
@@ -89,7 +91,7 @@ function AppContent() {
   const [syncStatus, setSyncStatus] = useState<SyncStatusResponse | null>(null)
   const [syncRunning, setSyncRunning] = useState(false)
   const [syncFeedback, setSyncFeedback] = useState('')
-  const [syncProjectKey, setSyncProjectKey] = useState('')
+  const [syncProjectKey, setSyncProjectKey] = useState('CS0100')
 
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [drawerDetail, setDrawerDetail] = useState<DrawerDetail | null>(null)
@@ -118,13 +120,13 @@ function AppContent() {
     for (const team of metrics?.by_team ?? []) {
       values.add(team.team)
     }
-    for (const epic of nonCompliant?.epics ?? []) {
+    for (const epic of epics?.epics ?? []) {
       for (const team of epic.teams) {
         values.add(team)
       }
     }
     return Array.from(values).sort((a, b) => a.localeCompare(b))
-  }, [metrics?.by_team, nonCompliant?.epics])
+  }, [epics?.epics, metrics?.by_team])
 
   const jsonHeaders = (): Record<string, string> => {
     const headers: Record<string, string> = {
@@ -231,6 +233,24 @@ function AppContent() {
     return serialized ? `?${serialized}` : ''
   }, [squadFilter, categoryFilter, epicStatusFilter])
 
+  const epicsQueryString = useMemo(() => {
+    const params = new URLSearchParams()
+    if (squadFilter.trim()) {
+      params.set('squad', squadFilter.trim())
+    }
+    if (categoryFilter) {
+      params.set('category', categoryFilter)
+    }
+    if (epicStatusFilter !== 'all') {
+      params.set('epic_status', epicStatusFilter)
+    }
+    if (complianceStatusFilter !== 'all') {
+      params.set('compliance_status', complianceStatusFilter)
+    }
+    const serialized = params.toString()
+    return serialized ? `?${serialized}` : ''
+  }, [squadFilter, categoryFilter, epicStatusFilter, complianceStatusFilter])
+
   const historyQueryString = useMemo(() => {
     const params = new URLSearchParams()
     if (squadFilter.trim()) {
@@ -252,7 +272,7 @@ function AppContent() {
         setDashboardLoading(false)
         setDashboardError(null)
         setMetrics(null)
-        setNonCompliant(null)
+        setEpics(null)
         setNudgeHistory(null)
         return
       }
@@ -261,12 +281,12 @@ function AppContent() {
       setDashboardError(null)
 
       try {
-        const [metricsResponse, nonCompliantResponse, historyResponse] = await Promise.all([
+        const [metricsResponse, epicsResponse, historyResponse] = await Promise.all([
           apiFetch(`/api/metrics${queryString}`, {
             signal: controller.signal,
             credentials: 'same-origin',
           }),
-          apiFetch(`/api/epics/non-compliant${queryString}`, {
+          apiFetch(`/api/epics${epicsQueryString}`, {
             signal: controller.signal,
             credentials: 'same-origin',
           }),
@@ -279,21 +299,21 @@ function AppContent() {
         if (!metricsResponse.ok) {
           throw new Error(`Metrics endpoint failed with status ${metricsResponse.status}`)
         }
-        if (!nonCompliantResponse.ok) {
-          throw new Error(`Non-compliant endpoint failed with status ${nonCompliantResponse.status}`)
+        if (!epicsResponse.ok) {
+          throw new Error(`Epics endpoint failed with status ${epicsResponse.status}`)
         }
         if (!historyResponse.ok) {
           throw new Error(`Nudge history endpoint failed with status ${historyResponse.status}`)
         }
 
-        const [metricsPayload, nonCompliantPayload, historyPayload] = (await Promise.all([
+        const [metricsPayload, epicsPayload, historyPayload] = (await Promise.all([
           metricsResponse.json(),
-          nonCompliantResponse.json(),
+          epicsResponse.json(),
           historyResponse.json(),
-        ])) as [MetricsResponse, NonCompliantResponse, NudgeHistoryResponse]
+        ])) as [MetricsResponse, EpicsResponse, NudgeHistoryResponse]
 
         setMetrics(metricsPayload)
-        setNonCompliant(nonCompliantPayload)
+        setEpics(epicsPayload)
         setNudgeHistory(historyPayload)
       } catch {
         if (controller.signal.aborted) {
@@ -312,7 +332,15 @@ function AppContent() {
     return () => {
       controller.abort()
     }
-  }, [queryString, historyQueryString, refreshCounter, sessionLoading, roleAuthEnabled, isAuthenticated])
+  }, [
+    queryString,
+    epicsQueryString,
+    historyQueryString,
+    refreshCounter,
+    sessionLoading,
+    roleAuthEnabled,
+    isAuthenticated,
+  ])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -422,8 +450,9 @@ function AppContent() {
     (location.pathname === '/' || location.pathname === '/epics' || location.pathname === '/nudges')
 
   const selectedNudgeEpic = useMemo(
-    () => nonCompliant?.epics.find((epic) => epic.jira_key === nudgeModalEpicKey) ?? null,
-    [nonCompliant, nudgeModalEpicKey],
+    () =>
+      epics?.epics.find((epic) => epic.jira_key === nudgeModalEpicKey && !epic.is_compliant) ?? null,
+    [epics, nudgeModalEpicKey],
   )
 
   const staleSyncMessage = useMemo(() => {
@@ -495,7 +524,7 @@ function AppContent() {
     return Array.from(values).sort((a, b) => a.localeCompare(b))
   }
 
-  const buildNudgePreview = (epic: NonCompliantEpic, recipients: string[]) => {
+  const buildNudgePreview = (epic: EpicOverviewItem, recipients: string[]) => {
     const lines = [
       `Epic: ${epic.jira_key} - ${epic.summary}`,
       `Teams: ${epic.teams.join(', ') || '-'}`,
@@ -515,7 +544,7 @@ function AppContent() {
     return lines.join('\n')
   }
 
-  const openEpicDetail = (epic: NonCompliantEpic) => {
+  const openEpicDetail = (epic: EpicOverviewItem) => {
     const matchingHistory = (nudgeHistory?.nudges ?? []).filter((entry) => entry.epic_key === epic.jira_key)
 
     setDrawerDetail({
@@ -586,26 +615,9 @@ function AppContent() {
   }
 
   const openSquadDetail = (teamKey: string) => {
-    const row = metrics?.by_team.find((item) => item.team === teamKey)
-    if (!row) {
-      return
-    }
-
     setSquadFilter(teamKey)
-    setDrawerDetail({
-      id: teamKey,
-      title: `Squad ${teamKey}`,
-      status: `${row.compliance_percentage}% compliance`,
-      statusTone: row.compliance_percentage >= 75 ? 'success' : row.compliance_percentage >= 50 ? 'warning' : 'error',
-      summary: 'Chart selection applied as active squad filter.',
-      metadata: [
-        { label: 'Rank', value: String(row.rank) },
-        { label: 'Total epics', value: String(row.total_epics) },
-        { label: 'Compliant', value: String(row.compliant_epics) },
-        { label: 'Non-compliant', value: String(row.non_compliant_epics) },
-      ],
-    })
-    setDrawerOpen(true)
+    setComplianceStatusFilter('non_compliant')
+    navigate('/epics')
   }
 
   const sendNudge = async (
@@ -671,8 +683,13 @@ function AppContent() {
       return
     }
 
-    const epic = nonCompliant?.epics.find((item) => item.jira_key === epicKey)
+    const epic = epics?.epics.find((item) => item.jira_key === epicKey)
     if (!epic) {
+      return
+    }
+
+    if (epic.is_compliant) {
+      setNudgeFeedback((prev) => ({ ...prev, [epicKey]: 'Epic is compliant; nudge is not required.' }))
       return
     }
 
@@ -795,7 +812,7 @@ function AppContent() {
         credentials: 'same-origin',
         headers: jsonHeaders(),
         body: JSON.stringify({
-          project_key: syncProjectKey.trim() || undefined,
+          project_key: syncProjectKey.trim() || 'CS0100',
         }),
       })
 
@@ -955,7 +972,7 @@ function AppContent() {
                 }
               }}
             >
-              Non-compliant Epics
+              Epics Overview
             </Tabs.Trigger>
             <Tabs.Trigger
               value="/nudges"
@@ -1057,8 +1074,7 @@ function AppContent() {
                   loading={dashboardLoading}
                   error={dashboardError}
                   metrics={metrics}
-                  nonCompliant={nonCompliant}
-                  nudgeHistory={nudgeHistory}
+                  epics={epics}
                   onRunSync={() => {
                     void runSync()
                   }}
@@ -1066,17 +1082,23 @@ function AppContent() {
                     toast.info('A sprint snapshot captures Jira sprint, epic, and DoD task status at sync time.')
                   }}
                   onSelectSquad={openSquadDetail}
+                  onOpenEpics={(filter) => {
+                    setComplianceStatusFilter(filter)
+                    navigate('/epics')
+                  }}
                 />
               }
             />
             <Route
               path="/epics"
               element={
-                <NonCompliantEpicsPage
+                <EpicsOverviewPage
                   loading={dashboardLoading}
                   error={dashboardError}
                   metrics={metrics}
-                  nonCompliant={nonCompliant}
+                  epics={epics}
+                  complianceStatusFilter={complianceStatusFilter}
+                  onComplianceStatusFilterChange={setComplianceStatusFilter}
                   nudgeFeedback={nudgeFeedback}
                   nudgeInFlight={nudgeInFlight}
                   canNudge={canNudge}
