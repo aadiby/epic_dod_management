@@ -85,11 +85,11 @@ class JiraSnapshotSyncService:
         )
 
     def _sync_max_results(self) -> int:
-        raw = os.getenv("JIRA_SYNC_MAX_RESULTS", "200").strip()
+        raw = os.getenv("JIRA_SYNC_MAX_RESULTS", "300").strip()
         try:
             parsed = int(raw)
         except ValueError:
-            return 200
+            return 300
         return max(parsed, 1)
 
     def _sync_sprint_epics(
@@ -308,7 +308,13 @@ class JiraSnapshotSyncService:
                         teams.add(f"{SQUAD_PREFIX}{team_name}")
                     else:
                         warnings.add(raw)
-                elif normalized.startswith("squad"):
+                elif normalized.endswith("_squad"):
+                    team_name = normalized[: -len("_squad")].strip()
+                    if team_name:
+                        teams.add(f"{SQUAD_PREFIX}{team_name}")
+                    else:
+                        warnings.add(raw)
+                elif normalized.startswith("squad") or normalized.endswith("squad"):
                     warnings.add(raw)
 
         return teams, len(teams) == 0, sorted(warnings)

@@ -210,3 +210,17 @@ class JiraSnapshotSyncServiceTests(TestCase):
             epic.squad_label_warnings,
             ["SQUAD_", "squad", "squad mobile"],
         )
+
+    def test_sync_accepts_suffix_squad_labels(self):
+        adapter = FakeAdapter()
+        adapter.dod_labels = ["Echo_Squad"]
+        adapter.epic_labels = []
+        adapter.regular_labels = []
+        service = JiraSnapshotSyncService(adapter)
+
+        service.sync_active_sprint(project_key="ABC")
+
+        epic = EpicSnapshot.objects.get()
+        self.assertFalse(epic.missing_squad_labels)
+        self.assertEqual(epic.squad_label_warnings, [])
+        self.assertEqual(list(epic.teams.values_list("key", flat=True)), ["squad_echo"])
