@@ -1,190 +1,171 @@
 {
-  "BAT0007-358": [],
-  "CS0036-5105": [],
-  "CS0036-5476": [],
-  "CS0036-5477": [],
-  "CS0036-5478": [],
-  "CS0042-22444": [],
-  "CS0042-25822": [
+  "CS0036-5583": [],
+  "CS0036-5664": [],
+  "CS0062-12848": [],
+  "CS0062-13300": [],
+  "CS0062-13344": [],
+  "CS0062-13520": [],
+  "CS0062-13548": [],
+  "CS0062-13555": [],
+  "CS0086-122": [],
+  "CS0086-205": [
     {
       "application": {},
-      "id": 162541,
+      "id": 179261,
       "object": {
-        "icon": {},
+        "icon": {
+          "url16x16": "https://eservice.mediatek.com/favicon.ico"
+        },
         "status": {
           "icon": {}
         },
-        "title": "Integrity Defect 1918937",
-        "url": "https://alm.barco.com:9443/im/issues?selection=1918937"
+        "title": "MTK request",
+        "url": "https://eservice.mediatek.com/eservice-portal/issue_manager/update/143236291"
       },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0042-25822/remotelink/162541"
-    },
-    {
-      "application": {},
-      "id": 162542,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "StatUI Issue Overview",
-        "url": "https://mx.barco.com:4800/issue_overview?text_field=CS0042-25822"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0042-25822/remotelink/162542"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0086-205/remotelink/179261"
     }
   ],
-  "CS0067-1642": [
-    {
-      "application": {},
-      "id": 176134,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "StatUI Issue Overview",
-        "url": "https://mx.barco.com:4800/issue_overview?text_field=CS0067-1642"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0067-1642/remotelink/176134"
-    }
-  ],
-  "CS0100-15490": [],
-  "CS0100-15618": [],
-  "CS0666-8506": [
-    {
-      "application": {
-        "name": "Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=975471766",
-      "id": 174241,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Exploratory testing for the FOTA release branch",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=975471766"
-      },
-      "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-8506/remotelink/174241"
-    }
-  ],
-  "CS0666-8714": [],
-  "CS0666-9027": [
-    {
-      "application": {
-        "name": "Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1051918517",
-      "id": 178154,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Leo Lu (Developer in Platform Feature team - Toad squad) 2026 weekly report",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1051918517"
-      },
-      "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9027/remotelink/178154"
-    },
-    {
-      "application": {
-        "name": "Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1051918626",
-      "id": 178542,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Way LuChen (Developer in ClickShare App - Lucario squad) 2026 weekly report",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1051918626"
-      },
-      "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9027/remotelink/178542"
-    },
-    {
-      "application": {},
-      "id": 176160,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "StatUI Issue Overview",
-        "url": "https://mx.barco.com:4800/issue_overview?text_field=CS0666-9027"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9027/remotelink/176160"
-    }
-  ],
-  "CS0666-9137": [],
-  "CS0666-9144": [
-    {
-      "application": {},
-      "id": 176556,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "StatUI Issue Overview",
-        "url": "https://mx.barco.com:4800/issue_overview?text_field=CS0666-9144"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9144/remotelink/176556"
-    }
-  ],
+  "CS0100-15578": [],
+  "CS0666-6907": [],
+  "CS0666-8692": [],
   "CS0666-9313": [],
+  "CS0666-9315": [],
   "CS0666-9324": [],
   "CS0666-9332": [],
-  "CS0666-9531": [],
-  "CS0666-9657": [],
-  "CTO0031-3961": [],
-  "IP0031-10085": [
+  "CS0666-9563": [],
+  "CS0666-9604": [],
+  "CS0666-9608": [],
+  "CS0666-9680": [
+    {
+      "application": {},
+      "id": 179259,
+      "object": {
+        "icon": {
+          "url16x16": "https://eservice.mediatek.com/favicon.ico"
+        },
+        "status": {
+          "icon": {}
+        },
+        "title": "MTK request",
+        "url": "https://eservice.mediatek.com/eservice-portal/issue_manager/update/143236273"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9680/remotelink/179259"
+    }
+  ],
+  "GEN0008-5048": [
     {
       "application": {
         "name": "System Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=946733060",
-      "id": 173686,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1022066991",
+      "id": 176390,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
         "title": "Wiki Page",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=946733060"
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1022066991"
       },
       "relationship": "Wiki Page",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IP0031-10085/remotelink/173686"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/GEN0008-5048/remotelink/176390"
     }
   ],
-  "IP0031-10287": [],
-  "IP0031-10781": [],
-  "IP0031-10783": [],
-  "IP0031-10784": [],
-  "IP0031-10924": [],
-  "IP0031-10962": [],
-  "IT0066-1837": [],
-  "IT0066-2655": [],
-  "MI0774-1543": [
+  "IT0066-2719": [
     {
-      "application": {},
-      "id": 172908,
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1000669732",
+      "id": 175675,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Integrity Defect 2008785",
-        "url": "https://alm.barco.com:9443/im/issues?selection=2008785"
+        "title": "2025Q4 - Sprint D (17/12 - 07/01)",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1000669732"
       },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0774-1543/remotelink/172908"
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2719/remotelink/175675"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=851345500",
+      "id": 175411,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "Location (Physical)",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=851345500"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2719/remotelink/175411"
+    }
+  ],
+  "IT0066-2910": [],
+  "IT0066-2922": [],
+  "IT0066-2924": [
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1086259271",
+      "id": 177667,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "2026Q1 - Sprint A (14/01 - 29/01)",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1086259271"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2924/remotelink/177667"
+    }
+  ],
+  "IT0066-2931": [],
+  "IT0066-2953": [],
+  "MI0436-12744": [],
+  "MI0774-1681": [
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1052508636",
+      "id": 175381,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "Sprint review sprint S1_Q1_2026_Nexxis",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1052508636"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0774-1681/remotelink/175381"
+    },
+    {
+      "application": {},
+      "id": 171566,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "Integrity Defect 2001727",
+        "url": "https://alm.barco.com:9443/im/issues?selection=2001727"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0774-1681/remotelink/171566"
     }
   ],
   "MI0774-1724": [
@@ -208,104 +189,214 @@
     }
   ],
   "MI0774-1962": [],
-  "MI0789-122": [
+  "MI0794-69": [
     {
-      "application": {
-        "name": "Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=705168695",
-      "id": 177629,
+      "application": {},
+      "id": 179370,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Page",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=705168695"
+        "title": "Integrity Defect 2087104",
+        "url": "https://alm.barco.com:9443/im/issues?selection=2087104"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0794-69/remotelink/179370"
+    }
+  ],
+  "NET0033-11211": [],
+  "NET0033-11422": [],
+  "NET0033-11589": [],
+  "OCS0001-20453": [
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1004536027",
+      "id": 174420,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "16 Dec 2025 | Barco CTRL Program Board (follow-up from 2 Dec)",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1004536027"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-122/remotelink/177629"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/174420"
     },
     {
-      "application": {},
-      "id": 177601,
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1056932107",
+      "id": 175352,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Integrity Defect 2075688",
-        "url": "https://alm.barco.com:9443/im/issues?selection=2075688"
+        "title": "CTRL 1.14.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1056932107"
       },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-122/remotelink/177601"
-    }
-  ],
-  "MI0789-123": [
-    {
-      "application": {},
-      "id": 178144,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Integrity Defect 2076303",
-        "url": "https://alm.barco.com:9443/im/issues?selection=2076303"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-123/remotelink/178144"
-    }
-  ],
-  "MI0789-35": [
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/175352"
+    },
     {
       "application": {
         "name": "Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=705168695",
-      "id": 177581,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1185743255",
+      "id": 177721,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Page",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=705168695"
+        "title": "CTRL 1.15.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1185743255"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-35/remotelink/177581"
-    }
-  ],
-  "MI0797-1177": [],
-  "MI0797-1179": [],
-  "MI0797-646": [
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/177721"
+    },
     {
       "application": {
         "name": "Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1084358661",
-      "id": 175994,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=428933317",
+      "id": 145286,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Cadence Q1 2026",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1084358661"
+        "title": "CTRL 1.6.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=428933317"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0797-646/remotelink/175994"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/145286"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=443258164",
+      "id": 144788,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL vulnerability management meeting",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=443258164"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/144788"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=461373643",
+      "id": 146299,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL 1.7.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=461373643"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/146299"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=461373981",
+      "id": 146315,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL 1.8.0 MRD - Supporting Data (Draft)",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=461373981"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/146315"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=810516742",
+      "id": 169311,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL 1.11.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=810516742"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/169311"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=934282746",
+      "id": 173327,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL 1.12.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=934282746"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/173327"
+    },
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=939819230",
+      "id": 173353,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "CTRL 1.13.0 MRD - Supporting Data",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=939819230"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-20453/remotelink/173353"
     }
   ],
-  "OCS0001-29664": [
+  "OCS0001-28631": [
     {
       "application": {
         "name": "Confluence",
         "type": "com.atlassian.confluence"
       },
       "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1055981610",
-      "id": 178994,
+      "id": 177460,
       "object": {
         "icon": {},
         "status": {
@@ -315,28 +406,45 @@
         "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1055981610"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-29664/remotelink/178994"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-28631/remotelink/177460"
     },
+    {
+      "application": {},
+      "id": 177376,
+      "object": {
+        "icon": {
+          "url16x16": "https://barcozone-my.sharepoint.com/favicon.ico"
+        },
+        "status": {
+          "icon": {}
+        },
+        "title": "Link to test video on touch monitor in Luxembourg room",
+        "url": "https://barcozone-my.sharepoint.com/:v:/g/personal/tom_rebry_barco_com/IQB1r8NK-SeMSrdh5yrrN_VZAU52_FyR5KBWiU0S0DGUqmw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=3alIr0"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-28631/remotelink/177376"
+    }
+  ],
+  "OCS0001-29077": [
     {
       "application": {
         "name": "Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=824676239",
-      "id": 176291,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=937918519",
+      "id": 173778,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Milestone Integration 2025",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=824676239"
+        "title": "CTRL 1.12.0 Known Issues Updates",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=937918519"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-29664/remotelink/176291"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-29077/remotelink/173778"
     }
   ],
-  "OCS0001-29811": [],
+  "OCS0001-29793": [],
   "OCS0001-30004": [
     {
       "application": {
@@ -372,79 +480,65 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-30004/remotelink/177357"
     }
   ],
-  "OCS0001-30153": [
-    {
-      "application": {},
-      "id": 178166,
-      "object": {
-        "icon": {
-          "url16x16": "https://barcozone.sharepoint.com/favicon.ico"
-        },
-        "status": {
-          "icon": {}
-        },
-        "title": "Logs and video",
-        "url": "https://barcozone.sharepoint.com/:f:/t/T-ENPGlobalSupportExperts/IgAKBXOKg5yeSbVOS7pwSR2sAchZpHgttHU8FDjVNbDjVXA?e=ScUnGz"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-30153/remotelink/178166"
-    }
-  ],
-  "OP0043-644": [],
-  "OP0043-669": [],
-  "OP0043-671": [],
-  "PRJ0406-21975": [],
-  "PRJ0666-20098": [
+  "OCS0001-30100": [
     {
       "application": {
         "name": "System Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1172766861",
-      "id": 178126,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=844759042",
+      "id": 178497,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Refinement - QDX - China certification",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1172766861"
+        "title": "OCS Arch - Source Sharing",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=844759042"
       },
       "relationship": "Wiki Page",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0666-20098/remotelink/178126"
-    },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-30100/remotelink/178497"
+    }
+  ],
+  "OCS0001-30224": [],
+  "OCS0001-30314": [],
+  "PRJ0666-19088": [],
+  "PRJ0666-20763": [
     {
       "application": {
         "name": "Confluence",
         "type": "com.atlassian.confluence"
       },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1226572371",
-      "id": 179039,
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=224595108",
+      "id": 178197,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "IX - Pulse Sprints - 2026 - 3",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1226572371"
+        "title": "2991 - Configuration & control",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=224595108"
       },
       "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0666-20098/remotelink/179039"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0666-20763/remotelink/178197"
     }
   ],
-  "PRJ0672-1601": [],
-  "PRJ0672-1602": [
+  "PRJ0666-20808": [],
+  "PRJ0672-1608": [
     {
       "application": {},
-      "id": 178574,
+      "id": 179361,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Integrity Story 2086534",
-        "url": "https://alm.barco.com:9443/im/issues?selection=2086534"
+        "title": "Integrity Story 2087102",
+        "url": "https://alm.barco.com:9443/im/issues?selection=2087102"
       },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0672-1602/remotelink/178574"
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0672-1608/remotelink/179361"
     }
-  ]
+  ],
+  "TSM8889-15219": [],
+  "TSM8889-15220": []
 }

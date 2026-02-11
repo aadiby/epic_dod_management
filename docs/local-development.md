@@ -238,6 +238,10 @@ source .venv/bin/activate
 python manage.py sync_jira_snapshots --project-key <JIRA_PROJECT_KEY>
 ```
 
+Notes:
+- Sync query depth is controlled by `JIRA_SYNC_MAX_RESULTS` (default `200`).
+- If `--project-key` is omitted, Jira results span all visible open sprints, and dashboard metrics are scoped to the latest stored sprint snapshot.
+
 ## Capture Jira API payloads for troubleshooting
 Use this in the secure business network where Jira access works.  
 It captures real Jira responses to JSON files so you can share them for debugging.

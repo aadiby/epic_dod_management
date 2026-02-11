@@ -61,6 +61,33 @@ class JiraClientAdapterRuntimeTests(SimpleTestCase):
         self.assertEqual(kwargs["fields"], "*all")
 
     @patch("jira_sync.adapter.JIRA")
+    def test_search_active_sprint_issues_paginates_when_total_exceeds_first_page(self, jira_cls_mock):
+        class Page(list):
+            def __init__(self, items, total):
+                super().__init__(items)
+                self.total = total
+
+        client_mock = Mock()
+        client_mock.search_issues.side_effect = [
+            Page(["issue-1", "issue-2", "issue-3", "issue-4"], total=8),
+            Page(["issue-5", "issue-6", "issue-7", "issue-8"], total=8),
+        ]
+        jira_cls_mock.return_value = client_mock
+
+        adapter = JiraClientAdapter(self.config)
+        issues = adapter.search_active_sprint_issues(project_key="ABC", max_results=8)
+
+        self.assertEqual(
+            issues,
+            ["issue-1", "issue-2", "issue-3", "issue-4", "issue-5", "issue-6", "issue-7", "issue-8"],
+        )
+        self.assertEqual(client_mock.search_issues.call_count, 2)
+        first_call_kwargs = client_mock.search_issues.call_args_list[0].kwargs
+        second_call_kwargs = client_mock.search_issues.call_args_list[1].kwargs
+        self.assertEqual(first_call_kwargs["startAt"], 0)
+        self.assertEqual(second_call_kwargs["startAt"], 4)
+
+    @patch("jira_sync.adapter.JIRA")
     def test_get_child_issues_uses_default_clause(self, jira_cls_mock):
         client_mock = Mock()
         client_mock.search_issues.return_value = ["child-1"]
@@ -91,6 +118,30 @@ class JiraClientAdapterRuntimeTests(SimpleTestCase):
 
         args, _ = client_mock.search_issues.call_args
         self.assertIn('"Team" = infra AND parent = "ABC-777"', args[0])
+
+    @patch("jira_sync.adapter.JIRA")
+    def test_get_child_issues_paginates_when_total_exceeds_first_page(self, jira_cls_mock):
+        class Page(list):
+            def __init__(self, items, total):
+                super().__init__(items)
+                self.total = total
+
+        client_mock = Mock()
+        client_mock.search_issues.side_effect = [
+            Page(["child-1", "child-2", "child-3"], total=5),
+            Page(["child-4", "child-5"], total=5),
+        ]
+        jira_cls_mock.return_value = client_mock
+
+        adapter = JiraClientAdapter(self.config)
+        children = adapter.get_child_issues(epic_key="ABC-100", max_results=5)
+
+        self.assertEqual(children, ["child-1", "child-2", "child-3", "child-4", "child-5"])
+        self.assertEqual(client_mock.search_issues.call_count, 2)
+        first_call_kwargs = client_mock.search_issues.call_args_list[0].kwargs
+        second_call_kwargs = client_mock.search_issues.call_args_list[1].kwargs
+        self.assertEqual(first_call_kwargs["startAt"], 0)
+        self.assertEqual(second_call_kwargs["startAt"], 3)
 
     @patch("jira_sync.adapter.JIRA")
     def test_wraps_jira_error_into_jira_api_error_with_status(self, jira_cls_mock):

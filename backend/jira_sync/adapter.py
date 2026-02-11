@@ -88,12 +88,9 @@ class JiraClientAdapter:
 
         return self._run_jira_call(
             operation="search_active_sprint_issues",
-            fn=lambda: list(
-                self.client.search_issues(
-                    jql,
-                    maxResults=max_results,
-                    fields="*all",
-                )
+            fn=lambda: self._search_issues_paginated(
+                jql=jql,
+                max_results=max_results,
             ),
         )
 
@@ -120,12 +117,9 @@ class JiraClientAdapter:
 
         return self._run_jira_call(
             operation="get_child_issues",
-            fn=lambda: list(
-                self.client.search_issues(
-                    jql,
-                    maxResults=max_results,
-                    fields="*all",
-                )
+            fn=lambda: self._search_issues_paginated(
+                jql=jql,
+                max_results=max_results,
             ),
         )
 
@@ -134,6 +128,37 @@ class JiraClientAdapter:
             operation="get_issue_remote_links",
             fn=lambda: list(self.client.remote_links(issue_key)),
         )
+
+    def _search_issues_paginated(self, *, jql: str, max_results: int) -> list[Any]:
+        target_total = max(int(max_results), 1)
+        page_size = min(target_total, 100)
+
+        issues: list[Any] = []
+        start_at = 0
+        while len(issues) < target_total:
+            remaining = target_total - len(issues)
+            current_page_size = min(page_size, remaining)
+            page = self.client.search_issues(
+                jql,
+                startAt=start_at,
+                maxResults=current_page_size,
+                fields="*all",
+            )
+            batch = list(page)
+            if not batch:
+                break
+
+            issues.extend(batch)
+            start_at += len(batch)
+
+            reported_total = self._coerce_status_code(getattr(page, "total", None))
+            if reported_total is not None and start_at >= min(reported_total, target_total):
+                break
+
+            if reported_total is None and len(batch) < current_page_size:
+                break
+
+        return issues[:target_total]
 
     def _run_jira_call(self, *, operation: str, fn):
         try:

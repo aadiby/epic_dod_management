@@ -29,7 +29,10 @@ class JiraSnapshotSyncService:
         self.adapter = adapter
 
     def sync_active_sprint(self, project_key: str | None = None) -> SyncSummary:
-        issues = self.adapter.search_active_sprint_issues(project_key=project_key)
+        issues = self.adapter.search_active_sprint_issues(
+            project_key=project_key,
+            max_results=self._sync_max_results(),
+        )
         if not issues:
             return SyncSummary(sprint_snapshots=0, epic_snapshots=0, dod_task_snapshots=0)
 
@@ -80,6 +83,14 @@ class JiraSnapshotSyncService:
             epic_snapshots=created_epics,
             dod_task_snapshots=created_dod_tasks,
         )
+
+    def _sync_max_results(self) -> int:
+        raw = os.getenv("JIRA_SYNC_MAX_RESULTS", "200").strip()
+        try:
+            parsed = int(raw)
+        except ValueError:
+            return 200
+        return max(parsed, 1)
 
     def _sync_sprint_epics(
         self,

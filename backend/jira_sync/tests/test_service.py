@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from django.test import TestCase
 
@@ -13,10 +14,13 @@ class FakeAdapter:
         self.dod_labels = ["squad_platform"]
         self.epic_labels = ["squad_platform"]
         self.regular_labels = ["squad_platform"]
+        self.last_search_args = None
 
     def search_active_sprint_issues(self, project_key=None, max_results=200):
-        del project_key
-        del max_results
+        self.last_search_args = {
+            "project_key": project_key,
+            "max_results": max_results,
+        }
         return [
             self._epic_issue(),
             self._dod_issue(),
@@ -122,6 +126,15 @@ class JiraSnapshotSyncServiceTests(TestCase):
         self.assertEqual(summary.sprint_snapshots, 0)
         self.assertEqual(summary.epic_snapshots, 0)
         self.assertEqual(summary.dod_task_snapshots, 0)
+
+    def test_sync_uses_env_override_for_max_results(self):
+        adapter = FakeAdapter()
+        service = JiraSnapshotSyncService(adapter)
+
+        with patch.dict("os.environ", {"JIRA_SYNC_MAX_RESULTS": "500"}, clear=False):
+            service.sync_active_sprint(project_key="ABC")
+
+        self.assertEqual(adapter.last_search_args, {"project_key": "ABC", "max_results": 500})
 
     def test_sync_marks_dod_task_with_combined_non_compliance_reasons(self):
         class IncompleteDoDAdapter(FakeAdapter):
