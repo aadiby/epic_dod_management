@@ -5,9 +5,9 @@
   "CS0062-13300": [],
   "CS0062-13344": [],
   "CS0062-13520": [],
-  "CS0062-13548": [],
   "CS0062-13555": [],
   "CS0086-122": [],
+  "CS0086-203": [],
   "CS0086-205": [
     {
       "application": {},
@@ -25,16 +25,52 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0086-205/remotelink/179261"
     }
   ],
+  "CS0100-15489": [],
   "CS0100-15578": [],
+  "CS0100-15618": [],
   "CS0666-6907": [],
+  "CS0666-7568": [
+    {
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=697303111",
+      "id": 168658,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "Duvel - Android user/data directories creation flow under primary storage & external USB",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=697303111"
+      },
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-7568/remotelink/168658"
+    }
+  ],
   "CS0666-8692": [],
+  "CS0666-9144": [
+    {
+      "application": {},
+      "id": 176556,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "StatUI Issue Overview",
+        "url": "https://mx.barco.com:4800/issue_overview?text_field=CS0666-9144"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9144/remotelink/176556"
+    }
+  ],
   "CS0666-9313": [],
-  "CS0666-9315": [],
   "CS0666-9324": [],
   "CS0666-9332": [],
-  "CS0666-9563": [],
+  "CS0666-9344": [],
   "CS0666-9604": [],
-  "CS0666-9608": [],
+  "CS0666-9607": [],
   "CS0666-9680": [
     {
       "application": {},
@@ -52,26 +88,7 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0666-9680/remotelink/179259"
     }
   ],
-  "GEN0008-5048": [
-    {
-      "application": {
-        "name": "System Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1022066991",
-      "id": 176390,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Wiki Page",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1022066991"
-      },
-      "relationship": "Wiki Page",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/GEN0008-5048/remotelink/176390"
-    }
-  ],
+  "IT0066-1837": [],
   "IT0066-2719": [
     {
       "application": {
@@ -132,8 +149,8 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2924/remotelink/177667"
     }
   ],
+  "IT0066-2928": [],
   "IT0066-2931": [],
-  "IT0066-2953": [],
   "MI0436-12744": [],
   "MI0774-1681": [
     {
@@ -189,24 +206,40 @@
     }
   ],
   "MI0774-1962": [],
-  "MI0794-69": [
+  "MI0789-122": [
     {
-      "application": {},
-      "id": 179370,
+      "application": {
+        "name": "Confluence",
+        "type": "com.atlassian.confluence"
+      },
+      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=705168695",
+      "id": 177629,
       "object": {
         "icon": {},
         "status": {
           "icon": {}
         },
-        "title": "Integrity Defect 2087104",
-        "url": "https://alm.barco.com:9443/im/issues?selection=2087104"
+        "title": "Page",
+        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=705168695"
       },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0794-69/remotelink/179370"
+      "relationship": "mentioned in",
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-122/remotelink/177629"
+    },
+    {
+      "application": {},
+      "id": 177601,
+      "object": {
+        "icon": {},
+        "status": {
+          "icon": {}
+        },
+        "title": "Integrity Defect 2075688",
+        "url": "https://alm.barco.com:9443/im/issues?selection=2075688"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/MI0789-122/remotelink/177601"
     }
   ],
-  "NET0033-11211": [],
   "NET0033-11422": [],
-  "NET0033-11589": [],
   "OCS0001-20453": [
     {
       "application": {
@@ -444,42 +477,8 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-29077/remotelink/173778"
     }
   ],
+  "OCS0001-29582": [],
   "OCS0001-29793": [],
-  "OCS0001-30004": [
-    {
-      "application": {
-        "name": "Confluence",
-        "type": "com.atlassian.confluence"
-      },
-      "globalId": "appId=5170ef4e-095b-3b78-bcbf-c4405e161fea&pageId=1235583186",
-      "id": 179142,
-      "object": {
-        "icon": {},
-        "status": {
-          "icon": {}
-        },
-        "title": "Statkraft Dalen - NO252001 - Tearing and interaction release",
-        "url": "https://barco-nv.atlassian.net/wiki/pages/viewpage.action?pageId=1235583186"
-      },
-      "relationship": "mentioned in",
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-30004/remotelink/179142"
-    },
-    {
-      "application": {},
-      "id": 177357,
-      "object": {
-        "icon": {
-          "url16x16": "https://barcozone.sharepoint.com/favicon.ico"
-        },
-        "status": {
-          "icon": {}
-        },
-        "title": "Sharepoint",
-        "url": "https://barcozone.sharepoint.com/:f:/t/T-ENPGlobalSupportExperts/IgBqwMVj4t0UQrG-rvk0-j2XAXevJdAAwppup_wv6EMFHvM?e=EVIufF"
-      },
-      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/OCS0001-30004/remotelink/177357"
-    }
-  ],
   "OCS0001-30100": [
     {
       "application": {
@@ -523,7 +522,6 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0666-20763/remotelink/178197"
     }
   ],
-  "PRJ0666-20808": [],
   "PRJ0672-1608": [
     {
       "application": {},
@@ -539,6 +537,22 @@
       "self": "https://barco-nv.atlassian.net/rest/api/2/issue/PRJ0672-1608/remotelink/179361"
     }
   ],
-  "TSM8889-15219": [],
+  "TSM0041-17373": [
+    {
+      "application": {},
+      "id": 176855,
+      "object": {
+        "icon": {
+          "url16x16": "https://barcozone.sharepoint.com/favicon.ico"
+        },
+        "status": {
+          "icon": {}
+        },
+        "title": "Sharepoint",
+        "url": "https://barcozone.sharepoint.com/:f:/t/T-ENPGlobalSupportExperts/IgAgwftijSLKT70UoCEdaaSgAbuXR4hkxYJznedLXIFiVWE?e=T0Qr0q"
+      },
+      "self": "https://barco-nv.atlassian.net/rest/api/2/issue/TSM0041-17373/remotelink/176855"
+    }
+  ],
   "TSM8889-15220": []
 }

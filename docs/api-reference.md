@@ -36,6 +36,8 @@ Base path: `/api`
   - `epic_status` (`all|open|done`, optional)
 - Response:
   - `scope`
+    - default (without `sprint_snapshot_id`): aggregated latest snapshot per active sprint (`sprint_state=active`)
+    - include `scope_mode` (`single|aggregate`), `sprint_snapshot_count`, and `sprint_snapshot_ids`
   - `summary`:
     - `total_epics`
     - `compliant_epics`
@@ -56,6 +58,7 @@ Base path: `/api`
   - `scope`
   - `count`
   - `epics[]` with:
+    - scope metadata per epic (`sprint_snapshot_id`, `jira_sprint_id`, `sprint_name`)
     - epic metadata (`jira_key`, `summary`, `jira_url`, `teams`)
     - squad label flags (`missing_squad_labels`, `squad_label_warnings`)
     - `compliance_reasons`
@@ -71,6 +74,7 @@ Base path: `/api`
   - `squad` (comma-separated list, optional)
   - `limit` (1..200, optional, default `50`)
 - Response: sent nudge log entries for scoped data.
+  - each entry includes `sprint_snapshot_id` and `sprint_name`
 
 ### `POST /epics/{jira_key}/nudge`
 - Body (optional):

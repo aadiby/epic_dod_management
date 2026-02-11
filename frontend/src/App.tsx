@@ -1,173 +1,33 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BrowserRouter, NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import './App.css'
+import * as Dialog from '@radix-ui/react-dialog'
+import * as Tabs from '@radix-ui/react-tabs'
+import { toast, Toaster } from 'sonner'
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
-type HealthStatus = 'loading' | 'healthy' | 'unhealthy'
-type EpicStatus = 'all' | 'open' | 'done'
-type UserRole = 'admin' | 'scrum_master' | 'viewer' | 'none'
-
-type MetricsResponse = {
-  scope: {
-    sprint_snapshot_id: number
-    jira_sprint_id: string
-    sprint_name: string
-    sprint_state: string
-    sync_timestamp: string
-  } | null
-  summary: {
-    total_epics: number
-    compliant_epics: number
-    non_compliant_epics: number
-    compliance_percentage: number
-    epics_with_missing_squad_labels?: number
-    epics_with_invalid_squad_labels?: number
-  }
-  by_team: Array<{
-    rank: number
-    team: string
-    total_epics: number
-    compliant_epics: number
-    non_compliant_epics: number
-    compliance_percentage: number
-  }>
-  by_category: Array<{
-    category: string
-    total_tasks: number
-    compliant_tasks: number
-    non_compliant_tasks: number
-    compliance_percentage: number
-  }>
-}
-
-type NonCompliantResponse = {
-  scope: {
-    sprint_snapshot_id: number
-    jira_sprint_id: string
-    sprint_name: string
-    sprint_state: string
-    sync_timestamp: string
-  } | null
-  count: number
-  epics: Array<{
-    jira_key: string
-    summary: string
-    status_name: string
-    resolution_name: string
-    is_done: boolean
-    jira_url: string
-    teams: string[]
-    compliance_reasons: string[]
-    missing_squad_labels?: boolean
-    squad_label_warnings?: string[]
-    nudge?: {
-      cooldown_active: boolean
-      seconds_remaining: number
-      last_sent_at: string | null
-    }
-    failing_dod_tasks: Array<{
-      jira_key: string
-      summary: string
-      category: string
-      is_done: boolean
-      jira_url?: string
-      has_evidence_link: boolean
-      evidence_link: string
-      non_compliance_reason: string
-    }>
-  }>
-}
-
-type NudgeHistoryResponse = {
-  scope: {
-    sprint_snapshot_id: number
-    jira_sprint_id: string
-    sprint_name: string
-    sprint_state: string
-    sync_timestamp: string
-  } | null
-  count: number
-  total_count: number
-  nudges: Array<{
-    epic_key: string
-    epic_summary: string
-    team: string | null
-    epic_teams: string[]
-    triggered_by: string
-    recipient_emails: string[]
-    sent_at: string
-  }>
-}
-
-type TeamConfig = {
-  key: string
-  display_name: string
-  notification_emails: string[]
-  scrum_masters?: string[]
-  is_active: boolean
-}
-
-type TeamsResponse = {
-  count: number
-  teams: TeamConfig[]
-}
-
-type SyncStatusResponse = {
-  server_time: string
-  latest_run: {
-    id: number
-    started_at: string
-    finished_at: string | null
-    status: 'RUNNING' | 'SUCCESS' | 'FAILED'
-    trigger: string
-    triggered_by: string
-    project_key: string
-    sprint_snapshots: number
-    epic_snapshots: number
-    dod_task_snapshots: number
-    error_message: string
-  } | null
-  latest_snapshot: {
-    id: number
-    jira_sprint_id: string
-    sprint_name: string
-    sprint_state: string
-    sync_timestamp: string
-  } | null
-  freshness: {
-    status: 'fresh' | 'stale' | 'missing'
-    is_stale: boolean
-    stale_threshold_minutes: number
-    age_seconds: number | null
-    age_minutes: number | null
-    last_snapshot_at: string | null
-    message: string
-  }
-}
-
-type AuthSessionResponse = {
-  authenticated: boolean
-  role_auth_enabled: boolean
-  user: {
-    username: string
-    email: string
-    role: UserRole
-    managed_squads: string[]
-  } | null
-}
-
-type DashboardPageProps = {
-  loading: boolean
-  error: string | null
-  metrics: MetricsResponse | null
-}
-
-type ToastKind = 'success' | 'error'
-
-type ToastMessage = {
-  id: number
-  kind: ToastKind
-  text: string
-}
+import { DetailsDrawer } from './components/drawer/DetailsDrawer'
+import { FilterBar } from './components/filters/FilterBar'
+import { DashboardHeader } from './components/layout/DashboardHeader'
+import { formatDateTime } from './lib/utils'
+import { LoginPage } from './pages/LoginPage'
+import { NudgeHistoryPage } from './pages/NudgeHistoryPage'
+import { NonCompliantEpicsPage } from './pages/NonCompliantEpicsPage'
+import { OverviewPage } from './pages/OverviewPage'
+import { SyncPage } from './pages/SyncPage'
+import { TeamsPage } from './pages/TeamsPage'
+import type {
+  AuthSessionResponse,
+  DrawerDetail,
+  EpicStatus,
+  HealthStatus,
+  MetricsResponse,
+  NonCompliantEpic,
+  NonCompliantResponse,
+  NudgeHistoryEntry,
+  NudgeHistoryResponse,
+  SyncStatusResponse,
+  TeamConfig,
+  TeamsResponse,
+} from './types'
 
 function getCookieValue(name: string): string {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -183,534 +43,11 @@ function apiFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Respons
   })
 }
 
-function getDashboardGate(props: DashboardPageProps) {
-  const { loading, error, metrics } = props
-
-  if (loading) {
-    return <p className="info-message">Loading dashboard data...</p>
-  }
-
-  if (error) {
-    return <p className="error-message">{error}</p>
-  }
-
-  if (!metrics?.scope) {
-    return <p className="info-message">No sprint snapshot data available yet. Run Jira sync first.</p>
-  }
-
-  return null
-}
-
-function OverviewPage({ loading, error, metrics }: DashboardPageProps) {
-  const gate = getDashboardGate({ loading, error, metrics })
-  if (gate) {
-    return gate
-  }
-
-  return (
-    <>
-      <section className="scope-panel">
-        <h2>{metrics?.scope?.sprint_name}</h2>
-        <p>
-          Sprint ID: {metrics?.scope?.jira_sprint_id} | State: {metrics?.scope?.sprint_state}
-        </p>
-      </section>
-
-      <section className="kpi-grid">
-        <article className="kpi-card">
-          <h3>Total Epics</h3>
-          <p data-testid="kpi-total-epics">{metrics?.summary.total_epics ?? 0}</p>
-        </article>
-        <article className="kpi-card">
-          <h3>Compliant</h3>
-          <p data-testid="kpi-compliant-epics">{metrics?.summary.compliant_epics ?? 0}</p>
-        </article>
-        <article className="kpi-card">
-          <h3>Non-compliant</h3>
-          <p data-testid="kpi-non-compliant-epics">{metrics?.summary.non_compliant_epics ?? 0}</p>
-        </article>
-        <article className="kpi-card">
-          <h3>Compliance %</h3>
-          <p data-testid="kpi-compliance-rate">{metrics?.summary.compliance_percentage ?? 0}%</p>
-        </article>
-        <article className="kpi-card">
-          <h3>Missing squad labels</h3>
-          <p data-testid="kpi-missing-squad-labels">
-            {metrics?.summary.epics_with_missing_squad_labels ?? 0}
-          </p>
-        </article>
-        <article className="kpi-card">
-          <h3>Invalid squad labels</h3>
-          <p data-testid="kpi-invalid-squad-labels">
-            {metrics?.summary.epics_with_invalid_squad_labels ?? 0}
-          </p>
-        </article>
-      </section>
-
-      <section className="table-panel">
-        <h2>Team Compliance</h2>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Team</th>
-                <th>Total epics</th>
-                <th>Compliant</th>
-                <th>Non-compliant</th>
-                <th>Rate %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(metrics?.by_team.length ?? 0) === 0 && (
-                <tr>
-                  <td colSpan={6}>No team data.</td>
-                </tr>
-              )}
-              {metrics?.by_team.map((team) => (
-                <tr key={team.team} data-testid={`team-row-${team.team}`}>
-                  <td data-testid={`team-rank-${team.team}`}>{team.rank}</td>
-                  <td>{team.team}</td>
-                  <td>{team.total_epics}</td>
-                  <td>{team.compliant_epics}</td>
-                  <td>{team.non_compliant_epics}</td>
-                  <td>{team.compliance_percentage}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="table-panel">
-        <h2>DoD Category Compliance</h2>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Category</th>
-                <th>Total tasks</th>
-                <th>Compliant</th>
-                <th>Non-compliant</th>
-                <th>Rate %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(metrics?.by_category.length ?? 0) === 0 && (
-                <tr>
-                  <td colSpan={5}>No category data.</td>
-                </tr>
-              )}
-              {metrics?.by_category.map((category) => (
-                <tr key={category.category}>
-                  <td>{category.category}</td>
-                  <td>{category.total_tasks}</td>
-                  <td>{category.compliant_tasks}</td>
-                  <td>{category.non_compliant_tasks}</td>
-                  <td>{category.compliance_percentage}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </>
-  )
-}
-
-type EpicsPageProps = DashboardPageProps & {
-  nonCompliant: NonCompliantResponse | null
-  nudgeFeedback: Record<string, string>
-  nudgeInFlight: Record<string, boolean>
-  onRequestNudge: (epicKey: string) => void
-  canNudge: boolean
-}
-
-function EpicsPage({
-  loading,
-  error,
-  metrics,
-  nonCompliant,
-  nudgeFeedback,
-  nudgeInFlight,
-  onRequestNudge,
-  canNudge,
-}: EpicsPageProps) {
-  const gate = getDashboardGate({ loading, error, metrics })
-  if (gate) {
-    return gate
-  }
-
-  return (
-    <section className="table-panel">
-      <h2>Non-compliant Epics</h2>
-      {!canNudge && <p className="nudge-note">Your role has read-only access. Nudge action is disabled.</p>}
-      <p data-testid="non-compliant-count">{nonCompliant?.count ?? 0} epic(s) require action.</p>
-      <div className="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Epic</th>
-              <th>Teams</th>
-              <th>Reasons</th>
-              <th>Failing DoD Tasks</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(nonCompliant?.epics.length ?? 0) === 0 && (
-              <tr>
-                <td colSpan={5}>No non-compliant epics.</td>
-              </tr>
-            )}
-            {nonCompliant?.epics.map((epic) => (
-              <tr key={epic.jira_key}>
-                <td>
-                  <a href={epic.jira_url} target="_blank" rel="noreferrer">
-                    {epic.jira_key}
-                  </a>
-                  <div>{epic.summary}</div>
-                </td>
-                <td>{epic.teams.join(', ') || '-'}</td>
-                <td>
-                  <div>{epic.compliance_reasons.join(', ')}</div>
-                  {epic.missing_squad_labels && <div className="nudge-note">Missing squad_ label</div>}
-                  {(epic.squad_label_warnings?.length ?? 0) > 0 && (
-                    <div className="nudge-note">
-                      Invalid squad labels: {(epic.squad_label_warnings ?? []).join(', ')}
-                    </div>
-                  )}
-                </td>
-                <td>
-                  <ul className="task-list">
-                    {epic.failing_dod_tasks.length === 0 && <li>No failing DoD tasks.</li>}
-                    {epic.failing_dod_tasks.map((task) => (
-                      <li key={task.jira_key}>
-                        <strong>
-                          {task.jira_url ? (
-                            <a href={task.jira_url} target="_blank" rel="noreferrer">
-                              {task.jira_key}
-                            </a>
-                          ) : (
-                            task.jira_key
-                          )}
-                        </strong>
-                        : {task.summary}
-                        <div className="nudge-note">
-                          {task.has_evidence_link && task.evidence_link ? (
-                            <a href={task.evidence_link} target="_blank" rel="noreferrer">
-                              Evidence link
-                            </a>
-                          ) : (
-                            'Evidence link missing'
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="nudge-button"
-                    data-testid={`nudge-button-${epic.jira_key}`}
-                    disabled={
-                      !canNudge ||
-                      Boolean(nudgeInFlight[epic.jira_key]) ||
-                      Boolean(epic.nudge?.cooldown_active)
-                    }
-                    onClick={() => onRequestNudge(epic.jira_key)}
-                  >
-                    {nudgeInFlight[epic.jira_key] ? 'Sending...' : 'Review & nudge'}
-                  </button>
-                  {epic.nudge?.cooldown_active && (
-                    <div className="nudge-note">
-                      Cooldown: {Math.ceil(epic.nudge.seconds_remaining / 60)} min remaining
-                    </div>
-                  )}
-                  {nudgeFeedback[epic.jira_key] && (
-                    <div className="nudge-note">{nudgeFeedback[epic.jira_key]}</div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  )
-}
-
-type NudgeHistoryPageProps = DashboardPageProps & {
-  nudgeHistory: NudgeHistoryResponse | null
-}
-
-function NudgeHistoryPage({ loading, error, metrics, nudgeHistory }: NudgeHistoryPageProps) {
-  const gate = getDashboardGate({ loading, error, metrics })
-  if (gate) {
-    return gate
-  }
-
-  return (
-    <section className="table-panel">
-      <h2>Nudge History</h2>
-      <div className="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Sent at</th>
-              <th>Epic</th>
-              <th>Teams</th>
-              <th>Triggered by</th>
-              <th>Recipients</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(nudgeHistory?.nudges.length ?? 0) === 0 && (
-              <tr>
-                <td colSpan={5}>No nudge history for this filter.</td>
-              </tr>
-            )}
-            {nudgeHistory?.nudges.map((entry) => (
-              <tr key={`${entry.epic_key}-${entry.sent_at}`}>
-                <td>{new Date(entry.sent_at).toLocaleString()}</td>
-                <td>{entry.epic_key}</td>
-                <td>{entry.epic_teams.join(', ') || '-'}</td>
-                <td>{entry.triggered_by}</td>
-                <td>{entry.recipient_emails.join(', ')}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  )
-}
-
-type TeamsPageProps = {
-  teams: TeamConfig[]
-  teamDrafts: Record<string, string>
-  teamScrumDrafts: Record<string, string>
-  teamSaveState: Record<string, boolean>
-  teamScrumSaveState: Record<string, boolean>
-  teamFeedback: Record<string, string>
-  teamScrumFeedback: Record<string, string>
-  onDraftChange: (teamKey: string, value: string) => void
-  onScrumDraftChange: (teamKey: string, value: string) => void
-  onSave: (teamKey: string) => void
-  onSaveScrumMasters: (teamKey: string) => void
-  canManageTeams: boolean
-}
-
-function TeamsPage({
-  teams,
-  teamDrafts,
-  teamScrumDrafts,
-  teamSaveState,
-  teamScrumSaveState,
-  teamFeedback,
-  teamScrumFeedback,
-  onDraftChange,
-  onScrumDraftChange,
-  onSave,
-  onSaveScrumMasters,
-  canManageTeams,
-}: TeamsPageProps) {
-  return (
-    <section className="table-panel">
-      <h2>Team Notification Recipients</h2>
-      {!canManageTeams && (
-        <p className="nudge-note">Admin role is required to update recipients. View-only mode is active.</p>
-      )}
-      <div className="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Team</th>
-              <th>Recipients (comma separated)</th>
-              <th>Scrum masters (usernames)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teams.length === 0 && (
-              <tr>
-                <td colSpan={4}>No teams found.</td>
-              </tr>
-            )}
-            {teams.map((team) => (
-              <tr key={team.key}>
-                <td>{team.display_name || team.key}</td>
-                <td>
-                  <input
-                    className="recipient-input"
-                    data-testid={`team-recipients-${team.key}`}
-                    value={teamDrafts[team.key] ?? ''}
-                    onChange={(event) => onDraftChange(team.key, event.target.value)}
-                    disabled={!canManageTeams}
-                  />
-                  {teamFeedback[team.key] && <div className="nudge-note">{teamFeedback[team.key]}</div>}
-                </td>
-                <td>
-                  <input
-                    className="recipient-input"
-                    data-testid={`team-scrum-masters-${team.key}`}
-                    value={teamScrumDrafts[team.key] ?? ''}
-                    onChange={(event) => onScrumDraftChange(team.key, event.target.value)}
-                    disabled={!canManageTeams}
-                  />
-                  {teamScrumFeedback[team.key] && (
-                    <div className="nudge-note">{teamScrumFeedback[team.key]}</div>
-                  )}
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="nudge-button"
-                    data-testid={`save-team-${team.key}`}
-                    disabled={!canManageTeams || Boolean(teamSaveState[team.key])}
-                    onClick={() => onSave(team.key)}
-                  >
-                    {teamSaveState[team.key] ? 'Saving...' : 'Save Recipients'}
-                  </button>
-                  <button
-                    type="button"
-                    className="nudge-button"
-                    data-testid={`save-team-scrum-${team.key}`}
-                    disabled={!canManageTeams || Boolean(teamScrumSaveState[team.key])}
-                    onClick={() => onSaveScrumMasters(team.key)}
-                  >
-                    {teamScrumSaveState[team.key] ? 'Saving...' : 'Save Scrum Masters'}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  )
-}
-
-type SyncPageProps = {
-  syncProjectKey: string
-  syncRunning: boolean
-  syncFeedback: string
-  syncStatus: SyncStatusResponse | null
-  onProjectChange: (value: string) => void
-  onRunSync: () => void
-  canRunSync: boolean
-}
-
-function SyncPage({
-  syncProjectKey,
-  syncRunning,
-  syncFeedback,
-  syncStatus,
-  onProjectChange,
-  onRunSync,
-  canRunSync,
-}: SyncPageProps) {
-  return (
-    <section className="table-panel">
-      <h2>Jira Sync Control</h2>
-      <p className="panel-intro">Run manual snapshot sync and monitor the latest run status.</p>
-      {!canRunSync && <p className="nudge-note">Admin role is required to run manual sync.</p>}
-      <div className="sync-controls">
-        <input
-          className="recipient-input"
-          placeholder="Project key (optional)"
-          value={syncProjectKey}
-          onChange={(event) => onProjectChange(event.target.value)}
-          data-testid="sync-project-key"
-          disabled={!canRunSync}
-        />
-        <button
-          type="button"
-          className="nudge-button"
-          data-testid="sync-run-button"
-          disabled={!canRunSync || syncRunning}
-          onClick={onRunSync}
-        >
-          {syncRunning ? 'Running sync...' : 'Run Sync'}
-        </button>
-      </div>
-      {syncFeedback && <p className="nudge-note">{syncFeedback}</p>}
-      <div className="nudge-note">
-        Latest run:{' '}
-        {syncStatus?.latest_run
-          ? `${syncStatus.latest_run.status} at ${new Date(syncStatus.latest_run.started_at).toLocaleString()}`
-          : 'No sync run yet.'}
-      </div>
-      {syncStatus?.latest_snapshot && (
-        <div className="nudge-note">
-          Latest snapshot: {syncStatus.latest_snapshot.sprint_name} ({syncStatus.latest_snapshot.sprint_state})
-        </div>
-      )}
-    </section>
-  )
-}
-
-type LoginPageProps = {
-  username: string
-  password: string
-  loginError: string
-  loginSubmitting: boolean
-  onUsernameChange: (value: string) => void
-  onPasswordChange: (value: string) => void
-  onSubmit: () => void
-}
-
-function LoginPage({
-  username,
-  password,
-  loginError,
-  loginSubmitting,
-  onUsernameChange,
-  onPasswordChange,
-  onSubmit,
-}: LoginPageProps) {
-  return (
-    <section className="table-panel auth-panel">
-      <h2>Sign In</h2>
-      <p className="panel-intro">Authenticate to access the dashboard.</p>
-      <div className="auth-form">
-        <label>
-          Username
-          <input
-            data-testid="login-username"
-            value={username}
-            onChange={(event) => onUsernameChange(event.target.value)}
-            autoComplete="username"
-          />
-        </label>
-        <label>
-          Password
-          <input
-            data-testid="login-password"
-            type="password"
-            value={password}
-            onChange={(event) => onPasswordChange(event.target.value)}
-            autoComplete="current-password"
-          />
-        </label>
-        <button
-          type="button"
-          className="refresh-button"
-          data-testid="login-submit"
-          disabled={loginSubmitting}
-          onClick={onSubmit}
-        >
-          {loginSubmitting ? 'Signing in...' : 'Sign in'}
-        </button>
-      </div>
-      {loginError && (
-        <p className="error-message" data-testid="login-error">
-          {loginError}
-        </p>
-      )}
-    </section>
-  )
+function toSquadArray(value: string): string[] {
+  return value
+    .split(',')
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0)
 }
 
 function AppContent() {
@@ -730,14 +67,17 @@ function AppContent() {
   const [squadFilter, setSquadFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
   const [epicStatusFilter, setEpicStatusFilter] = useState<EpicStatus>('all')
+
   const [metrics, setMetrics] = useState<MetricsResponse | null>(null)
   const [nonCompliant, setNonCompliant] = useState<NonCompliantResponse | null>(null)
   const [dashboardLoading, setDashboardLoading] = useState(true)
   const [dashboardError, setDashboardError] = useState<string | null>(null)
   const [refreshCounter, setRefreshCounter] = useState(0)
+
   const [nudgeFeedback, setNudgeFeedback] = useState<Record<string, string>>({})
   const [nudgeInFlight, setNudgeInFlight] = useState<Record<string, boolean>>({})
   const [nudgeHistory, setNudgeHistory] = useState<NudgeHistoryResponse | null>(null)
+
   const [teams, setTeams] = useState<TeamConfig[]>([])
   const [teamDrafts, setTeamDrafts] = useState<Record<string, string>>({})
   const [teamScrumDrafts, setTeamScrumDrafts] = useState<Record<string, string>>({})
@@ -745,15 +85,21 @@ function AppContent() {
   const [teamScrumSaveState, setTeamScrumSaveState] = useState<Record<string, boolean>>({})
   const [teamFeedback, setTeamFeedback] = useState<Record<string, string>>({})
   const [teamScrumFeedback, setTeamScrumFeedback] = useState<Record<string, string>>({})
+
   const [syncStatus, setSyncStatus] = useState<SyncStatusResponse | null>(null)
   const [syncRunning, setSyncRunning] = useState(false)
   const [syncFeedback, setSyncFeedback] = useState('')
   const [syncProjectKey, setSyncProjectKey] = useState('')
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerDetail, setDrawerDetail] = useState<DrawerDetail | null>(null)
+
   const [nudgeModalEpicKey, setNudgeModalEpicKey] = useState<string | null>(null)
   const [nudgeModalRecipients, setNudgeModalRecipients] = useState('')
   const [nudgeModalError, setNudgeModalError] = useState('')
-  const [toasts, setToasts] = useState<ToastMessage[]>([])
-  const [, setToastCounter] = useState(0)
+  const [toastMessages, setToastMessages] = useState<Array<{ id: number; kind: 'success' | 'error'; text: string }>>(
+    [],
+  )
 
   const roleAuthEnabled = Boolean(session?.role_auth_enabled)
   const isAuthenticated = Boolean(session?.authenticated)
@@ -764,6 +110,21 @@ function AppContent() {
   const showAdminPages = !roleAuthEnabled || currentRole === 'admin'
   const canManageTeams = showAdminPages
   const canRunSync = showAdminPages
+
+  const selectedSquads = useMemo(() => toSquadArray(squadFilter), [squadFilter])
+
+  const availableSquads = useMemo(() => {
+    const values = new Set<string>()
+    for (const team of metrics?.by_team ?? []) {
+      values.add(team.team)
+    }
+    for (const epic of nonCompliant?.epics ?? []) {
+      for (const team of epic.teams) {
+        values.add(team)
+      }
+    }
+    return Array.from(values).sort((a, b) => a.localeCompare(b))
+  }, [metrics?.by_team, nonCompliant?.epics])
 
   const jsonHeaders = (): Record<string, string> => {
     const headers: Record<string, string> = {
@@ -836,7 +197,6 @@ function AppContent() {
           return
         }
 
-        // Backward-compatible fallback for environments without auth endpoint wiring.
         setSession({
           authenticated: false,
           role_auth_enabled: false,
@@ -1049,18 +409,6 @@ function AppContent() {
     })
   }, [teams])
 
-  const badgeClass = useMemo(() => {
-    if (status === 'healthy') {
-      return 'status-badge status-badge--ok'
-    }
-
-    if (status === 'unhealthy') {
-      return 'status-badge status-badge--error'
-    }
-
-    return 'status-badge status-badge--loading'
-  }, [status])
-
   const categoryOptions = useMemo(() => {
     const options = new Set(metrics?.by_category.map((item) => item.category) ?? [])
     if (categoryFilter) {
@@ -1092,11 +440,43 @@ function AppContent() {
     return `Sync data is stale (${ageMinutes} minutes old). Threshold is ${syncStatus.freshness.stale_threshold_minutes} minutes.`
   }, [requiresLogin, syncStatus])
 
+  const tabValue = useMemo(() => {
+    if (location.pathname === '/epics') {
+      return '/epics'
+    }
+    if (location.pathname === '/nudges') {
+      return '/nudges'
+    }
+    if (location.pathname === '/teams') {
+      return '/teams'
+    }
+    if (location.pathname === '/sync') {
+      return '/sync'
+    }
+    return '/'
+  }, [location.pathname])
+
   const parseRecipients = (raw: string): string[] =>
     raw
       .split(',')
       .map((item) => item.trim())
       .filter((item) => item.length > 0)
+
+  const pushToast = (kind: 'success' | 'error', text: string) => {
+    if (import.meta.env.MODE !== 'test') {
+      if (kind === 'success') {
+        toast.success(text)
+      } else {
+        toast.error(text)
+      }
+    }
+
+    const id = Date.now() + Math.floor(Math.random() * 1000)
+    setToastMessages((current) => [...current, { id, kind, text }])
+    window.setTimeout(() => {
+      setToastMessages((current) => current.filter((item) => item.id !== id))
+    }, 4500)
+  }
 
   const defaultRecipientsForTeams = (teamKeys: string[]): string[] => {
     const values = new Set<string>()
@@ -1115,7 +495,7 @@ function AppContent() {
     return Array.from(values).sort((a, b) => a.localeCompare(b))
   }
 
-  const buildNudgePreview = (epic: NonCompliantResponse['epics'][number], recipients: string[]) => {
+  const buildNudgePreview = (epic: NonCompliantEpic, recipients: string[]) => {
     const lines = [
       `Epic: ${epic.jira_key} - ${epic.summary}`,
       `Teams: ${epic.teams.join(', ') || '-'}`,
@@ -1135,21 +515,108 @@ function AppContent() {
     return lines.join('\n')
   }
 
-  const pushToast = (kind: ToastKind, text: string) => {
-    setToastCounter((previousCounter) => {
-      const nextId = previousCounter + 1
-      setToasts((current) => [...current, { id: nextId, kind, text }])
-      window.setTimeout(() => {
-        setToasts((current) => current.filter((item) => item.id !== nextId))
-      }, 4500)
-      return nextId
+  const openEpicDetail = (epic: NonCompliantEpic) => {
+    const matchingHistory = (nudgeHistory?.nudges ?? []).filter((entry) => entry.epic_key === epic.jira_key)
+
+    setDrawerDetail({
+      id: epic.jira_key,
+      title: epic.jira_key,
+      status: epic.status_name || (epic.is_done ? 'Done' : 'Open'),
+      statusTone: epic.is_done ? 'success' : 'warning',
+      summary: epic.summary,
+      metadata: [
+        { label: 'Teams', value: epic.teams.join(', ') || '-' },
+        { label: 'Reasons', value: epic.compliance_reasons.join(', ') || '-' },
+        { label: 'Last nudge', value: formatDateTime(epic.nudge?.last_sent_at) },
+      ],
+      failedChecks: epic.failing_dod_tasks.map((task) => ({
+        title: `${task.jira_key} (${task.category})`,
+        subtitle: task.non_compliance_reason || task.summary,
+        href: task.jira_url,
+      })),
+      history: matchingHistory.map((entry) => ({
+        title: 'Nudge sent',
+        description: `${entry.triggered_by} -> ${entry.recipient_emails.join(', ')}`,
+        timestamp: formatDateTime(entry.sent_at),
+      })),
+      links: [{ label: 'Jira epic', href: epic.jira_url }],
     })
+    setDrawerOpen(true)
   }
 
-  const sendNudge = async (epicKey: string, explicitRecipients: string[] = []) => {
+  const openNudgeDetail = (entry: NudgeHistoryEntry) => {
+    setDrawerDetail({
+      id: `${entry.epic_key}-${entry.sent_at}`,
+      title: entry.epic_key,
+      status: 'Nudge sent',
+      statusTone: 'success',
+      summary: entry.epic_summary,
+      metadata: [
+        { label: 'Teams', value: entry.epic_teams.join(', ') || '-' },
+        { label: 'Triggered by', value: entry.triggered_by },
+        { label: 'Recipients', value: entry.recipient_emails.join(', ') || '-' },
+      ],
+      history: [
+        {
+          title: 'Dispatched',
+          description: `Payload sent to ${entry.recipient_emails.join(', ')}`,
+          timestamp: formatDateTime(entry.sent_at),
+        },
+      ],
+    })
+    setDrawerOpen(true)
+  }
+
+  const openTeamDetail = (team: TeamConfig) => {
+    const compliance = metrics?.by_team.find((entry) => entry.team === team.key)
+
+    setDrawerDetail({
+      id: team.key,
+      title: team.display_name || team.key,
+      status: team.is_active ? 'Active' : 'Inactive',
+      statusTone: team.is_active ? 'success' : 'neutral',
+      summary: `Team key ${team.key}`,
+      metadata: [
+        { label: 'Compliance', value: `${compliance?.compliance_percentage ?? 0}%` },
+        { label: 'Recipients', value: team.notification_emails.join(', ') || '-' },
+        { label: 'Scrum masters', value: (team.scrum_masters ?? []).join(', ') || '-' },
+      ],
+    })
+    setDrawerOpen(true)
+  }
+
+  const openSquadDetail = (teamKey: string) => {
+    const row = metrics?.by_team.find((item) => item.team === teamKey)
+    if (!row) {
+      return
+    }
+
+    setSquadFilter(teamKey)
+    setDrawerDetail({
+      id: teamKey,
+      title: `Squad ${teamKey}`,
+      status: `${row.compliance_percentage}% compliance`,
+      statusTone: row.compliance_percentage >= 75 ? 'success' : row.compliance_percentage >= 50 ? 'warning' : 'error',
+      summary: 'Chart selection applied as active squad filter.',
+      metadata: [
+        { label: 'Rank', value: String(row.rank) },
+        { label: 'Total epics', value: String(row.total_epics) },
+        { label: 'Compliant', value: String(row.compliant_epics) },
+        { label: 'Non-compliant', value: String(row.non_compliant_epics) },
+      ],
+    })
+    setDrawerOpen(true)
+  }
+
+  const sendNudge = async (
+    epicKey: string,
+    explicitRecipients: string[] = [],
+    sprintSnapshotId?: number,
+  ) => {
     if (!canNudge) {
-      setNudgeFeedback((prev) => ({ ...prev, [epicKey]: 'Your role cannot send nudges.' }))
-      pushToast('error', 'Your role cannot send nudges.')
+      const text = 'Your role cannot send nudges.'
+      setNudgeFeedback((prev) => ({ ...prev, [epicKey]: text }))
+      pushToast('error', text)
       return false
     }
 
@@ -1158,8 +625,9 @@ function AppContent() {
 
     try {
       const params = new URLSearchParams()
-      if (metrics?.scope?.sprint_snapshot_id) {
-        params.set('sprint_snapshot_id', String(metrics.scope.sprint_snapshot_id))
+      const resolvedSprintSnapshotId = sprintSnapshotId ?? metrics?.scope?.sprint_snapshot_id
+      if (resolvedSprintSnapshotId) {
+        params.set('sprint_snapshot_id', String(resolvedSprintSnapshotId))
       }
       const query = params.toString()
       const response = await apiFetch(
@@ -1220,7 +688,7 @@ function AppContent() {
     }
 
     const recipients = parseRecipients(nudgeModalRecipients)
-    const ok = await sendNudge(selectedNudgeEpic.jira_key, recipients)
+    const ok = await sendNudge(selectedNudgeEpic.jira_key, recipients, selectedNudgeEpic.sprint_snapshot_id)
     if (ok) {
       setNudgeModalEpicKey(null)
       setNudgeModalRecipients('')
@@ -1240,10 +708,7 @@ function AppContent() {
     setTeamSaveState((prev) => ({ ...prev, [teamKey]: true }))
     setTeamFeedback((prev) => ({ ...prev, [teamKey]: '' }))
 
-    const recipients = (teamDrafts[teamKey] || '')
-      .split(',')
-      .map((item) => item.trim())
-      .filter((item) => item.length > 0)
+    const recipients = parseRecipients(teamDrafts[teamKey] || '')
 
     try {
       const response = await apiFetch(`/api/teams/${encodeURIComponent(teamKey)}/recipients`, {
@@ -1261,10 +726,12 @@ function AppContent() {
         current.map((team) => (team.key === teamKey && payload.team ? payload.team : team)),
       )
       setTeamFeedback((prev) => ({ ...prev, [teamKey]: payload.detail || 'Saved.' }))
+      pushToast('success', 'Team recipients saved.')
       setRefreshCounter((prev) => prev + 1)
     } catch (error) {
       const text = error instanceof Error ? error.message : 'Failed to save recipients.'
       setTeamFeedback((prev) => ({ ...prev, [teamKey]: text }))
+      pushToast('error', text)
     } finally {
       setTeamSaveState((prev) => ({ ...prev, [teamKey]: false }))
     }
@@ -1279,10 +746,7 @@ function AppContent() {
     setTeamScrumSaveState((prev) => ({ ...prev, [teamKey]: true }))
     setTeamScrumFeedback((prev) => ({ ...prev, [teamKey]: '' }))
 
-    const scrumMasters = (teamScrumDrafts[teamKey] || '')
-      .split(',')
-      .map((item) => item.trim())
-      .filter((item) => item.length > 0)
+    const scrumMasters = parseRecipients(teamScrumDrafts[teamKey] || '')
 
     try {
       const response = await apiFetch(`/api/teams/${encodeURIComponent(teamKey)}/scrum-masters`, {
@@ -1304,10 +768,12 @@ function AppContent() {
         ),
       )
       setTeamScrumFeedback((prev) => ({ ...prev, [teamKey]: payload.detail || 'Saved.' }))
+      pushToast('success', 'Team scrum masters saved.')
       setRefreshCounter((prev) => prev + 1)
     } catch (error) {
       const text = error instanceof Error ? error.message : 'Failed to save scrum masters.'
       setTeamScrumFeedback((prev) => ({ ...prev, [teamKey]: text }))
+      pushToast('error', text)
     } finally {
       setTeamScrumSaveState((prev) => ({ ...prev, [teamKey]: false }))
     }
@@ -1316,6 +782,7 @@ function AppContent() {
   const runSync = async () => {
     if (!canRunSync) {
       setSyncFeedback('Admin role required.')
+      pushToast('error', 'Admin role required.')
       return
     }
 
@@ -1353,10 +820,12 @@ function AppContent() {
       } else {
         setSyncFeedback(payload.detail || 'Sync finished.')
       }
+      pushToast('success', payload.detail || 'Sync completed.')
       setRefreshCounter((prev) => prev + 1)
     } catch (error) {
       const text = error instanceof Error ? error.message : 'Failed to run sync.'
       setSyncFeedback(text)
+      pushToast('error', text)
     } finally {
       setSyncRunning(false)
     }
@@ -1414,189 +883,148 @@ function AppContent() {
   }
 
   return (
-    <main className="app-shell">
-      {toasts.length > 0 && (
-        <section className="toast-stack" data-testid="toast-stack" aria-live="polite" aria-atomic="true">
-          {toasts.map((toast) => (
+    <main className="mx-auto min-h-screen w-full max-w-[1500px] space-y-4 px-4 py-6 lg:px-6">
+      {import.meta.env.MODE !== 'test' && <Toaster richColors position="top-right" closeButton />}
+      {toastMessages.length > 0 && (
+        <section className="fixed right-4 top-4 z-[60] grid w-[min(420px,calc(100vw-2rem))] gap-2">
+          {toastMessages.map((item) => (
             <div
-              key={toast.id}
-              className={`toast toast--${toast.kind}`}
-              data-testid={`toast-${toast.kind}`}
-              role="status"
+              key={item.id}
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-md"
+              data-testid={`toast-${item.kind}`}
             >
-              {toast.text}
+              {item.text}
             </div>
           ))}
         </section>
       )}
-      <header className="app-header">
-        <div>
-          <h1>DoD Compliance Dashboard</h1>
-          <p>Track active sprint Definition of Done adherence per squad.</p>
-        </div>
-        <div className="header-actions">
-          <span className={badgeClass} data-testid="health-badge">
-            {message}
-          </span>
-          {sessionLoading && <span className="status-badge status-badge--loading">Session loading...</span>}
-          {!sessionLoading && roleAuthEnabled && session?.user && (
-            <span className="status-badge status-badge--loading" data-testid="session-role-badge">
-              {session.user.username} ({session.user.role})
-            </span>
-          )}
-          <button
-            type="button"
-            className="refresh-button"
-            onClick={() => {
-              setRefreshCounter((prev) => prev + 1)
-              setAuthRefreshCounter((prev) => prev + 1)
-            }}
-            data-testid="refresh-dashboard"
-          >
-            Refresh data
-          </button>
-          {!sessionLoading && roleAuthEnabled && isAuthenticated && (
-            <button
-              type="button"
-              className="refresh-button"
-              onClick={() => {
-                void logoutUser()
-              }}
-              data-testid="logout-button"
-            >
-              Sign out
-            </button>
-          )}
-        </div>
-      </header>
+
+      <DashboardHeader
+        title="DoD Compliance Dashboard"
+        subtitle="Track active sprint Definition of Done adherence per squad."
+        healthStatus={status}
+        healthMessage={message}
+        sessionLoading={sessionLoading}
+        username={session?.user?.username}
+        role={session?.user?.role}
+        roleAuthEnabled={roleAuthEnabled}
+        isAuthenticated={isAuthenticated}
+        showSyncButton={!requiresLogin && showAdminPages}
+        syncDisabled={!canRunSync || syncRunning}
+        onRunSync={() => {
+          void runSync()
+        }}
+        onRefresh={() => {
+          setRefreshCounter((prev) => prev + 1)
+          setAuthRefreshCounter((prev) => prev + 1)
+        }}
+        onSignOut={() => {
+          void logoutUser()
+        }}
+      />
 
       {!requiresLogin && (
-        <nav className="top-nav" aria-label="Primary">
-          <NavLink to="/" end className="nav-link" data-testid="nav-overview">
-            Overview
-          </NavLink>
-          <NavLink to="/epics" className="nav-link" data-testid="nav-epics">
-            Non-compliant Epics
-          </NavLink>
-          <NavLink to="/nudges" className="nav-link" data-testid="nav-nudges">
-            Nudge History
-          </NavLink>
-          {showAdminPages && (
-            <NavLink to="/teams" className="nav-link" data-testid="nav-teams">
-              Teams
-            </NavLink>
-          )}
-          {showAdminPages && (
-            <NavLink to="/sync" className="nav-link" data-testid="nav-sync">
-              Sync
-            </NavLink>
-          )}
-        </nav>
+        <Tabs.Root
+          value={tabValue}
+          onValueChange={(value) => {
+            if (value !== tabValue) {
+              navigate(value)
+            }
+          }}
+        >
+          <Tabs.List className="grid grid-cols-2 gap-2 rounded-2xl border border-slate-200/60 bg-white p-2 shadow-sm sm:grid-cols-3 lg:grid-cols-5">
+            <Tabs.Trigger
+              value="/"
+              className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition data-[state=active]:bg-teal-600 data-[state=active]:text-white"
+              data-testid="nav-overview"
+              onClick={() => {
+                if (location.pathname !== '/') {
+                  navigate('/')
+                }
+              }}
+            >
+              Overview
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="/epics"
+              className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition data-[state=active]:bg-teal-600 data-[state=active]:text-white"
+              data-testid="nav-epics"
+              onClick={() => {
+                if (location.pathname !== '/epics') {
+                  navigate('/epics')
+                }
+              }}
+            >
+              Non-compliant Epics
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="/nudges"
+              className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition data-[state=active]:bg-teal-600 data-[state=active]:text-white"
+              data-testid="nav-nudges"
+              onClick={() => {
+                if (location.pathname !== '/nudges') {
+                  navigate('/nudges')
+                }
+              }}
+            >
+              Nudge History
+            </Tabs.Trigger>
+            {showAdminPages && (
+              <Tabs.Trigger
+                value="/teams"
+                className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition data-[state=active]:bg-teal-600 data-[state=active]:text-white"
+                data-testid="nav-teams"
+                onClick={() => {
+                  if (location.pathname !== '/teams') {
+                    navigate('/teams')
+                  }
+                }}
+              >
+                Teams
+              </Tabs.Trigger>
+            )}
+            {showAdminPages && (
+              <Tabs.Trigger
+                value="/sync"
+                className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition data-[state=active]:bg-teal-600 data-[state=active]:text-white"
+                data-testid="nav-sync"
+                onClick={() => {
+                  if (location.pathname !== '/sync') {
+                    navigate('/sync')
+                  }
+                }}
+              >
+                Sync
+              </Tabs.Trigger>
+            )}
+          </Tabs.List>
+        </Tabs.Root>
       )}
 
       {!requiresLogin && staleSyncMessage && (
-        <section
-          className="error-message freshness-banner"
-          data-testid="sync-freshness-banner"
-          role="status"
-        >
+        <section className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
           {staleSyncMessage}
         </section>
       )}
 
       {showFilterPanel && (
-        <section className="filter-panel">
-          <h2>Filters</h2>
-          <div className="filter-grid">
-            <label>
-              Squads
-              <input
-                value={squadFilter}
-                onChange={(event) => setSquadFilter(event.target.value)}
-                placeholder="squad_platform,squad_mobile"
-                data-testid="filter-squad"
-              />
-            </label>
-            <label>
-              DoD Category
-              <select
-                value={categoryFilter}
-                onChange={(event) => setCategoryFilter(event.target.value)}
-                data-testid="filter-category"
-              >
-                <option value="">All categories</option>
-                {categoryOptions.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Epic status
-              <select
-                value={epicStatusFilter}
-                onChange={(event) => setEpicStatusFilter(event.target.value as EpicStatus)}
-                data-testid="filter-epic-status"
-              >
-                <option value="all">All</option>
-                <option value="open">Open</option>
-                <option value="done">Done</option>
-              </select>
-            </label>
-          </div>
-        </section>
-      )}
-
-      {!requiresLogin && selectedNudgeEpic && (
-        <div className="modal-backdrop" data-testid="nudge-modal">
-          <section className="modal-card" role="dialog" aria-modal="true" aria-label="Nudge confirmation">
-            <h2>Confirm Nudge</h2>
-            <p className="panel-intro">
-              Review recipients and message preview before sending the nudge for{' '}
-              <strong>{selectedNudgeEpic.jira_key}</strong>.
-            </p>
-            <label>
-              Recipients (comma separated, optional)
-              <input
-                className="recipient-input"
-                data-testid="nudge-modal-recipients"
-                value={nudgeModalRecipients}
-                onChange={(event) => setNudgeModalRecipients(event.target.value)}
-                placeholder="team@example.com, scrum.master@example.com"
-              />
-            </label>
-            <pre className="modal-preview" data-testid="nudge-modal-preview">
-              {buildNudgePreview(selectedNudgeEpic, parseRecipients(nudgeModalRecipients))}
-            </pre>
-            {nudgeModalError && <p className="error-message">{nudgeModalError}</p>}
-            <div className="modal-actions">
-              <button
-                type="button"
-                className="refresh-button"
-                data-testid="nudge-modal-cancel"
-                onClick={() => {
-                  setNudgeModalEpicKey(null)
-                  setNudgeModalError('')
-                }}
-                disabled={Boolean(nudgeInFlight[selectedNudgeEpic.jira_key])}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="nudge-button"
-                data-testid="nudge-modal-confirm"
-                onClick={() => {
-                  void confirmNudge()
-                }}
-                disabled={Boolean(nudgeInFlight[selectedNudgeEpic.jira_key])}
-              >
-                {nudgeInFlight[selectedNudgeEpic.jira_key] ? 'Sending...' : 'Send nudge'}
-              </button>
-            </div>
-          </section>
-        </div>
+        <FilterBar
+          availableSquads={availableSquads}
+          selectedSquads={selectedSquads}
+          rawSquadValue={squadFilter}
+          categoryOptions={categoryOptions}
+          categoryFilter={categoryFilter}
+          epicStatusFilter={epicStatusFilter}
+          onRawSquadChange={setSquadFilter}
+          onSelectedSquadsChange={(value) => setSquadFilter(value.join(','))}
+          onCategoryFilterChange={setCategoryFilter}
+          onEpicStatusFilterChange={setEpicStatusFilter}
+          onClearAll={() => {
+            setSquadFilter('')
+            setCategoryFilter('')
+            setEpicStatusFilter('all')
+          }}
+        />
       )}
 
       <Routes>
@@ -1624,12 +1052,27 @@ function AppContent() {
           <>
             <Route
               path="/"
-              element={<OverviewPage loading={dashboardLoading} error={dashboardError} metrics={metrics} />}
+              element={
+                <OverviewPage
+                  loading={dashboardLoading}
+                  error={dashboardError}
+                  metrics={metrics}
+                  nonCompliant={nonCompliant}
+                  nudgeHistory={nudgeHistory}
+                  onRunSync={() => {
+                    void runSync()
+                  }}
+                  onLearnSnapshot={() => {
+                    toast.info('A sprint snapshot captures Jira sprint, epic, and DoD task status at sync time.')
+                  }}
+                  onSelectSquad={openSquadDetail}
+                />
+              }
             />
             <Route
               path="/epics"
               element={
-                <EpicsPage
+                <NonCompliantEpicsPage
                   loading={dashboardLoading}
                   error={dashboardError}
                   metrics={metrics}
@@ -1637,9 +1080,8 @@ function AppContent() {
                   nudgeFeedback={nudgeFeedback}
                   nudgeInFlight={nudgeInFlight}
                   canNudge={canNudge}
-                  onRequestNudge={(epicKey) => {
-                    requestNudge(epicKey)
-                  }}
+                  onRequestNudge={requestNudge}
+                  onViewDetails={openEpicDetail}
                 />
               }
             />
@@ -1651,6 +1093,7 @@ function AppContent() {
                   error={dashboardError}
                   metrics={metrics}
                   nudgeHistory={nudgeHistory}
+                  onViewDetails={openNudgeDetail}
                 />
               }
             />
@@ -1660,6 +1103,7 @@ function AppContent() {
                 showAdminPages ? (
                   <TeamsPage
                     teams={teams}
+                    metrics={metrics}
                     teamDrafts={teamDrafts}
                     teamScrumDrafts={teamScrumDrafts}
                     teamSaveState={teamSaveState}
@@ -1679,6 +1123,7 @@ function AppContent() {
                     onSaveScrumMasters={(teamKey) => {
                       void saveTeamScrumMasters(teamKey)
                     }}
+                    onViewTeam={openTeamDetail}
                   />
                 ) : (
                   <Navigate to="/" replace />
@@ -1710,6 +1155,82 @@ function AppContent() {
           </>
         )}
       </Routes>
+
+      <DetailsDrawer open={drawerOpen} onOpenChange={setDrawerOpen} detail={drawerDetail} />
+
+      <Dialog.Root
+        open={!requiresLogin && selectedNudgeEpic !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setNudgeModalEpicKey(null)
+            setNudgeModalError('')
+          }
+        }}
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-slate-900/45" />
+          <Dialog.Content
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl"
+            data-testid="nudge-modal"
+          >
+            <Dialog.Title className="text-lg font-semibold text-slate-900">Confirm Nudge</Dialog.Title>
+            {selectedNudgeEpic && (
+              <>
+                <Dialog.Description className="mt-1 text-sm text-slate-600">
+                  Review recipients and message preview before sending the nudge for{' '}
+                  <strong>{selectedNudgeEpic.jira_key}</strong>.
+                </Dialog.Description>
+                <label className="mt-4 block text-sm font-medium text-slate-700">
+                  Recipients (comma separated, optional)
+                  <input
+                    className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm"
+                    data-testid="nudge-modal-recipients"
+                    value={nudgeModalRecipients}
+                    onChange={(event) => setNudgeModalRecipients(event.target.value)}
+                    placeholder="team@example.com, scrum.master@example.com"
+                  />
+                </label>
+                <pre
+                  className="mt-3 max-h-56 overflow-auto rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700"
+                  data-testid="nudge-modal-preview"
+                >
+                  {buildNudgePreview(selectedNudgeEpic, parseRecipients(nudgeModalRecipients))}
+                </pre>
+                {nudgeModalError && (
+                  <p className="mt-3 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+                    {nudgeModalError}
+                  </p>
+                )}
+                <div className="mt-4 flex justify-end gap-2">
+                  <button
+                    type="button"
+                    className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+                    data-testid="nudge-modal-cancel"
+                    onClick={() => {
+                      setNudgeModalEpicKey(null)
+                      setNudgeModalError('')
+                    }}
+                    disabled={Boolean(nudgeInFlight[selectedNudgeEpic.jira_key])}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-xl border border-teal-600 bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-60"
+                    data-testid="nudge-modal-confirm"
+                    onClick={() => {
+                      void confirmNudge()
+                    }}
+                    disabled={Boolean(nudgeInFlight[selectedNudgeEpic.jira_key])}
+                  >
+                    {nudgeInFlight[selectedNudgeEpic.jira_key] ? 'Sending...' : 'Send nudge'}
+                  </button>
+                </div>
+              </>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </main>
   )
 }

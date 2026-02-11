@@ -104,21 +104,55 @@ class ComplianceFilterMixin:
             return []
         return [item.strip() for item in raw.split(",") if item.strip()]
 
-    def _resolve_sprint_snapshot(self, request) -> SprintSnapshot | None:
-        sprint_id = request.query_params.get("sprint_snapshot_id")
+    def _resolve_sprint_snapshots(self, request) -> list[SprintSnapshot]:
+        sprint_id = (request.query_params.get("sprint_snapshot_id") or "").strip()
         queryset = SprintSnapshot.objects.order_by("-sync_timestamp", "-id")
-        if sprint_id:
-            return queryset.filter(id=sprint_id).first()
-        return queryset.first()
 
-    def _base_epics_queryset(self, request, sprint_snapshot: SprintSnapshot):
+        if sprint_id:
+            snapshot = queryset.filter(id=sprint_id).first()
+            return [snapshot] if snapshot is not None else []
+
+        active_snapshots = list(
+            SprintSnapshot.objects.filter(sprint_state__iexact="active").order_by(
+                "jira_sprint_id",
+                "-sync_timestamp",
+                "-id",
+            )
+        )
+        if active_snapshots:
+            latest_per_sprint: dict[str, SprintSnapshot] = {}
+            for snapshot in active_snapshots:
+                if snapshot.jira_sprint_id not in latest_per_sprint:
+                    latest_per_sprint[snapshot.jira_sprint_id] = snapshot
+            return sorted(
+                latest_per_sprint.values(),
+                key=lambda snapshot: (snapshot.sync_timestamp, snapshot.id),
+                reverse=True,
+            )
+
+        latest = queryset.first()
+        if latest is None:
+            return []
+
+        # Fallback: if no active snapshots exist, use latest sync batch.
+        return list(
+            queryset.filter(sync_timestamp=latest.sync_timestamp).order_by("-sync_timestamp", "-id")
+        )
+
+    def _resolve_sprint_snapshot(self, request) -> SprintSnapshot | None:
+        snapshots = self._resolve_sprint_snapshots(request)
+        return snapshots[0] if snapshots else None
+
+    def _base_epics_queryset(self, request, sprint_snapshots: list[SprintSnapshot]):
         squad_keys = self._parse_csv(request.query_params.get("squad"))
         epic_status = (request.query_params.get("epic_status") or "all").strip().lower()
 
+        snapshot_ids = [snapshot.id for snapshot in sprint_snapshots]
         queryset = (
-            EpicSnapshot.objects.filter(sprint_snapshot=sprint_snapshot)
+            EpicSnapshot.objects.filter(sprint_snapshot_id__in=snapshot_ids)
+            .select_related("sprint_snapshot")
             .prefetch_related("teams", "dod_tasks", "nudge_logs")
-            .order_by("jira_key")
+            .order_by("jira_key", "-sprint_snapshot_id")
         )
 
         managed_squads = self._managed_squad_keys(request)
@@ -240,13 +274,31 @@ class ComplianceFilterMixin:
         defaults = self._parse_csv(os.getenv("NUDGE_DEFAULT_RECIPIENTS", ""))
         return sorted(set(defaults))
 
-    def _scope_payload(self, sprint_snapshot: SprintSnapshot) -> dict[str, object]:
+    def _scope_payload(self, sprint_snapshots: list[SprintSnapshot]) -> dict[str, object]:
+        latest = sprint_snapshots[0]
+        if len(sprint_snapshots) == 1:
+            sprint_snapshot = latest
+            return {
+                "scope_mode": "single",
+                "sprint_snapshot_count": 1,
+                "sprint_snapshot_ids": [sprint_snapshot.id],
+                "sprint_snapshot_id": sprint_snapshot.id,
+                "jira_sprint_id": sprint_snapshot.jira_sprint_id,
+                "sprint_name": sprint_snapshot.sprint_name,
+                "sprint_state": sprint_snapshot.sprint_state,
+                "sync_timestamp": sprint_snapshot.sync_timestamp.isoformat(),
+            }
+
         return {
-            "sprint_snapshot_id": sprint_snapshot.id,
-            "jira_sprint_id": sprint_snapshot.jira_sprint_id,
-            "sprint_name": sprint_snapshot.sprint_name,
-            "sprint_state": sprint_snapshot.sprint_state,
-            "sync_timestamp": sprint_snapshot.sync_timestamp.isoformat(),
+            "scope_mode": "aggregate",
+            "sprint_snapshot_count": len(sprint_snapshots),
+            "sprint_snapshot_ids": [snapshot.id for snapshot in sprint_snapshots],
+            # Backward-compatible scalar fields for existing clients.
+            "sprint_snapshot_id": latest.id,
+            "jira_sprint_id": "aggregate",
+            "sprint_name": f"All Active Sprints ({len(sprint_snapshots)})",
+            "sprint_state": "mixed",
+            "sync_timestamp": latest.sync_timestamp.isoformat(),
         }
 
     def _resolve_actor(self, request) -> str:
@@ -266,6 +318,9 @@ class ComplianceFilterMixin:
         evaluation: EpicEvaluation,
     ) -> dict[str, object]:
         return {
+            "sprint_snapshot_id": epic.sprint_snapshot_id,
+            "jira_sprint_id": epic.sprint_snapshot.jira_sprint_id,
+            "sprint_name": epic.sprint_snapshot.sprint_name,
             "jira_key": epic.jira_key,
             "summary": epic.summary,
             "status_name": epic.status_name,
@@ -302,10 +357,10 @@ class MetricsView(ComplianceFilterMixin, APIView):
         if guard is not None:
             return guard
 
-        sprint_snapshot = self._resolve_sprint_snapshot(request)
+        sprint_snapshots = self._resolve_sprint_snapshots(request)
         category = request.query_params.get("category")
 
-        if sprint_snapshot is None:
+        if not sprint_snapshots:
             return Response(
                 {
                     "scope": None,
@@ -322,7 +377,7 @@ class MetricsView(ComplianceFilterMixin, APIView):
                 }
             )
 
-        epics = list(self._base_epics_queryset(request, sprint_snapshot))
+        epics = list(self._base_epics_queryset(request, sprint_snapshots))
 
         evaluated: list[tuple[EpicSnapshot, EpicEvaluation]] = []
         for epic in epics:
@@ -347,7 +402,7 @@ class MetricsView(ComplianceFilterMixin, APIView):
 
         return Response(
             {
-                "scope": self._scope_payload(sprint_snapshot),
+                "scope": self._scope_payload(sprint_snapshots),
                 "summary": {
                     "total_epics": total_epics,
                     "compliant_epics": compliant_epics,
@@ -445,13 +500,13 @@ class NonCompliantEpicsView(ComplianceFilterMixin, APIView):
         if guard is not None:
             return guard
 
-        sprint_snapshot = self._resolve_sprint_snapshot(request)
+        sprint_snapshots = self._resolve_sprint_snapshots(request)
         category = request.query_params.get("category")
 
-        if sprint_snapshot is None:
+        if not sprint_snapshots:
             return Response({"scope": None, "count": 0, "epics": []})
 
-        epics = list(self._base_epics_queryset(request, sprint_snapshot))
+        epics = list(self._base_epics_queryset(request, sprint_snapshots))
         non_compliant_epics = []
 
         for epic in epics:
@@ -463,7 +518,7 @@ class NonCompliantEpicsView(ComplianceFilterMixin, APIView):
 
         return Response(
             {
-                "scope": self._scope_payload(sprint_snapshot),
+                "scope": self._scope_payload(sprint_snapshots),
                 "count": len(non_compliant_epics),
                 "epics": non_compliant_epics,
             }
@@ -655,8 +710,8 @@ class NudgeHistoryView(ComplianceFilterMixin, APIView):
         if guard is not None:
             return guard
 
-        sprint_snapshot = self._resolve_sprint_snapshot(request)
-        if sprint_snapshot is None:
+        sprint_snapshots = self._resolve_sprint_snapshots(request)
+        if not sprint_snapshots:
             return Response({"scope": None, "count": 0, "total_count": 0, "nudges": []})
 
         squad_keys = self._parse_csv(request.query_params.get("squad"))
@@ -667,8 +722,8 @@ class NudgeHistoryView(ComplianceFilterMixin, APIView):
         limit = max(1, min(limit, 200))
 
         queryset = (
-            NudgeLog.objects.filter(epic_snapshot__sprint_snapshot=sprint_snapshot)
-            .select_related("epic_snapshot", "team")
+            NudgeLog.objects.filter(epic_snapshot__sprint_snapshot_id__in=[s.id for s in sprint_snapshots])
+            .select_related("epic_snapshot", "epic_snapshot__sprint_snapshot", "team")
             .prefetch_related("epic_snapshot__teams")
             .order_by("-sent_at")
         )
@@ -690,6 +745,8 @@ class NudgeHistoryView(ComplianceFilterMixin, APIView):
             nudges.append(
                 {
                     "epic_key": log.epic_snapshot.jira_key,
+                    "sprint_snapshot_id": log.epic_snapshot.sprint_snapshot_id,
+                    "sprint_name": log.epic_snapshot.sprint_snapshot.sprint_name,
                     "epic_summary": log.epic_snapshot.summary,
                     "team": log.team.key if log.team else None,
                     "epic_teams": sorted([team.key for team in log.epic_snapshot.teams.all()]),
@@ -701,7 +758,7 @@ class NudgeHistoryView(ComplianceFilterMixin, APIView):
 
         return Response(
             {
-                "scope": self._scope_payload(sprint_snapshot),
+                "scope": self._scope_payload(sprint_snapshots),
                 "count": len(nudges),
                 "total_count": total_count,
                 "nudges": nudges,
@@ -725,8 +782,8 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
             )
             return guard
 
-        sprint_snapshot = self._resolve_sprint_snapshot(request)
-        if sprint_snapshot is None:
+        sprint_snapshots = self._resolve_sprint_snapshots(request)
+        if not sprint_snapshots:
             audit_log(
                 "nudge.rejected",
                 request=request,
@@ -739,12 +796,15 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 status=status.HTTP_404_NOT_FOUND,
             )
 
+        snapshot_ids = [snapshot.id for snapshot in sprint_snapshots]
         epic = (
             EpicSnapshot.objects.filter(
-                sprint_snapshot=sprint_snapshot,
+                sprint_snapshot_id__in=snapshot_ids,
                 jira_key=jira_key,
             )
+            .select_related("sprint_snapshot")
             .prefetch_related("teams", "dod_tasks", "nudge_logs")
+            .order_by("-sprint_snapshot__sync_timestamp", "-sprint_snapshot_id", "-id")
             .first()
         )
         if epic is None:
@@ -753,7 +813,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 request=request,
                 level=logging.WARNING,
                 epic_key=jira_key,
-                sprint_snapshot_id=sprint_snapshot.id,
+                scope_snapshot_ids=snapshot_ids,
                 reason="epic_not_found",
             )
             return Response(
@@ -767,7 +827,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 request=request,
                 level=logging.WARNING,
                 epic_key=epic.jira_key,
-                sprint_snapshot_id=sprint_snapshot.id,
+                sprint_snapshot_id=epic.sprint_snapshot_id,
                 reason="not_allowed_for_user_scope",
             )
             return Response(
@@ -782,7 +842,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 request=request,
                 level=logging.INFO,
                 epic_key=epic.jira_key,
-                sprint_snapshot_id=sprint_snapshot.id,
+                sprint_snapshot_id=epic.sprint_snapshot_id,
                 reason="epic_is_compliant",
             )
             return Response(
@@ -797,7 +857,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 request=request,
                 level=logging.WARNING,
                 epic_key=epic.jira_key,
-                sprint_snapshot_id=sprint_snapshot.id,
+                sprint_snapshot_id=epic.sprint_snapshot_id,
                 reason="cooldown_active",
                 seconds_remaining=nudge_state["seconds_remaining"],
             )
@@ -823,7 +883,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
                 request=request,
                 level=logging.WARNING,
                 epic_key=epic.jira_key,
-                sprint_snapshot_id=sprint_snapshot.id,
+                sprint_snapshot_id=epic.sprint_snapshot_id,
                 reason="no_recipients",
             )
             return Response(
@@ -868,7 +928,7 @@ class NudgeEpicView(ComplianceFilterMixin, APIView):
             "nudge.sent",
             request=request,
             epic_key=epic.jira_key,
-            sprint_snapshot_id=sprint_snapshot.id,
+            sprint_snapshot_id=epic.sprint_snapshot_id,
             recipient_count=len(recipients),
             nudge_log_id=nudge_log.id,
             failing_task_count=len(evaluation.failing_tasks),

@@ -1,578 +1,4 @@
 {
-  "CS0100-10147": {
-    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
-    "fields": {
-      "aggregateprogress": {
-        "progress": 0,
-        "total": 0
-      },
-      "aggregatetimeestimate": null,
-      "aggregatetimeoriginalestimate": null,
-      "aggregatetimespent": null,
-      "assignee": {
-        "accountId": "712020:61cb0aaf-e36b-448d-ad6c-719651a7c076",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/90477cffc43c16e75d5277e26cbd7d09?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCT-5.png",
-          "24x24": "https://secure.gravatar.com/avatar/90477cffc43c16e75d5277e26cbd7d09?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCT-5.png",
-          "32x32": "https://secure.gravatar.com/avatar/90477cffc43c16e75d5277e26cbd7d09?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCT-5.png",
-          "48x48": "https://secure.gravatar.com/avatar/90477cffc43c16e75d5277e26cbd7d09?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCT-5.png"
-        },
-        "displayName": "CY Tsai",
-        "emailAddress": "cy.tsai@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=712020%3A61cb0aaf-e36b-448d-ad6c-719651a7c076",
-        "timeZone": "Europe/Brussels"
-      },
-      "attachment": [],
-      "comment": {
-        "comments": [
-          {
-            "author": {
-              "accountId": "61eacb08e2261a0069576958",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/16",
-                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/24",
-                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/32",
-                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/48"
-              },
-              "displayName": "Jason Lin",
-              "emailAddress": "jason.lin@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacb08e2261a0069576958",
-              "timeZone": "Asia/Taipei"
-            },
-            "body": "Moved this epic to the improvement scope after the MVP.",
-            "created": "2025-05-14T06:20:59.106+0200",
-            "id": "1422459",
-            "jsdPublic": true,
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/912220/comment/1422459",
-            "updateAuthor": {
-              "accountId": "61eacb08e2261a0069576958",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/16",
-                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/24",
-                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/32",
-                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/48"
-              },
-              "displayName": "Jason Lin",
-              "emailAddress": "jason.lin@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacb08e2261a0069576958",
-              "timeZone": "Asia/Taipei"
-            },
-            "updated": "2025-05-14T06:20:59.106+0200"
-          },
-          {
-            "author": {
-              "accountId": "61eaca6b93885f006989ee94",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "24x24": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "32x32": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "48x48": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png"
-              },
-              "displayName": "Harrison Lin",
-              "emailAddress": "harrison.lin@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eaca6b93885f006989ee94",
-              "timeZone": "Europe/Brussels"
-            },
-            "body": "[~accountid:712020:5bc09e28-6068-49d8-a706-95c0ddfad698]  \nPlease add the test for ticket 8430 & other implementation changes.\n[https://barco-nv.atlassian.net/browse/CS0666-8430|https://barco-nv.atlassian.net/browse/CS0666-8430|smart-link] => it might already be covered in [https://eu1-prod.practitest.app/p/16779/tests/3367434/edit|https://eu1-prod.practitest.app/p/16779/tests/3367434/edit|smart-link] \n\nand ensure the test is updated.[https://barco-nv.atlassian.net/browse/CS0666-8523|https://barco-nv.atlassian.net/browse/CS0666-8523|smart-link] \n\nu can use the tickets instead of creating a new one.\n\n[https://barco-nv.atlassian.net/browse/CS0100-12522|https://barco-nv.atlassian.net/browse/CS0100-12522|smart-link] [https://barco-nv.atlassian.net/browse/CS0100-12523|https://barco-nv.atlassian.net/browse/CS0100-12523|smart-link] ",
-            "created": "2026-01-16T07:06:16.382+0100",
-            "id": "1549661",
-            "jsdPublic": true,
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/912220/comment/1549661",
-            "updateAuthor": {
-              "accountId": "61eaca6b93885f006989ee94",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "24x24": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "32x32": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png",
-                "48x48": "https://secure.gravatar.com/avatar/e46ba094e7bc38995bda70d18c5604c8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHL-1.png"
-              },
-              "displayName": "Harrison Lin",
-              "emailAddress": "harrison.lin@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eaca6b93885f006989ee94",
-              "timeZone": "Europe/Brussels"
-            },
-            "updated": "2026-01-28T03:35:36.135+0100"
-          }
-        ],
-        "maxResults": 2,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/912220/comment",
-        "startAt": 0,
-        "total": 2
-      },
-      "components": [],
-      "created": "2025-04-02T14:45:24.186+0200",
-      "creator": {
-        "accountId": "61eacb08e2261a0069576958",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/16",
-          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/24",
-          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/32",
-          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/48"
-        },
-        "displayName": "Jason Lin",
-        "emailAddress": "jason.lin@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacb08e2261a0069576958",
-        "timeZone": "Asia/Taipei"
-      },
-      "customfield_10000": "{}",
-      "customfield_10001": null,
-      "customfield_10002": [],
-      "customfield_10003": null,
-      "customfield_10004": null,
-      "customfield_10005": null,
-      "customfield_10006": null,
-      "customfield_10007": null,
-      "customfield_10008": null,
-      "customfield_10009": null,
-      "customfield_10010": null,
-      "customfield_10011": null,
-      "customfield_10012": {
-        "id": "10016",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10016",
-        "value": "To Do"
-      },
-      "customfield_10013": "ghx-label-4",
-      "customfield_10014": null,
-      "customfield_10015": null,
-      "customfield_10016": null,
-      "customfield_10017": "dark_yellow",
-      "customfield_10019": "2|hzz5h3:",
-      "customfield_10020": null,
-      "customfield_10021": null,
-      "customfield_10022": null,
-      "customfield_10023": null,
-      "customfield_10024": "2026-01-16T07:06:16.382+0100",
-      "customfield_10025": null,
-      "customfield_10027": null,
-      "customfield_10028": null,
-      "customfield_10029": null,
-      "customfield_10030": null,
-      "customfield_10031": null,
-      "customfield_10034": null,
-      "customfield_10035": null,
-      "customfield_10036": null,
-      "customfield_10037": null,
-      "customfield_10038": null,
-      "customfield_10039": null,
-      "customfield_10040": {
-        "id": "10020",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
-        "value": "Software"
-      },
-      "customfield_10044": {
-        "id": "10031",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
-        "value": "Barco Employee"
-      },
-      "customfield_10045": null,
-      "customfield_10049": null,
-      "customfield_10054": null,
-      "customfield_10055": null,
-      "customfield_10057": null,
-      "customfield_10059": null,
-      "customfield_10060": null,
-      "customfield_10061": null,
-      "customfield_10062": null,
-      "customfield_10063": null,
-      "customfield_10064": null,
-      "customfield_10065": null,
-      "customfield_10066": null,
-      "customfield_10067": null,
-      "customfield_10068": null,
-      "customfield_10069": null,
-      "customfield_10070": null,
-      "customfield_10077": null,
-      "customfield_10078": null,
-      "customfield_10079": null,
-      "customfield_10081": null,
-      "customfield_10082": null,
-      "customfield_10121": null,
-      "customfield_10122": null,
-      "customfield_10123": null,
-      "customfield_10124": null,
-      "customfield_10125": null,
-      "customfield_10128": null,
-      "customfield_10129": null,
-      "customfield_10130": null,
-      "customfield_10131": null,
-      "customfield_10132": null,
-      "customfield_10133": null,
-      "customfield_10167": null,
-      "customfield_10200": [],
-      "customfield_10201": null,
-      "customfield_10211": null,
-      "customfield_10213": null,
-      "customfield_10214": null,
-      "customfield_10281": null,
-      "customfield_10282": null,
-      "customfield_10283": null,
-      "customfield_10284": null,
-      "customfield_10318": null,
-      "customfield_11320": null,
-      "customfield_11322": null,
-      "customfield_11355": null,
-      "customfield_11356": null,
-      "customfield_11357": null,
-      "customfield_11390": null,
-      "customfield_11423": null,
-      "customfield_11456": null,
-      "customfield_12523": null,
-      "customfield_12524": null,
-      "customfield_12525": null,
-      "customfield_12526": null,
-      "customfield_12527": null,
-      "customfield_12528": null,
-      "customfield_12529": null,
-      "customfield_12530": null,
-      "customfield_12531": null,
-      "customfield_12532": [],
-      "customfield_12533": null,
-      "customfield_12534": null,
-      "customfield_12536": null,
-      "customfield_12537": null,
-      "customfield_12538": null,
-      "customfield_12539": null,
-      "customfield_12540": null,
-      "customfield_12541": null,
-      "customfield_12542": null,
-      "customfield_12543": null,
-      "customfield_12544": null,
-      "customfield_12545": null,
-      "customfield_12546": null,
-      "customfield_12547": null,
-      "customfield_12580": null,
-      "customfield_12613": null,
-      "customfield_12614": null,
-      "customfield_12615": null,
-      "customfield_12616": null,
-      "customfield_12617": null,
-      "customfield_12618": null,
-      "customfield_12619": null,
-      "customfield_12620": null,
-      "customfield_12621": null,
-      "customfield_12622": null,
-      "customfield_12623": null,
-      "customfield_12624": null,
-      "customfield_12625": null,
-      "customfield_12626": null,
-      "customfield_12627": null,
-      "customfield_12628": null,
-      "customfield_12629": null,
-      "customfield_12630": null,
-      "customfield_12631": null,
-      "customfield_12632": null,
-      "customfield_12633": null,
-      "customfield_12634": null,
-      "customfield_12635": null,
-      "customfield_12636": null,
-      "customfield_12637": null,
-      "customfield_12638": null,
-      "customfield_12639": null,
-      "customfield_12640": null,
-      "customfield_12641": null,
-      "customfield_12642": null,
-      "customfield_12643": null,
-      "customfield_12644": null,
-      "customfield_12645": null,
-      "customfield_12646": null,
-      "customfield_12647": null,
-      "customfield_12680": null,
-      "customfield_12713": null,
-      "customfield_12714": null,
-      "customfield_12715": null,
-      "customfield_12716": null,
-      "customfield_12717": null,
-      "customfield_12718": null,
-      "customfield_12719": null,
-      "description": "Gathering the post-MVP to-do tasks.",
-      "duedate": null,
-      "fixVersions": [],
-      "issuelinks": [],
-      "issuerestriction": {
-        "issuerestrictions": {},
-        "shouldDisplay": false
-      },
-      "issuetype": {
-        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-        "hierarchyLevel": 1,
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-        "id": "10000",
-        "name": "Epic",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-        "subtask": false
-      },
-      "labels": [
-        "Duvel_PostMVP",
-        "Koopas_Squad",
-        "Lead_Koopas_Squad",
-        "Wave4"
-      ],
-      "lastViewed": null,
-      "parent": {
-        "fields": {
-          "issuetype": {
-            "avatarId": 10315,
-            "description": "A top-level initiative.",
-            "hierarchyLevel": 2,
-            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-            "id": "10117",
-            "name": "Initiative",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
-            "subtask": false
-          },
-          "priority": {
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/medium.svg",
-            "id": "10003",
-            "name": "P3",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10003"
-          },
-          "status": {
-            "description": "Identify what the problem is and for who? What is the value for Barco?",
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-            "id": "10128",
-            "name": "Problem Validation",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/status/10128",
-            "statusCategory": {
-              "colorName": "blue-gray",
-              "id": 2,
-              "key": "new",
-              "name": "To Do",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-            }
-          },
-          "summary": "Wave IV: Placeholder for Settings app"
-        },
-        "id": "980990",
-        "key": "CS0102-245",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/980990"
-      },
-      "priority": {
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/medium.svg",
-        "id": "10003",
-        "name": "P3",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10003"
-      },
-      "progress": {
-        "progress": 0,
-        "total": 0
-      },
-      "project": {
-        "avatarUrls": {
-          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=xsmall",
-          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=small",
-          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=medium",
-          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423"
-        },
-        "id": "12089",
-        "key": "CS0100",
-        "name": "MX - Product Backlog",
-        "projectCategory": {
-          "description": "Meeting Experience",
-          "id": "10029",
-          "name": "Meeting Experience",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10029"
-        },
-        "projectTypeKey": "software",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/project/12089",
-        "simplified": false
-      },
-      "reporter": {
-        "accountId": "61eacb08e2261a0069576958",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/16",
-          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/24",
-          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/32",
-          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacb08e2261a0069576958/55583ce5-7810-4c95-92da-68f57727d81d/48"
-        },
-        "displayName": "Jason Lin",
-        "emailAddress": "jason.lin@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacb08e2261a0069576958",
-        "timeZone": "Asia/Taipei"
-      },
-      "resolution": null,
-      "resolutiondate": null,
-      "security": null,
-      "status": {
-        "description": "The issue is reported and ready for the assignee to start work on it.",
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-        "id": "10003",
-        "name": "Reported",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-        "statusCategory": {
-          "colorName": "blue-gray",
-          "id": 2,
-          "key": "new",
-          "name": "To Do",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-        }
-      },
-      "statusCategory": {
-        "colorName": "blue-gray",
-        "id": 2,
-        "key": "new",
-        "name": "To Do",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-      },
-      "statuscategorychangedate": "2025-04-02T14:45:24.732+0200",
-      "subtasks": [
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Define threat modeling strategy"
-          },
-          "id": "912436",
-          "key": "CS0100-10150",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/912436"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Test | Practitest \ud83e\uddea\ud83d\udec2"
-          },
-          "id": "965157",
-          "key": "CS0100-12522",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/965157"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Test | System test \ud83e\uddea\u2699\ufe0f"
-          },
-          "id": "965159",
-          "key": "CS0100-12523",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/965159"
-        }
-      ],
-      "summary": "[Duvel][Setting] Post MVP placeholder",
-      "timeestimate": null,
-      "timeoriginalestimate": null,
-      "timespent": null,
-      "timetracking": {},
-      "updated": "2026-02-02T12:40:54.675+0100",
-      "versions": [],
-      "votes": {
-        "hasVoted": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-10147/votes",
-        "votes": 0
-      },
-      "watches": {
-        "isWatching": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-10147/watchers",
-        "watchCount": 2
-      },
-      "worklog": {
-        "maxResults": 20,
-        "startAt": 0,
-        "total": 0,
-        "worklogs": []
-      },
-      "workratio": -1
-    },
-    "id": "912220",
-    "key": "CS0100-10147",
-    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/912220"
-  },
   "CS0100-10165": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
     "fields": {
@@ -2214,6 +1640,757 @@
     "id": "969283",
     "key": "CS0100-13293",
     "self": "https://barco-nv.atlassian.net/rest/api/2/issue/969283"
+  },
+  "CS0100-13975": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
+    "fields": {
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "aggregatetimeestimate": null,
+      "aggregatetimeoriginalestimate": null,
+      "aggregatetimespent": null,
+      "assignee": {
+        "accountId": "61eacba498cd610070718e32",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
+        },
+        "displayName": "Ryan Huang",
+        "emailAddress": "ryan.r.huang@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
+        "timeZone": "Asia/Taipei"
+      },
+      "attachment": [],
+      "comment": {
+        "comments": [],
+        "maxResults": 0,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/992399/comment",
+        "startAt": 0,
+        "total": 0
+      },
+      "components": [],
+      "created": "2025-11-17T09:23:07.804+0100",
+      "creator": {
+        "accountId": "61eacba498cd610070718e32",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
+        },
+        "displayName": "Ryan Huang",
+        "emailAddress": "ryan.r.huang@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
+        "timeZone": "Asia/Taipei"
+      },
+      "customfield_10000": "{}",
+      "customfield_10001": null,
+      "customfield_10002": [],
+      "customfield_10003": null,
+      "customfield_10004": null,
+      "customfield_10005": null,
+      "customfield_10006": null,
+      "customfield_10007": null,
+      "customfield_10008": null,
+      "customfield_10009": null,
+      "customfield_10010": null,
+      "customfield_10011": null,
+      "customfield_10012": {
+        "id": "10017",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10017",
+        "value": "In Progress"
+      },
+      "customfield_10013": "ghx-label-3",
+      "customfield_10014": null,
+      "customfield_10015": null,
+      "customfield_10016": null,
+      "customfield_10017": "orange",
+      "customfield_10019": "2|i08m13:",
+      "customfield_10020": null,
+      "customfield_10021": null,
+      "customfield_10022": null,
+      "customfield_10023": null,
+      "customfield_10024": null,
+      "customfield_10025": null,
+      "customfield_10027": null,
+      "customfield_10028": null,
+      "customfield_10029": null,
+      "customfield_10030": null,
+      "customfield_10031": null,
+      "customfield_10034": null,
+      "customfield_10035": null,
+      "customfield_10036": null,
+      "customfield_10037": null,
+      "customfield_10038": null,
+      "customfield_10039": null,
+      "customfield_10040": {
+        "id": "10020",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
+        "value": "Software"
+      },
+      "customfield_10044": {
+        "id": "10031",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
+        "value": "Barco Employee"
+      },
+      "customfield_10045": null,
+      "customfield_10049": null,
+      "customfield_10054": null,
+      "customfield_10055": null,
+      "customfield_10057": null,
+      "customfield_10059": null,
+      "customfield_10060": null,
+      "customfield_10061": null,
+      "customfield_10062": null,
+      "customfield_10063": null,
+      "customfield_10064": null,
+      "customfield_10065": null,
+      "customfield_10066": null,
+      "customfield_10067": null,
+      "customfield_10068": null,
+      "customfield_10069": null,
+      "customfield_10070": null,
+      "customfield_10077": null,
+      "customfield_10078": null,
+      "customfield_10079": null,
+      "customfield_10081": null,
+      "customfield_10082": null,
+      "customfield_10121": null,
+      "customfield_10122": null,
+      "customfield_10123": null,
+      "customfield_10124": null,
+      "customfield_10125": null,
+      "customfield_10128": null,
+      "customfield_10129": null,
+      "customfield_10130": null,
+      "customfield_10131": null,
+      "customfield_10132": null,
+      "customfield_10133": null,
+      "customfield_10167": null,
+      "customfield_10200": [],
+      "customfield_10201": null,
+      "customfield_10211": null,
+      "customfield_10213": null,
+      "customfield_10214": null,
+      "customfield_10281": null,
+      "customfield_10282": null,
+      "customfield_10283": null,
+      "customfield_10284": null,
+      "customfield_10318": null,
+      "customfield_11320": null,
+      "customfield_11322": null,
+      "customfield_11355": null,
+      "customfield_11356": null,
+      "customfield_11357": null,
+      "customfield_11390": null,
+      "customfield_11423": null,
+      "customfield_11456": null,
+      "customfield_12523": null,
+      "customfield_12524": null,
+      "customfield_12525": null,
+      "customfield_12526": null,
+      "customfield_12527": null,
+      "customfield_12528": null,
+      "customfield_12529": null,
+      "customfield_12530": null,
+      "customfield_12531": null,
+      "customfield_12532": [],
+      "customfield_12533": null,
+      "customfield_12534": null,
+      "customfield_12536": null,
+      "customfield_12537": null,
+      "customfield_12538": null,
+      "customfield_12539": null,
+      "customfield_12540": null,
+      "customfield_12541": null,
+      "customfield_12542": null,
+      "customfield_12543": null,
+      "customfield_12544": null,
+      "customfield_12545": null,
+      "customfield_12546": null,
+      "customfield_12547": null,
+      "customfield_12580": null,
+      "customfield_12613": null,
+      "customfield_12614": null,
+      "customfield_12615": null,
+      "customfield_12616": null,
+      "customfield_12617": null,
+      "customfield_12618": null,
+      "customfield_12619": null,
+      "customfield_12620": null,
+      "customfield_12621": null,
+      "customfield_12622": null,
+      "customfield_12623": null,
+      "customfield_12624": null,
+      "customfield_12625": null,
+      "customfield_12626": null,
+      "customfield_12627": null,
+      "customfield_12628": null,
+      "customfield_12629": null,
+      "customfield_12630": null,
+      "customfield_12631": null,
+      "customfield_12632": null,
+      "customfield_12633": null,
+      "customfield_12634": null,
+      "customfield_12635": null,
+      "customfield_12636": null,
+      "customfield_12637": null,
+      "customfield_12638": null,
+      "customfield_12639": null,
+      "customfield_12640": null,
+      "customfield_12641": null,
+      "customfield_12642": null,
+      "customfield_12643": null,
+      "customfield_12644": null,
+      "customfield_12645": null,
+      "customfield_12646": null,
+      "customfield_12647": null,
+      "customfield_12680": null,
+      "customfield_12713": null,
+      "customfield_12714": null,
+      "customfield_12715": null,
+      "customfield_12716": null,
+      "customfield_12717": null,
+      "customfield_12718": null,
+      "customfield_12719": null,
+      "description": "This epic aims to upgrade Qt to version 6.10.1 across all supported platforms. The migration will ensure long\u2011term maintainability, improve performance, and align the system with the latest Qt framework. \n\nPlanned procedure: \n\n# Disable hardware acceleration and perform basic functional verification on Duff, Kirin, Phoenix, and Delirium, with a focus on validating digital signage and other critical features.\n# Provide a test build to the Product Owner for comparing performance against the previous Qt version.\n# Complete the Qt version bump and integration into the pipeline before the end of February.",
+      "duedate": null,
+      "fixVersions": [
+        {
+          "archived": false,
+          "description": "",
+          "id": "34900",
+          "name": "CX 26.02",
+          "releaseDate": "2026-02-26",
+          "released": false,
+          "self": "https://barco-nv.atlassian.net/rest/api/2/version/34900"
+        }
+      ],
+      "issuelinks": [
+        {
+          "id": "505841",
+          "inwardIssue": {
+            "fields": {
+              "issuetype": {
+                "avatarId": 10304,
+                "description": "Identified security risks",
+                "hierarchyLevel": 0,
+                "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10304?size=medium",
+                "id": "11151",
+                "name": "Security Risk",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/11151",
+                "subtask": false
+              },
+              "priority": {
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+                "id": "10000",
+                "name": "t.b.d.",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+              },
+              "status": {
+                "description": "The issue is reported and ready for the assignee to start work on it.",
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+                "id": "10003",
+                "name": "Reported",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+                "statusCategory": {
+                  "colorName": "blue-gray",
+                  "id": 2,
+                  "key": "new",
+                  "name": "To Do",
+                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+                }
+              },
+              "summary": "Chromium sandbox escape - CVE-2025-5959"
+            },
+            "id": "996589",
+            "key": "CS0042-26111",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/996589"
+          },
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505841",
+          "type": {
+            "id": "10006",
+            "inward": "Required for",
+            "name": "Depends on",
+            "outward": "Depends on",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10006"
+          }
+        },
+        {
+          "id": "505842",
+          "inwardIssue": {
+            "fields": {
+              "issuetype": {
+                "avatarId": 10304,
+                "description": "Identified security risks",
+                "hierarchyLevel": 0,
+                "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10304?size=medium",
+                "id": "11151",
+                "name": "Security Risk",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/11151",
+                "subtask": false
+              },
+              "priority": {
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+                "id": "10000",
+                "name": "t.b.d.",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+              },
+              "status": {
+                "description": "The issue is reported and ready for the assignee to start work on it.",
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+                "id": "10003",
+                "name": "Reported",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+                "statusCategory": {
+                  "colorName": "blue-gray",
+                  "id": 2,
+                  "key": "new",
+                  "name": "To Do",
+                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+                }
+              },
+              "summary": "Chromium sandbox escape - CVE-2025-11206"
+            },
+            "id": "996586",
+            "key": "CS0042-26110",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/996586"
+          },
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505842",
+          "type": {
+            "id": "10006",
+            "inward": "Required for",
+            "name": "Depends on",
+            "outward": "Depends on",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10006"
+          }
+        },
+        {
+          "id": "505843",
+          "inwardIssue": {
+            "fields": {
+              "issuetype": {
+                "avatarId": 10304,
+                "description": "Identified security risks",
+                "hierarchyLevel": 0,
+                "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10304?size=medium",
+                "id": "11151",
+                "name": "Security Risk",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/11151",
+                "subtask": false
+              },
+              "priority": {
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+                "id": "10000",
+                "name": "t.b.d.",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+              },
+              "status": {
+                "description": "The issue is reported and ready for the assignee to start work on it.",
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+                "id": "10003",
+                "name": "Reported",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+                "statusCategory": {
+                  "colorName": "blue-gray",
+                  "id": 2,
+                  "key": "new",
+                  "name": "To Do",
+                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+                }
+              },
+              "summary": "Chromium sandbox escape - CVE-2024-7024"
+            },
+            "id": "996585",
+            "key": "CS0042-26109",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/996585"
+          },
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505843",
+          "type": {
+            "id": "10006",
+            "inward": "Required for",
+            "name": "Depends on",
+            "outward": "Depends on",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10006"
+          }
+        },
+        {
+          "id": "505844",
+          "inwardIssue": {
+            "fields": {
+              "issuetype": {
+                "avatarId": 10304,
+                "description": "Identified security risks",
+                "hierarchyLevel": 0,
+                "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10304?size=medium",
+                "id": "11151",
+                "name": "Security Risk",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/11151",
+                "subtask": false
+              },
+              "priority": {
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+                "id": "10000",
+                "name": "t.b.d.",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+              },
+              "status": {
+                "description": "The issue is reported and ready for the assignee to start work on it.",
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+                "id": "10003",
+                "name": "Reported",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+                "statusCategory": {
+                  "colorName": "blue-gray",
+                  "id": 2,
+                  "key": "new",
+                  "name": "To Do",
+                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+                }
+              },
+              "summary": "Chromium sandbox escape - CVE-2024-6779"
+            },
+            "id": "996583",
+            "key": "CS0042-26108",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/996583"
+          },
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505844",
+          "type": {
+            "id": "10006",
+            "inward": "Required for",
+            "name": "Depends on",
+            "outward": "Depends on",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10006"
+          }
+        },
+        {
+          "id": "505845",
+          "inwardIssue": {
+            "fields": {
+              "issuetype": {
+                "avatarId": 10304,
+                "description": "Identified security risks",
+                "hierarchyLevel": 0,
+                "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10304?size=medium",
+                "id": "11151",
+                "name": "Security Risk",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/11151",
+                "subtask": false
+              },
+              "priority": {
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+                "id": "10000",
+                "name": "t.b.d.",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+              },
+              "status": {
+                "description": "",
+                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+                "id": "10005",
+                "name": "Investigated",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10005",
+                "statusCategory": {
+                  "colorName": "blue-gray",
+                  "id": 2,
+                  "key": "new",
+                  "name": "To Do",
+                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+                }
+              },
+              "summary": "Chromium sandbox escape - CVE-2025-6558"
+            },
+            "id": "949400",
+            "key": "CS0042-25863",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/949400"
+          },
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505845",
+          "type": {
+            "id": "10006",
+            "inward": "Required for",
+            "name": "Depends on",
+            "outward": "Depends on",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10006"
+          }
+        }
+      ],
+      "issuerestriction": {
+        "issuerestrictions": {},
+        "shouldDisplay": false
+      },
+      "issuetype": {
+        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
+        "hierarchyLevel": 1,
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
+        "id": "10000",
+        "name": "Epic",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
+        "subtask": false
+      },
+      "labels": [
+        "Lead_Wolfe_Squad",
+        "Wave3"
+      ],
+      "lastViewed": null,
+      "parent": {
+        "fields": {
+          "issuetype": {
+            "avatarId": 10315,
+            "description": "A top-level initiative.",
+            "hierarchyLevel": 2,
+            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+            "id": "10117",
+            "name": "Initiative",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
+            "subtask": false
+          },
+          "priority": {
+            "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+            "id": "10000",
+            "name": "t.b.d.",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+          },
+          "status": {
+            "description": "Identify what the problem is and for who? What is the value for Barco?",
+            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+            "id": "10128",
+            "name": "Problem Validation",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/status/10128",
+            "statusCategory": {
+              "colorName": "blue-gray",
+              "id": 2,
+              "key": "new",
+              "name": "To Do",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+            }
+          },
+          "summary": "Security | QT"
+        },
+        "id": "900893",
+        "key": "CS0102-115",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/900893"
+      },
+      "priority": {
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/blocker.svg",
+        "id": "10001",
+        "name": "P1 (Highest)",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10001"
+      },
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "project": {
+        "avatarUrls": {
+          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=xsmall",
+          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=small",
+          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=medium",
+          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423"
+        },
+        "id": "12089",
+        "key": "CS0100",
+        "name": "MX - Product Backlog",
+        "projectCategory": {
+          "description": "Meeting Experience",
+          "id": "10029",
+          "name": "Meeting Experience",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10029"
+        },
+        "projectTypeKey": "software",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/project/12089",
+        "simplified": false
+      },
+      "reporter": {
+        "accountId": "61eacba498cd610070718e32",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
+        },
+        "displayName": "Ryan Huang",
+        "emailAddress": "ryan.r.huang@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
+        "timeZone": "Asia/Taipei"
+      },
+      "resolution": null,
+      "resolutiondate": null,
+      "security": null,
+      "status": {
+        "description": "This issue is being actively worked on at the moment by the assignee.",
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/inprogress.png",
+        "id": "3",
+        "name": "In Progress",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/status/3",
+        "statusCategory": {
+          "colorName": "yellow",
+          "id": 4,
+          "key": "indeterminate",
+          "name": "In Progress",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
+        }
+      },
+      "statusCategory": {
+        "colorName": "yellow",
+        "id": 4,
+        "key": "indeterminate",
+        "name": "In Progress",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
+      },
+      "statuscategorychangedate": "2026-02-04T06:55:51.669+0100",
+      "subtasks": [
+        {
+          "fields": {
+            "issuetype": {
+              "avatarId": 10557,
+              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
+              "hierarchyLevel": -1,
+              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
+              "id": "10007",
+              "name": "Implementation Sub-Task",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
+              "subtask": true
+            },
+            "priority": {
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+              "id": "10000",
+              "name": "t.b.d.",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+            },
+            "status": {
+              "description": "The issue is reported and ready for the assignee to start work on it.",
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+              "id": "10003",
+              "name": "Reported",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+              "statusCategory": {
+                "colorName": "blue-gray",
+                "id": 2,
+                "key": "new",
+                "name": "To Do",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+              }
+            },
+            "summary": "Define threat modeling strategy"
+          },
+          "id": "992523",
+          "key": "CS0100-14013",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/992523"
+        },
+        {
+          "fields": {
+            "issuetype": {
+              "avatarId": 10557,
+              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
+              "hierarchyLevel": -1,
+              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
+              "id": "10007",
+              "name": "Implementation Sub-Task",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
+              "subtask": true
+            },
+            "priority": {
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+              "id": "10000",
+              "name": "t.b.d.",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+            },
+            "status": {
+              "description": "The issue is reported and ready for the assignee to start work on it.",
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+              "id": "10003",
+              "name": "Reported",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+              "statusCategory": {
+                "colorName": "blue-gray",
+                "id": 2,
+                "key": "new",
+                "name": "To Do",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+              }
+            },
+            "summary": "Test | Practitest \ud83e\uddea\ud83d\udec2"
+          },
+          "id": "992630",
+          "key": "CS0100-14066",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/992630"
+        },
+        {
+          "fields": {
+            "issuetype": {
+              "avatarId": 10557,
+              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
+              "hierarchyLevel": -1,
+              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
+              "id": "10007",
+              "name": "Implementation Sub-Task",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
+              "subtask": true
+            },
+            "priority": {
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+              "id": "10000",
+              "name": "t.b.d.",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+            },
+            "status": {
+              "description": "The issue is reported and ready for the assignee to start work on it.",
+              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+              "id": "10003",
+              "name": "Reported",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+              "statusCategory": {
+                "colorName": "blue-gray",
+                "id": 2,
+                "key": "new",
+                "name": "To Do",
+                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+              }
+            },
+            "summary": "Test | System test \ud83e\uddea\u2699\ufe0f"
+          },
+          "id": "992632",
+          "key": "CS0100-14067",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/992632"
+        }
+      ],
+      "summary": "QT upgrade to 6.10.1 for all platform",
+      "timeestimate": null,
+      "timeoriginalestimate": null,
+      "timespent": null,
+      "timetracking": {},
+      "updated": "2026-02-04T09:00:14.381+0100",
+      "versions": [],
+      "votes": {
+        "hasVoted": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-13975/votes",
+        "votes": 0
+      },
+      "watches": {
+        "isWatching": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-13975/watchers",
+        "watchCount": 1
+      },
+      "worklog": {
+        "maxResults": 20,
+        "startAt": 0,
+        "total": 0,
+        "worklogs": []
+      },
+      "workratio": -1
+    },
+    "id": "992399",
+    "key": "CS0100-13975",
+    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/992399"
   },
   "CS0100-14380": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
@@ -5008,577 +5185,6 @@
     "key": "CS0100-14675",
     "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1006175"
   },
-  "CS0100-14749": {
-    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
-    "fields": {
-      "aggregateprogress": {
-        "progress": 0,
-        "total": 0
-      },
-      "aggregatetimeestimate": null,
-      "aggregatetimeoriginalestimate": null,
-      "aggregatetimespent": null,
-      "assignee": {
-        "accountId": "5b30c09636e1832cfafcca06",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "24x24": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "32x32": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "48x48": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png"
-        },
-        "displayName": "Clint Liu",
-        "emailAddress": "clint.liu@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5b30c09636e1832cfafcca06",
-        "timeZone": "Europe/Brussels"
-      },
-      "attachment": [],
-      "comment": {
-        "comments": [],
-        "maxResults": 0,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1008226/comment",
-        "startAt": 0,
-        "total": 0
-      },
-      "components": [],
-      "created": "2026-01-06T13:34:02.600+0100",
-      "creator": {
-        "accountId": "5b30c09636e1832cfafcca06",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "24x24": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "32x32": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "48x48": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png"
-        },
-        "displayName": "Clint Liu",
-        "emailAddress": "clint.liu@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5b30c09636e1832cfafcca06",
-        "timeZone": "Europe/Brussels"
-      },
-      "customfield_10000": "{pullrequest={dataType=pullrequest, state=OPEN, stateCount=1}, json={\"cachedValue\":{\"errors\":[],\"summary\":{\"pullrequest\":{\"overall\":{\"count\":1,\"lastUpdated\":\"2026-02-09T21:46:00.000+0100\",\"stateCount\":1,\"state\":\"OPEN\",\"dataType\":\"pullrequest\",\"open\":true},\"byInstanceType\":{\"GitHub\":{\"count\":1,\"name\":\"GitHub\"}}}}},\"isStale\":true}}",
-      "customfield_10001": {
-        "avatarUrl": "",
-        "id": "656b2166-f9c0-422a-9a0e-77812a167852",
-        "isShared": true,
-        "isVerified": false,
-        "isVisible": true,
-        "name": "Echo",
-        "title": "Echo"
-      },
-      "customfield_10002": [],
-      "customfield_10003": null,
-      "customfield_10004": null,
-      "customfield_10005": null,
-      "customfield_10006": null,
-      "customfield_10007": null,
-      "customfield_10008": null,
-      "customfield_10009": null,
-      "customfield_10010": null,
-      "customfield_10011": null,
-      "customfield_10012": {
-        "id": "10016",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10016",
-        "value": "To Do"
-      },
-      "customfield_10013": "ghx-label-4",
-      "customfield_10014": null,
-      "customfield_10015": null,
-      "customfield_10016": null,
-      "customfield_10017": "blue",
-      "customfield_10019": "2|i0avvj:0000000000004",
-      "customfield_10020": null,
-      "customfield_10021": null,
-      "customfield_10022": null,
-      "customfield_10023": null,
-      "customfield_10024": null,
-      "customfield_10025": null,
-      "customfield_10027": null,
-      "customfield_10028": null,
-      "customfield_10029": null,
-      "customfield_10030": null,
-      "customfield_10031": null,
-      "customfield_10034": null,
-      "customfield_10035": null,
-      "customfield_10036": null,
-      "customfield_10037": null,
-      "customfield_10038": null,
-      "customfield_10039": null,
-      "customfield_10040": {
-        "id": "10020",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
-        "value": "Software"
-      },
-      "customfield_10044": {
-        "id": "10031",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
-        "value": "Barco Employee"
-      },
-      "customfield_10045": null,
-      "customfield_10049": null,
-      "customfield_10054": null,
-      "customfield_10055": null,
-      "customfield_10057": null,
-      "customfield_10059": null,
-      "customfield_10060": null,
-      "customfield_10061": null,
-      "customfield_10062": null,
-      "customfield_10063": null,
-      "customfield_10064": null,
-      "customfield_10065": null,
-      "customfield_10066": null,
-      "customfield_10067": null,
-      "customfield_10068": null,
-      "customfield_10069": null,
-      "customfield_10070": null,
-      "customfield_10077": null,
-      "customfield_10078": null,
-      "customfield_10079": null,
-      "customfield_10081": null,
-      "customfield_10082": null,
-      "customfield_10121": null,
-      "customfield_10122": null,
-      "customfield_10123": null,
-      "customfield_10124": null,
-      "customfield_10125": null,
-      "customfield_10128": null,
-      "customfield_10129": null,
-      "customfield_10130": null,
-      "customfield_10131": null,
-      "customfield_10132": null,
-      "customfield_10133": null,
-      "customfield_10167": null,
-      "customfield_10200": [],
-      "customfield_10201": null,
-      "customfield_10211": null,
-      "customfield_10213": null,
-      "customfield_10214": null,
-      "customfield_10281": null,
-      "customfield_10282": null,
-      "customfield_10283": null,
-      "customfield_10284": null,
-      "customfield_10318": null,
-      "customfield_11320": null,
-      "customfield_11322": null,
-      "customfield_11355": null,
-      "customfield_11356": null,
-      "customfield_11357": null,
-      "customfield_11390": null,
-      "customfield_11423": null,
-      "customfield_11456": null,
-      "customfield_12523": null,
-      "customfield_12524": null,
-      "customfield_12525": null,
-      "customfield_12526": null,
-      "customfield_12527": null,
-      "customfield_12528": null,
-      "customfield_12529": null,
-      "customfield_12530": null,
-      "customfield_12531": null,
-      "customfield_12532": [],
-      "customfield_12533": null,
-      "customfield_12534": null,
-      "customfield_12536": null,
-      "customfield_12537": null,
-      "customfield_12538": null,
-      "customfield_12539": null,
-      "customfield_12540": null,
-      "customfield_12541": null,
-      "customfield_12542": null,
-      "customfield_12543": null,
-      "customfield_12544": null,
-      "customfield_12545": null,
-      "customfield_12546": null,
-      "customfield_12547": null,
-      "customfield_12580": null,
-      "customfield_12613": null,
-      "customfield_12614": null,
-      "customfield_12615": null,
-      "customfield_12616": null,
-      "customfield_12617": null,
-      "customfield_12618": null,
-      "customfield_12619": null,
-      "customfield_12620": null,
-      "customfield_12621": null,
-      "customfield_12622": null,
-      "customfield_12623": null,
-      "customfield_12624": null,
-      "customfield_12625": null,
-      "customfield_12626": null,
-      "customfield_12627": null,
-      "customfield_12628": null,
-      "customfield_12629": null,
-      "customfield_12630": null,
-      "customfield_12631": null,
-      "customfield_12632": null,
-      "customfield_12633": null,
-      "customfield_12634": null,
-      "customfield_12635": null,
-      "customfield_12636": null,
-      "customfield_12637": null,
-      "customfield_12638": null,
-      "customfield_12639": null,
-      "customfield_12640": null,
-      "customfield_12641": null,
-      "customfield_12642": null,
-      "customfield_12643": null,
-      "customfield_12644": null,
-      "customfield_12645": null,
-      "customfield_12646": null,
-      "customfield_12647": null,
-      "customfield_12680": null,
-      "customfield_12713": null,
-      "customfield_12714": null,
-      "customfield_12715": null,
-      "customfield_12716": null,
-      "customfield_12717": null,
-      "customfield_12718": null,
-      "customfield_12719": null,
-      "description": "Have volume settings synchronized between MTRA / TouchConsole UI and peripheral.\n\nUser story:\n[https://barco-nv.atlassian.net/browse/CS0666-8967|https://barco-nv.atlassian.net/browse/CS0666-8967|smart-link] ",
-      "duedate": null,
-      "fixVersions": [
-        {
-          "archived": false,
-          "description": "",
-          "id": "34621",
-          "name": "04.03.00|Q1",
-          "releaseDate": "2026-03-31",
-          "released": false,
-          "self": "https://barco-nv.atlassian.net/rest/api/2/version/34621"
-        },
-        {
-          "archived": false,
-          "description": "",
-          "id": "34900",
-          "name": "CX 26.02",
-          "releaseDate": "2026-02-26",
-          "released": false,
-          "self": "https://barco-nv.atlassian.net/rest/api/2/version/34900"
-        }
-      ],
-      "issuelinks": [
-        {
-          "id": "503209",
-          "inwardIssue": {
-            "fields": {
-              "issuetype": {
-                "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-                "hierarchyLevel": 1,
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-                "id": "10000",
-                "name": "Epic",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-                "subtask": false
-              },
-              "priority": {
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/blocker.svg",
-                "id": "10001",
-                "name": "P1 (Highest)",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10001"
-              },
-              "status": {
-                "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/closed.png",
-                "id": "6",
-                "name": "Closed",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/status/6",
-                "statusCategory": {
-                  "colorName": "green",
-                  "id": 3,
-                  "key": "done",
-                  "name": "Done",
-                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/3"
-                }
-              },
-              "summary": "[Implementation] Mute sync between FoR and Bar"
-            },
-            "id": "996804",
-            "key": "CS0100-14259",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/996804"
-          },
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/503209",
-          "type": {
-            "id": "10007",
-            "inward": "is related to",
-            "name": "Reference",
-            "outward": "relates to",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10007"
-          }
-        }
-      ],
-      "issuerestriction": {
-        "issuerestrictions": {},
-        "shouldDisplay": false
-      },
-      "issuetype": {
-        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-        "hierarchyLevel": 1,
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-        "id": "10000",
-        "name": "Epic",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-        "subtask": false
-      },
-      "labels": [
-        "Lead_Echo_Squad",
-        "Wave4"
-      ],
-      "lastViewed": null,
-      "parent": {
-        "fields": {
-          "issuetype": {
-            "avatarId": 10315,
-            "description": "A top-level initiative.",
-            "hierarchyLevel": 2,
-            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-            "id": "10117",
-            "name": "Initiative",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
-            "subtask": false
-          },
-          "priority": {
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/highest.svg",
-            "id": "10002",
-            "name": "P2",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10002"
-          },
-          "status": {
-            "description": "The issue is reported and ready for the assignee to start work on it.",
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-            "id": "10003",
-            "name": "Reported",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-            "statusCategory": {
-              "colorName": "blue-gray",
-              "id": 2,
-              "key": "new",
-              "name": "To Do",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-            }
-          },
-          "summary": "Post MTR certification actions"
-        },
-        "id": "998234",
-        "key": "CS0102-305",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/998234"
-      },
-      "priority": {
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/highest.svg",
-        "id": "10002",
-        "name": "P2",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10002"
-      },
-      "progress": {
-        "progress": 0,
-        "total": 0
-      },
-      "project": {
-        "avatarUrls": {
-          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=xsmall",
-          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=small",
-          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=medium",
-          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423"
-        },
-        "id": "12089",
-        "key": "CS0100",
-        "name": "MX - Product Backlog",
-        "projectCategory": {
-          "description": "Meeting Experience",
-          "id": "10029",
-          "name": "Meeting Experience",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10029"
-        },
-        "projectTypeKey": "software",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/project/12089",
-        "simplified": false
-      },
-      "reporter": {
-        "accountId": "5b30c09636e1832cfafcca06",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "24x24": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "32x32": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png",
-          "48x48": "https://secure.gravatar.com/avatar/cc52df2abcb91677a9f00973030000cf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCL-4.png"
-        },
-        "displayName": "Clint Liu",
-        "emailAddress": "clint.liu@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5b30c09636e1832cfafcca06",
-        "timeZone": "Europe/Brussels"
-      },
-      "resolution": null,
-      "resolutiondate": null,
-      "security": null,
-      "status": {
-        "description": "The issue is reported and ready for the assignee to start work on it.",
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-        "id": "10003",
-        "name": "Reported",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-        "statusCategory": {
-          "colorName": "blue-gray",
-          "id": 2,
-          "key": "new",
-          "name": "To Do",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-        }
-      },
-      "statusCategory": {
-        "colorName": "blue-gray",
-        "id": 2,
-        "key": "new",
-        "name": "To Do",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-      },
-      "statuscategorychangedate": "2026-01-06T13:34:03.262+0100",
-      "subtasks": [
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/closed.png",
-              "id": "6",
-              "name": "Closed",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/6",
-              "statusCategory": {
-                "colorName": "green",
-                "id": 3,
-                "key": "done",
-                "name": "Done",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/3"
-              }
-            },
-            "summary": "Define threat modeling strategy"
-          },
-          "id": "1008639",
-          "key": "CS0100-14753",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1008639"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10006",
-              "name": "In Review",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10006",
-              "statusCategory": {
-                "colorName": "yellow",
-                "id": 4,
-                "key": "indeterminate",
-                "name": "In Progress",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
-              }
-            },
-            "summary": "Test | Practitest \ud83e\uddea\ud83d\udec2"
-          },
-          "id": "1008647",
-          "key": "CS0100-14757",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1008647"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10006",
-              "name": "In Review",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10006",
-              "statusCategory": {
-                "colorName": "yellow",
-                "id": 4,
-                "key": "indeterminate",
-                "name": "In Progress",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
-              }
-            },
-            "summary": "Test | System test \ud83e\uddea\u2699\ufe0f"
-          },
-          "id": "1008649",
-          "key": "CS0100-14758",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1008649"
-        }
-      ],
-      "summary": "[Implementation] Volume sync between FoR and Bar",
-      "timeestimate": null,
-      "timeoriginalestimate": null,
-      "timespent": null,
-      "timetracking": {},
-      "updated": "2026-02-02T13:18:57.253+0100",
-      "versions": [],
-      "votes": {
-        "hasVoted": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-14749/votes",
-        "votes": 0
-      },
-      "watches": {
-        "isWatching": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-14749/watchers",
-        "watchCount": 1
-      },
-      "worklog": {
-        "maxResults": 20,
-        "startAt": 0,
-        "total": 0,
-        "worklogs": []
-      },
-      "workratio": -1
-    },
-    "id": "1008226",
-    "key": "CS0100-14749",
-    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1008226"
-  },
   "CS0100-14824": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
     "fields": {
@@ -6038,626 +5644,6 @@
     "id": "1009430",
     "key": "CS0100-14824",
     "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1009430"
-  },
-  "CS0100-14897": {
-    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
-    "fields": {
-      "aggregateprogress": {
-        "progress": 0,
-        "total": 0
-      },
-      "aggregatetimeestimate": null,
-      "aggregatetimeoriginalestimate": null,
-      "aggregatetimespent": null,
-      "assignee": {
-        "accountId": "557058:87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "24x24": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "32x32": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "48x48": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png"
-        },
-        "displayName": "Bob Delmulle",
-        "emailAddress": "bob.delmulle@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=557058%3A87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "timeZone": "Europe/Brussels"
-      },
-      "attachment": [
-        {
-          "author": {
-            "accountId": "557058:87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-            "accountType": "atlassian",
-            "active": true,
-            "avatarUrls": {
-              "16x16": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-              "24x24": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-              "32x32": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-              "48x48": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png"
-            },
-            "displayName": "Bob Delmulle",
-            "emailAddress": "bob.delmulle@barco.com",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=557058%3A87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-            "timeZone": "Europe/Brussels"
-          },
-          "content": "https://barco-nv.atlassian.net/rest/api/2/attachment/content/612298",
-          "created": "2026-01-12T16:47:31.899+0100",
-          "filename": "image-20260112-145706.png",
-          "id": "612298",
-          "mimeType": "image/png",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/attachment/612298",
-          "size": 56232,
-          "thumbnail": "https://barco-nv.atlassian.net/rest/api/2/attachment/thumbnail/612298"
-        }
-      ],
-      "comment": {
-        "comments": [
-          {
-            "author": {
-              "accountId": "61eac9f254627a00708d8f57",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/16",
-                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/24",
-                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/32",
-                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/48"
-              },
-              "displayName": "Kennedy Kambona",
-              "emailAddress": "kennedy.kambona@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eac9f254627a00708d8f57",
-              "timeZone": "Europe/Brussels"
-            },
-            "body": "Since the description mentions about compositor sharing: Compositor needs a \u201cspecial flag\u201d to have it share directly to a surface rather than via the virtual camera [https://github.com/barcoclickshare/compositor-apk?tab=readme-ov-file#classic-clickshare-sharing-vs-mtr-sharing|https://github.com/barcoclickshare/compositor-apk?tab=readme-ov-file#classic-clickshare-sharing-vs-mtr-sharing|smart-link]  ",
-            "created": "2026-01-13T15:26:17.510+0100",
-            "id": "1547849",
-            "jsdPublic": true,
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1010868/comment/1547849",
-            "updateAuthor": {
-              "accountId": "61eac9f254627a00708d8f57",
-              "accountType": "atlassian",
-              "active": true,
-              "avatarUrls": {
-                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/16",
-                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/24",
-                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/32",
-                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eac9f254627a00708d8f57/eb2e8c63-68e7-41b1-8969-6c5ae3f086da/48"
-              },
-              "displayName": "Kennedy Kambona",
-              "emailAddress": "kennedy.kambona@barco.com",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eac9f254627a00708d8f57",
-              "timeZone": "Europe/Brussels"
-            },
-            "updated": "2026-01-13T15:26:17.510+0100"
-          }
-        ],
-        "maxResults": 1,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1010868/comment",
-        "startAt": 0,
-        "total": 1
-      },
-      "components": [],
-      "created": "2026-01-12T16:47:31.733+0100",
-      "creator": {
-        "accountId": "557058:87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "24x24": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "32x32": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "48x48": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png"
-        },
-        "displayName": "Bob Delmulle",
-        "emailAddress": "bob.delmulle@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=557058%3A87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "timeZone": "Europe/Brussels"
-      },
-      "customfield_10000": "{}",
-      "customfield_10001": null,
-      "customfield_10002": [],
-      "customfield_10003": null,
-      "customfield_10004": null,
-      "customfield_10005": null,
-      "customfield_10006": null,
-      "customfield_10007": null,
-      "customfield_10008": null,
-      "customfield_10009": null,
-      "customfield_10010": null,
-      "customfield_10011": null,
-      "customfield_10012": {
-        "id": "10016",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10016",
-        "value": "To Do"
-      },
-      "customfield_10013": "ghx-label-4",
-      "customfield_10014": null,
-      "customfield_10015": null,
-      "customfield_10016": null,
-      "customfield_10017": "dark_grey",
-      "customfield_10019": "2|i0avvj:0000000000009",
-      "customfield_10020": null,
-      "customfield_10021": null,
-      "customfield_10022": null,
-      "customfield_10023": null,
-      "customfield_10024": "2026-01-13T15:26:17.510+0100",
-      "customfield_10025": null,
-      "customfield_10027": null,
-      "customfield_10028": null,
-      "customfield_10029": null,
-      "customfield_10030": null,
-      "customfield_10031": null,
-      "customfield_10034": null,
-      "customfield_10035": null,
-      "customfield_10036": null,
-      "customfield_10037": null,
-      "customfield_10038": null,
-      "customfield_10039": null,
-      "customfield_10040": {
-        "id": "10020",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
-        "value": "Software"
-      },
-      "customfield_10044": {
-        "id": "10031",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
-        "value": "Barco Employee"
-      },
-      "customfield_10045": null,
-      "customfield_10049": null,
-      "customfield_10054": null,
-      "customfield_10055": null,
-      "customfield_10057": null,
-      "customfield_10059": null,
-      "customfield_10060": null,
-      "customfield_10061": null,
-      "customfield_10062": null,
-      "customfield_10063": null,
-      "customfield_10064": null,
-      "customfield_10065": null,
-      "customfield_10066": null,
-      "customfield_10067": null,
-      "customfield_10068": null,
-      "customfield_10069": null,
-      "customfield_10070": null,
-      "customfield_10077": null,
-      "customfield_10078": null,
-      "customfield_10079": null,
-      "customfield_10081": null,
-      "customfield_10082": null,
-      "customfield_10121": null,
-      "customfield_10122": null,
-      "customfield_10123": null,
-      "customfield_10124": null,
-      "customfield_10125": null,
-      "customfield_10128": null,
-      "customfield_10129": null,
-      "customfield_10130": null,
-      "customfield_10131": null,
-      "customfield_10132": null,
-      "customfield_10133": null,
-      "customfield_10167": null,
-      "customfield_10200": [],
-      "customfield_10201": null,
-      "customfield_10211": null,
-      "customfield_10213": null,
-      "customfield_10214": null,
-      "customfield_10281": null,
-      "customfield_10282": null,
-      "customfield_10283": null,
-      "customfield_10284": null,
-      "customfield_10318": null,
-      "customfield_11320": null,
-      "customfield_11322": null,
-      "customfield_11355": null,
-      "customfield_11356": null,
-      "customfield_11357": null,
-      "customfield_11390": null,
-      "customfield_11423": null,
-      "customfield_11456": null,
-      "customfield_12523": null,
-      "customfield_12524": null,
-      "customfield_12525": null,
-      "customfield_12526": null,
-      "customfield_12527": null,
-      "customfield_12528": null,
-      "customfield_12529": null,
-      "customfield_12530": null,
-      "customfield_12531": null,
-      "customfield_12532": [],
-      "customfield_12533": null,
-      "customfield_12534": null,
-      "customfield_12536": null,
-      "customfield_12537": null,
-      "customfield_12538": null,
-      "customfield_12539": null,
-      "customfield_12540": null,
-      "customfield_12541": null,
-      "customfield_12542": null,
-      "customfield_12543": null,
-      "customfield_12544": null,
-      "customfield_12545": null,
-      "customfield_12546": null,
-      "customfield_12547": null,
-      "customfield_12580": null,
-      "customfield_12613": null,
-      "customfield_12614": null,
-      "customfield_12615": null,
-      "customfield_12616": null,
-      "customfield_12617": null,
-      "customfield_12618": null,
-      "customfield_12619": null,
-      "customfield_12620": null,
-      "customfield_12621": null,
-      "customfield_12622": null,
-      "customfield_12623": null,
-      "customfield_12624": null,
-      "customfield_12625": null,
-      "customfield_12626": null,
-      "customfield_12627": null,
-      "customfield_12628": null,
-      "customfield_12629": null,
-      "customfield_12630": null,
-      "customfield_12631": null,
-      "customfield_12632": null,
-      "customfield_12633": null,
-      "customfield_12634": null,
-      "customfield_12635": null,
-      "customfield_12636": null,
-      "customfield_12637": null,
-      "customfield_12638": null,
-      "customfield_12639": null,
-      "customfield_12640": null,
-      "customfield_12641": null,
-      "customfield_12642": null,
-      "customfield_12643": null,
-      "customfield_12644": null,
-      "customfield_12645": null,
-      "customfield_12646": null,
-      "customfield_12647": null,
-      "customfield_12680": null,
-      "customfield_12713": null,
-      "customfield_12714": null,
-      "customfield_12715": null,
-      "customfield_12716": null,
-      "customfield_12717": null,
-      "customfield_12718": null,
-      "customfield_12719": null,
-      "description": "h2. What?\n\n\natm you have a Duvel and you run trough the OOBE at the end of the OOBE we start MTR as MTR is our only service provider.\n\nIf we would support other service providers the OOBE would end with the option to choose MTR or Zoom or webex or ...\n\n\u00a0example:\n\n!image-20260112-145706.png|width=290,alt=\"image-20260112-145706.png\"!\n\nWith this epic we want to Provide the option to be a Clickshare device. The use cases after selecting this Clickshare service provider will be similar to the wave3 functionality.\n\nThis feature should be hidden behind a feature toggle as this should not be released for Duvel for quite some time\n\n|| ||*Duvel*||*GOD*||*Karmeliet (later)*||\n|MTR|x| |x|\n|Clickshare|x|x|x|\n|Zoom (TBD not soon)|x| |x|\n\nas for GOD there is only one option there should not be a selection screen\n\nh2. \nHow?\n\nArch: [~accountid:61eac9f254627a00708d8f57] \n[https://barco-nv.atlassian.net/wiki/spaces/wovcs/pages/1082064950/Wave+IV+-+Clickshare+Service+Provider|https://barco-nv.atlassian.net/wiki/spaces/wovcs/pages/1082064950/Wave+IV+-+Clickshare+Service+Provider|smart-link] \nWhen we enable the clickshare service provider we will need to make sure it brings compositor to the foreground so we can share to this.\n\n\nat the end of this epic we should have a feature toggle which can enable this feature on Duvel (off by default)\nonce enabled the clickshare service is enabled we should be able to share to it and this should be tested ",
-      "duedate": null,
-      "fixVersions": [
-        {
-          "archived": false,
-          "description": "",
-          "id": "34900",
-          "name": "CX 26.02",
-          "releaseDate": "2026-02-26",
-          "released": false,
-          "self": "https://barco-nv.atlassian.net/rest/api/2/version/34900"
-        }
-      ],
-      "issuelinks": [
-        {
-          "id": "504946",
-          "inwardIssue": {
-            "fields": {
-              "issuetype": {
-                "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-                "hierarchyLevel": 1,
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-                "id": "10000",
-                "name": "Epic",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-                "subtask": false
-              },
-              "priority": {
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/blocker.svg",
-                "id": "10001",
-                "name": "P1 (Highest)",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10001"
-              },
-              "status": {
-                "description": "The issue is reported and ready for the assignee to start work on it.",
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-                "id": "10003",
-                "name": "Reported",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-                "statusCategory": {
-                  "colorName": "blue-gray",
-                  "id": 2,
-                  "key": "new",
-                  "name": "To Do",
-                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-                }
-              },
-              "summary": "[Duvel][step2] Enable Clickshare as a service provider on Duvel - provider part"
-            },
-            "id": "1017800",
-            "key": "CS0100-15301",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1017800"
-          },
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/504946",
-          "type": {
-            "id": "10001",
-            "inward": "is cloned by",
-            "name": "Cloners",
-            "outward": "clones",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10001"
-          }
-        }
-      ],
-      "issuerestriction": {
-        "issuerestrictions": {},
-        "shouldDisplay": false
-      },
-      "issuetype": {
-        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-        "hierarchyLevel": 1,
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-        "id": "10000",
-        "name": "Epic",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-        "subtask": false
-      },
-      "labels": [
-        "Lead_Oi_Squad",
-        "Oi_Squad",
-        "Wave4"
-      ],
-      "lastViewed": null,
-      "parent": {
-        "fields": {
-          "issuetype": {
-            "avatarId": 10315,
-            "description": "A top-level initiative.",
-            "hierarchyLevel": 2,
-            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-            "id": "10117",
-            "name": "Initiative",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
-            "subtask": false
-          },
-          "priority": {
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-            "id": "10000",
-            "name": "t.b.d.",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-          },
-          "status": {
-            "description": "Identify what the problem is and for who? What is the value for Barco?",
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-            "id": "10128",
-            "name": "Problem Validation",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/status/10128",
-            "statusCategory": {
-              "colorName": "blue-gray",
-              "id": 2,
-              "key": "new",
-              "name": "To Do",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-            }
-          },
-          "summary": "Wave IV: ClickShare experience as a service provider (step 2)"
-        },
-        "id": "880111",
-        "key": "CS0102-17",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/880111"
-      },
-      "priority": {
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/priorities/blocker.svg",
-        "id": "10001",
-        "name": "P1 (Highest)",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10001"
-      },
-      "progress": {
-        "progress": 0,
-        "total": 0
-      },
-      "project": {
-        "avatarUrls": {
-          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=xsmall",
-          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=small",
-          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=medium",
-          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423"
-        },
-        "id": "12089",
-        "key": "CS0100",
-        "name": "MX - Product Backlog",
-        "projectCategory": {
-          "description": "Meeting Experience",
-          "id": "10029",
-          "name": "Meeting Experience",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10029"
-        },
-        "projectTypeKey": "software",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/project/12089",
-        "simplified": false
-      },
-      "reporter": {
-        "accountId": "557058:87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "24x24": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "32x32": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png",
-          "48x48": "https://secure.gravatar.com/avatar/a87872044976bec219986598da062293?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FBD-2.png"
-        },
-        "displayName": "Bob Delmulle",
-        "emailAddress": "bob.delmulle@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=557058%3A87e6cd43-eeb5-478c-94f3-7a0c9f0c3e77",
-        "timeZone": "Europe/Brussels"
-      },
-      "resolution": null,
-      "resolutiondate": null,
-      "security": null,
-      "status": {
-        "description": "The issue is reported and ready for the assignee to start work on it.",
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-        "id": "10003",
-        "name": "Reported",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-        "statusCategory": {
-          "colorName": "blue-gray",
-          "id": 2,
-          "key": "new",
-          "name": "To Do",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-        }
-      },
-      "statusCategory": {
-        "colorName": "blue-gray",
-        "id": 2,
-        "key": "new",
-        "name": "To Do",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-      },
-      "statuscategorychangedate": "2026-01-12T16:47:32.384+0100",
-      "subtasks": [
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Define threat modeling strategy"
-          },
-          "id": "1011035",
-          "key": "CS0100-14905",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1011035"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Test | Practitest \ud83e\uddea\ud83d\udec2"
-          },
-          "id": "1011072",
-          "key": "CS0100-14923",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1011072"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is reported and ready for the assignee to start work on it.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-              "id": "10003",
-              "name": "Reported",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-              "statusCategory": {
-                "colorName": "blue-gray",
-                "id": 2,
-                "key": "new",
-                "name": "To Do",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-              }
-            },
-            "summary": "Test | System test \ud83e\uddea\u2699\ufe0f"
-          },
-          "id": "1011074",
-          "key": "CS0100-14924",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1011074"
-        }
-      ],
-      "summary": "[Duvel][step2] Enable Clickshare as a service provider on Duvel - oobe part",
-      "timeestimate": null,
-      "timeoriginalestimate": null,
-      "timespent": null,
-      "timetracking": {},
-      "updated": "2026-02-02T13:18:56.845+0100",
-      "versions": [],
-      "votes": {
-        "hasVoted": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-14897/votes",
-        "votes": 0
-      },
-      "watches": {
-        "isWatching": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-14897/watchers",
-        "watchCount": 2
-      },
-      "worklog": {
-        "maxResults": 20,
-        "startAt": 0,
-        "total": 0,
-        "worklogs": []
-      },
-      "workratio": -1
-    },
-    "id": "1010868",
-    "key": "CS0100-14897",
-    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1010868"
   },
   "CS0100-14994": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
@@ -11352,561 +10338,6 @@
     "id": "1019943",
     "key": "CS0100-15466",
     "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1019943"
-  },
-  "CS0100-15468": {
-    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
-    "fields": {
-      "aggregateprogress": {
-        "progress": 0,
-        "total": 0
-      },
-      "aggregatetimeestimate": null,
-      "aggregatetimeoriginalestimate": null,
-      "aggregatetimespent": null,
-      "assignee": {
-        "accountId": "61eacba498cd610070718e32",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
-          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
-          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
-          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
-        },
-        "displayName": "Ryan Huang",
-        "emailAddress": "ryan.r.huang@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
-        "timeZone": "Asia/Taipei"
-      },
-      "attachment": [],
-      "comment": {
-        "comments": [],
-        "maxResults": 0,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1019980/comment",
-        "startAt": 0,
-        "total": 0
-      },
-      "components": [],
-      "created": "2026-02-02T07:46:25.971+0100",
-      "creator": {
-        "accountId": "61eacba498cd610070718e32",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
-          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
-          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
-          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
-        },
-        "displayName": "Ryan Huang",
-        "emailAddress": "ryan.r.huang@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
-        "timeZone": "Asia/Taipei"
-      },
-      "customfield_10000": "{}",
-      "customfield_10001": null,
-      "customfield_10002": [],
-      "customfield_10003": null,
-      "customfield_10004": null,
-      "customfield_10005": null,
-      "customfield_10006": null,
-      "customfield_10007": null,
-      "customfield_10008": null,
-      "customfield_10009": null,
-      "customfield_10010": null,
-      "customfield_10011": null,
-      "customfield_10012": {
-        "id": "10017",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10017",
-        "value": "In Progress"
-      },
-      "customfield_10013": "ghx-label-3",
-      "customfield_10014": null,
-      "customfield_10015": null,
-      "customfield_10016": null,
-      "customfield_10017": "teal",
-      "customfield_10019": "2|i0avvj:00i",
-      "customfield_10020": null,
-      "customfield_10021": null,
-      "customfield_10022": null,
-      "customfield_10023": null,
-      "customfield_10024": null,
-      "customfield_10025": null,
-      "customfield_10027": null,
-      "customfield_10028": null,
-      "customfield_10029": null,
-      "customfield_10030": null,
-      "customfield_10031": null,
-      "customfield_10034": null,
-      "customfield_10035": null,
-      "customfield_10036": null,
-      "customfield_10037": null,
-      "customfield_10038": null,
-      "customfield_10039": null,
-      "customfield_10040": {
-        "id": "10020",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
-        "value": "Software"
-      },
-      "customfield_10044": {
-        "id": "10031",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
-        "value": "Barco Employee"
-      },
-      "customfield_10045": null,
-      "customfield_10049": null,
-      "customfield_10054": null,
-      "customfield_10055": null,
-      "customfield_10057": null,
-      "customfield_10059": null,
-      "customfield_10060": null,
-      "customfield_10061": null,
-      "customfield_10062": null,
-      "customfield_10063": null,
-      "customfield_10064": null,
-      "customfield_10065": null,
-      "customfield_10066": null,
-      "customfield_10067": null,
-      "customfield_10068": null,
-      "customfield_10069": null,
-      "customfield_10070": null,
-      "customfield_10077": null,
-      "customfield_10078": null,
-      "customfield_10079": null,
-      "customfield_10081": null,
-      "customfield_10082": null,
-      "customfield_10121": null,
-      "customfield_10122": null,
-      "customfield_10123": null,
-      "customfield_10124": null,
-      "customfield_10125": null,
-      "customfield_10128": null,
-      "customfield_10129": null,
-      "customfield_10130": null,
-      "customfield_10131": null,
-      "customfield_10132": null,
-      "customfield_10133": null,
-      "customfield_10167": null,
-      "customfield_10200": [],
-      "customfield_10201": null,
-      "customfield_10211": null,
-      "customfield_10213": null,
-      "customfield_10214": null,
-      "customfield_10281": null,
-      "customfield_10282": null,
-      "customfield_10283": null,
-      "customfield_10284": null,
-      "customfield_10318": null,
-      "customfield_11320": null,
-      "customfield_11322": null,
-      "customfield_11355": null,
-      "customfield_11356": null,
-      "customfield_11357": null,
-      "customfield_11390": null,
-      "customfield_11423": null,
-      "customfield_11456": null,
-      "customfield_12523": null,
-      "customfield_12524": null,
-      "customfield_12525": null,
-      "customfield_12526": null,
-      "customfield_12527": null,
-      "customfield_12528": null,
-      "customfield_12529": null,
-      "customfield_12530": null,
-      "customfield_12531": null,
-      "customfield_12532": [],
-      "customfield_12533": null,
-      "customfield_12534": null,
-      "customfield_12536": null,
-      "customfield_12537": null,
-      "customfield_12538": null,
-      "customfield_12539": null,
-      "customfield_12540": null,
-      "customfield_12541": null,
-      "customfield_12542": null,
-      "customfield_12543": null,
-      "customfield_12544": null,
-      "customfield_12545": null,
-      "customfield_12546": null,
-      "customfield_12547": null,
-      "customfield_12580": null,
-      "customfield_12613": null,
-      "customfield_12614": null,
-      "customfield_12615": null,
-      "customfield_12616": null,
-      "customfield_12617": null,
-      "customfield_12618": null,
-      "customfield_12619": null,
-      "customfield_12620": null,
-      "customfield_12621": null,
-      "customfield_12622": null,
-      "customfield_12623": null,
-      "customfield_12624": null,
-      "customfield_12625": null,
-      "customfield_12626": null,
-      "customfield_12627": null,
-      "customfield_12628": null,
-      "customfield_12629": null,
-      "customfield_12630": null,
-      "customfield_12631": null,
-      "customfield_12632": null,
-      "customfield_12633": null,
-      "customfield_12634": null,
-      "customfield_12635": null,
-      "customfield_12636": null,
-      "customfield_12637": null,
-      "customfield_12638": null,
-      "customfield_12639": null,
-      "customfield_12640": null,
-      "customfield_12641": null,
-      "customfield_12642": null,
-      "customfield_12643": null,
-      "customfield_12644": null,
-      "customfield_12645": null,
-      "customfield_12646": null,
-      "customfield_12647": null,
-      "customfield_12680": null,
-      "customfield_12713": null,
-      "customfield_12714": null,
-      "customfield_12715": null,
-      "customfield_12716": null,
-      "customfield_12717": null,
-      "customfield_12718": null,
-      "customfield_12719": null,
-      "description": "Resource reserve for team to pick up.\n\n* Wampus maximum *4* tickets in MA\n* Wolfe maximum 4 tickets in MA",
-      "duedate": null,
-      "fixVersions": [
-        {
-          "archived": false,
-          "description": "",
-          "id": "34900",
-          "name": "CX 26.02",
-          "releaseDate": "2026-02-26",
-          "released": false,
-          "self": "https://barco-nv.atlassian.net/rest/api/2/version/34900"
-        }
-      ],
-      "issuelinks": [
-        {
-          "id": "505694",
-          "outwardIssue": {
-            "fields": {
-              "issuetype": {
-                "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-                "hierarchyLevel": 1,
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-                "id": "10000",
-                "name": "Epic",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-                "subtask": false
-              },
-              "priority": {
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-                "id": "10000",
-                "name": "t.b.d.",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-              },
-              "status": {
-                "description": "The issue is reported and ready for the assignee to start work on it.",
-                "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-                "id": "10003",
-                "name": "Reported",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
-                "statusCategory": {
-                  "colorName": "blue-gray",
-                  "id": 2,
-                  "key": "new",
-                  "name": "To Do",
-                  "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-                }
-              },
-              "summary": "WAVE III - 26.03 Maintenance, Stability, and Continuous Improvement"
-            },
-            "id": "1003242",
-            "key": "CS0100-14453",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1003242"
-          },
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issueLink/505694",
-          "type": {
-            "id": "10001",
-            "inward": "is cloned by",
-            "name": "Cloners",
-            "outward": "clones",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issueLinkType/10001"
-          }
-        }
-      ],
-      "issuerestriction": {
-        "issuerestrictions": {},
-        "shouldDisplay": false
-      },
-      "issuetype": {
-        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
-        "hierarchyLevel": 1,
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
-        "id": "10000",
-        "name": "Epic",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
-        "subtask": false
-      },
-      "labels": [
-        "Lead_Wampus_Squad",
-        "Wave3",
-        "Wolfe_Squad"
-      ],
-      "lastViewed": null,
-      "parent": {
-        "fields": {
-          "issuetype": {
-            "avatarId": 10315,
-            "description": "A top-level initiative.",
-            "hierarchyLevel": 2,
-            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-            "id": "10117",
-            "name": "Initiative",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
-            "subtask": false
-          },
-          "priority": {
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-            "id": "10000",
-            "name": "t.b.d.",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-          },
-          "status": {
-            "description": "Identify what the problem is and for who? What is the value for Barco?",
-            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
-            "id": "10128",
-            "name": "Problem Validation",
-            "self": "https://barco-nv.atlassian.net/rest/api/2/status/10128",
-            "statusCategory": {
-              "colorName": "blue-gray",
-              "id": 2,
-              "key": "new",
-              "name": "To Do",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
-            }
-          },
-          "summary": "Quality | PQM&Debt&Release"
-        },
-        "id": "891432",
-        "key": "CS0102-98",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/891432"
-      },
-      "priority": {
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-        "id": "10000",
-        "name": "t.b.d.",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-      },
-      "progress": {
-        "progress": 0,
-        "total": 0
-      },
-      "project": {
-        "avatarUrls": {
-          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=xsmall",
-          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=small",
-          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423?size=medium",
-          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10423"
-        },
-        "id": "12089",
-        "key": "CS0100",
-        "name": "MX - Product Backlog",
-        "projectCategory": {
-          "description": "Meeting Experience",
-          "id": "10029",
-          "name": "Meeting Experience",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10029"
-        },
-        "projectTypeKey": "software",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/project/12089",
-        "simplified": false
-      },
-      "reporter": {
-        "accountId": "61eacba498cd610070718e32",
-        "accountType": "atlassian",
-        "active": true,
-        "avatarUrls": {
-          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/16",
-          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/24",
-          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/32",
-          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/61eacba498cd610070718e32/c99f4481-0f6b-422c-a141-ab3f1a681c06/48"
-        },
-        "displayName": "Ryan Huang",
-        "emailAddress": "ryan.r.huang@barco.com",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61eacba498cd610070718e32",
-        "timeZone": "Asia/Taipei"
-      },
-      "resolution": null,
-      "resolutiondate": null,
-      "security": null,
-      "status": {
-        "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/inprogress.png",
-        "id": "3",
-        "name": "In Progress",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/status/3",
-        "statusCategory": {
-          "colorName": "yellow",
-          "id": 4,
-          "key": "indeterminate",
-          "name": "In Progress",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
-        }
-      },
-      "statusCategory": {
-        "colorName": "yellow",
-        "id": 4,
-        "key": "indeterminate",
-        "name": "In Progress",
-        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
-      },
-      "statuscategorychangedate": "2026-02-09T03:18:08.314+0100",
-      "subtasks": [
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/closed.png",
-              "id": "6",
-              "name": "Closed",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/6",
-              "statusCategory": {
-                "colorName": "green",
-                "id": 3,
-                "key": "done",
-                "name": "Done",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/3"
-              }
-            },
-            "summary": "Define threat modeling strategy"
-          },
-          "id": "1020041",
-          "key": "CS0100-15471",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1020041"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/closed.png",
-              "id": "6",
-              "name": "Closed",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/6",
-              "statusCategory": {
-                "colorName": "green",
-                "id": 3,
-                "key": "done",
-                "name": "Done",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/3"
-              }
-            },
-            "summary": "Test | Practitest \ud83e\uddea\ud83d\udec2"
-          },
-          "id": "1020053",
-          "key": "CS0100-15477",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1020053"
-        },
-        {
-          "fields": {
-            "issuetype": {
-              "avatarId": 10557,
-              "description": "The Implementation Sub-Task is used to break down any development task. (Migrated on 19 Jun 2023 20:28 UTC)",
-              "hierarchyLevel": -1,
-              "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10557?size=medium",
-              "id": "10007",
-              "name": "Implementation Sub-Task",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10007",
-              "subtask": true
-            },
-            "priority": {
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
-              "id": "10000",
-              "name": "t.b.d.",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
-            },
-            "status": {
-              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
-              "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/closed.png",
-              "id": "6",
-              "name": "Closed",
-              "self": "https://barco-nv.atlassian.net/rest/api/2/status/6",
-              "statusCategory": {
-                "colorName": "green",
-                "id": 3,
-                "key": "done",
-                "name": "Done",
-                "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/3"
-              }
-            },
-            "summary": "Test | System test \ud83e\uddea\u2699\ufe0f"
-          },
-          "id": "1020055",
-          "key": "CS0100-15478",
-          "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1020055"
-        }
-      ],
-      "summary": "WAVE III - 26.02 Maintenance, Stability, and Continuous Improvement",
-      "timeestimate": null,
-      "timeoriginalestimate": null,
-      "timespent": null,
-      "timetracking": {},
-      "updated": "2026-02-09T03:18:08.313+0100",
-      "versions": [],
-      "votes": {
-        "hasVoted": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-15468/votes",
-        "votes": 0
-      },
-      "watches": {
-        "isWatching": false,
-        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/CS0100-15468/watchers",
-        "watchCount": 1
-      },
-      "worklog": {
-        "maxResults": 20,
-        "startAt": 0,
-        "total": 0,
-        "worklogs": []
-      },
-      "workratio": -1
-    },
-    "id": "1019980",
-    "key": "CS0100-15468",
-    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/1019980"
   },
   "CS0100-7651": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
@@ -17086,17 +15517,746 @@
     "key": "IT0058-814",
     "self": "https://barco-nv.atlassian.net/rest/api/2/issue/883145"
   },
+  "IT0066-1776": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
+    "fields": {
+      "aggregateprogress": {
+        "percent": 88,
+        "progress": 173400,
+        "total": 195000
+      },
+      "aggregatetimeestimate": 21600,
+      "aggregatetimeoriginalestimate": 313200,
+      "aggregatetimespent": 173400,
+      "assignee": null,
+      "attachment": [],
+      "comment": {
+        "comments": [
+          {
+            "author": {
+              "accountId": "5bbb10f1420fae14bc813b96",
+              "accountType": "atlassian",
+              "active": true,
+              "avatarUrls": {
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/16",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/24",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/32",
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/48"
+              },
+              "displayName": "Joost Allegaert",
+              "emailAddress": "joost.allegaert@barco.com",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5bbb10f1420fae14bc813b96",
+              "timeZone": "CET"
+            },
+            "body": "Tayfun will be elaborating with DRS & Mulesoft team - and as such evaluate  what needs to happen  for data to support the decompositioning. ( field content / lambda real time table)",
+            "created": "2025-04-09T09:18:10.750+0200",
+            "id": "1406096",
+            "jsdPublic": true,
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issue/913040/comment/1406096",
+            "updateAuthor": {
+              "accountId": "5bbb10f1420fae14bc813b96",
+              "accountType": "atlassian",
+              "active": true,
+              "avatarUrls": {
+                "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/16",
+                "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/24",
+                "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/32",
+                "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/48"
+              },
+              "displayName": "Joost Allegaert",
+              "emailAddress": "joost.allegaert@barco.com",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5bbb10f1420fae14bc813b96",
+              "timeZone": "CET"
+            },
+            "updated": "2025-04-09T09:18:10.750+0200"
+          }
+        ],
+        "maxResults": 1,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/913040/comment",
+        "startAt": 0,
+        "total": 1
+      },
+      "components": [],
+      "created": "2025-04-04T16:49:14.536+0200",
+      "creator": {
+        "accountId": "5bbb10f1420fae14bc813b96",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/16",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/24",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/32",
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/48"
+        },
+        "displayName": "Joost Allegaert",
+        "emailAddress": "joost.allegaert@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5bbb10f1420fae14bc813b96",
+        "timeZone": "CET"
+      },
+      "customfield_10000": "{}",
+      "customfield_10001": null,
+      "customfield_10002": [],
+      "customfield_10003": null,
+      "customfield_10004": null,
+      "customfield_10005": null,
+      "customfield_10006": null,
+      "customfield_10007": null,
+      "customfield_10008": null,
+      "customfield_10009": null,
+      "customfield_10010": null,
+      "customfield_10011": null,
+      "customfield_10012": {
+        "id": "10016",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10016",
+        "value": "To Do"
+      },
+      "customfield_10013": "ghx-label-4",
+      "customfield_10014": null,
+      "customfield_10015": null,
+      "customfield_10016": null,
+      "customfield_10017": "dark_blue",
+      "customfield_10019": "2|hzzaef:",
+      "customfield_10020": null,
+      "customfield_10021": null,
+      "customfield_10022": null,
+      "customfield_10023": null,
+      "customfield_10024": null,
+      "customfield_10025": null,
+      "customfield_10027": null,
+      "customfield_10028": null,
+      "customfield_10029": null,
+      "customfield_10030": null,
+      "customfield_10031": null,
+      "customfield_10034": null,
+      "customfield_10035": null,
+      "customfield_10036": null,
+      "customfield_10037": null,
+      "customfield_10038": null,
+      "customfield_10039": null,
+      "customfield_10040": {
+        "id": "10020",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
+        "value": "Software"
+      },
+      "customfield_10044": {
+        "id": "10031",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
+        "value": "Barco Employee"
+      },
+      "customfield_10045": null,
+      "customfield_10049": null,
+      "customfield_10054": null,
+      "customfield_10055": null,
+      "customfield_10057": null,
+      "customfield_10059": null,
+      "customfield_10060": null,
+      "customfield_10061": null,
+      "customfield_10062": null,
+      "customfield_10063": null,
+      "customfield_10064": null,
+      "customfield_10065": null,
+      "customfield_10066": null,
+      "customfield_10067": null,
+      "customfield_10068": null,
+      "customfield_10069": null,
+      "customfield_10070": null,
+      "customfield_10077": null,
+      "customfield_10078": null,
+      "customfield_10079": null,
+      "customfield_10081": null,
+      "customfield_10082": null,
+      "customfield_10121": null,
+      "customfield_10122": null,
+      "customfield_10123": null,
+      "customfield_10124": null,
+      "customfield_10125": null,
+      "customfield_10128": null,
+      "customfield_10129": null,
+      "customfield_10130": null,
+      "customfield_10131": null,
+      "customfield_10132": null,
+      "customfield_10133": null,
+      "customfield_10167": null,
+      "customfield_10200": [],
+      "customfield_10201": null,
+      "customfield_10211": null,
+      "customfield_10213": null,
+      "customfield_10214": null,
+      "customfield_10281": null,
+      "customfield_10282": null,
+      "customfield_10283": null,
+      "customfield_10284": null,
+      "customfield_10318": null,
+      "customfield_11320": null,
+      "customfield_11322": null,
+      "customfield_11355": null,
+      "customfield_11356": null,
+      "customfield_11357": null,
+      "customfield_11390": null,
+      "customfield_11423": null,
+      "customfield_11456": null,
+      "customfield_12523": null,
+      "customfield_12524": null,
+      "customfield_12525": null,
+      "customfield_12526": null,
+      "customfield_12527": null,
+      "customfield_12528": null,
+      "customfield_12529": null,
+      "customfield_12530": null,
+      "customfield_12531": null,
+      "customfield_12532": [],
+      "customfield_12533": null,
+      "customfield_12534": null,
+      "customfield_12536": null,
+      "customfield_12537": null,
+      "customfield_12538": null,
+      "customfield_12539": null,
+      "customfield_12540": null,
+      "customfield_12541": null,
+      "customfield_12542": null,
+      "customfield_12543": null,
+      "customfield_12544": null,
+      "customfield_12545": null,
+      "customfield_12546": null,
+      "customfield_12547": null,
+      "customfield_12580": null,
+      "customfield_12613": null,
+      "customfield_12614": null,
+      "customfield_12615": null,
+      "customfield_12616": null,
+      "customfield_12617": null,
+      "customfield_12618": null,
+      "customfield_12619": null,
+      "customfield_12620": null,
+      "customfield_12621": null,
+      "customfield_12622": null,
+      "customfield_12623": null,
+      "customfield_12624": null,
+      "customfield_12625": null,
+      "customfield_12626": null,
+      "customfield_12627": null,
+      "customfield_12628": null,
+      "customfield_12629": null,
+      "customfield_12630": null,
+      "customfield_12631": null,
+      "customfield_12632": null,
+      "customfield_12633": null,
+      "customfield_12634": null,
+      "customfield_12635": null,
+      "customfield_12636": null,
+      "customfield_12637": null,
+      "customfield_12638": null,
+      "customfield_12639": null,
+      "customfield_12640": null,
+      "customfield_12641": null,
+      "customfield_12642": null,
+      "customfield_12643": null,
+      "customfield_12644": null,
+      "customfield_12645": null,
+      "customfield_12646": null,
+      "customfield_12647": null,
+      "customfield_12680": null,
+      "customfield_12713": null,
+      "customfield_12714": null,
+      "customfield_12715": null,
+      "customfield_12716": null,
+      "customfield_12717": null,
+      "customfield_12718": null,
+      "customfield_12719": null,
+      "description": null,
+      "duedate": null,
+      "fixVersions": [],
+      "issuelinks": [],
+      "issuerestriction": {
+        "issuerestrictions": {},
+        "shouldDisplay": false
+      },
+      "issuetype": {
+        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
+        "hierarchyLevel": 1,
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
+        "id": "10000",
+        "name": "Epic",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
+        "subtask": false
+      },
+      "labels": [],
+      "lastViewed": null,
+      "parent": {
+        "fields": {
+          "issuetype": {
+            "avatarId": 10315,
+            "description": "A top-level initiative.",
+            "hierarchyLevel": 2,
+            "iconUrl": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+            "id": "10117",
+            "name": "Initiative",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10117",
+            "subtask": false
+          },
+          "priority": {
+            "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+            "id": "10000",
+            "name": "t.b.d.",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+          },
+          "status": {
+            "description": "This issue is being actively worked on at the moment by the assignee.",
+            "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/inprogress.png",
+            "id": "3",
+            "name": "In Progress",
+            "self": "https://barco-nv.atlassian.net/rest/api/2/status/3",
+            "statusCategory": {
+              "colorName": "yellow",
+              "id": 4,
+              "key": "indeterminate",
+              "name": "In Progress",
+              "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/4"
+            }
+          },
+          "summary": "DRS decompositioning"
+        },
+        "id": "892108",
+        "key": "IT0080-5",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/892108"
+      },
+      "priority": {
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+        "id": "10000",
+        "name": "t.b.d.",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+      },
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "project": {
+        "avatarUrls": {
+          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=xsmall",
+          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=small",
+          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=medium",
+          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408"
+        },
+        "id": "11801",
+        "key": "IT0066",
+        "name": "IT - Azure Data Platform",
+        "projectCategory": {
+          "description": "IT projects",
+          "id": "10012",
+          "name": "IT",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10012"
+        },
+        "projectTypeKey": "software",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/project/11801",
+        "simplified": false
+      },
+      "reporter": {
+        "accountId": "5bbb10f1420fae14bc813b96",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/16",
+          "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/24",
+          "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/32",
+          "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5bbb10f1420fae14bc813b96/d21ce9ec-cb17-462c-a740-22fbb59e4f89/48"
+        },
+        "displayName": "Joost Allegaert",
+        "emailAddress": "joost.allegaert@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=5bbb10f1420fae14bc813b96",
+        "timeZone": "CET"
+      },
+      "resolution": null,
+      "resolutiondate": null,
+      "security": null,
+      "status": {
+        "description": "The issue is reported and ready for the assignee to start work on it.",
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+        "id": "10003",
+        "name": "Reported",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+        "statusCategory": {
+          "colorName": "blue-gray",
+          "id": 2,
+          "key": "new",
+          "name": "To Do",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+        }
+      },
+      "statusCategory": {
+        "colorName": "blue-gray",
+        "id": 2,
+        "key": "new",
+        "name": "To Do",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+      },
+      "statuscategorychangedate": "2025-04-04T16:49:14.960+0200",
+      "subtasks": [],
+      "summary": "DRS decompositioning via data products",
+      "timeestimate": null,
+      "timeoriginalestimate": null,
+      "timespent": null,
+      "timetracking": {},
+      "updated": "2025-05-16T17:07:48.823+0200",
+      "versions": [],
+      "votes": {
+        "hasVoted": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-1776/votes",
+        "votes": 0
+      },
+      "watches": {
+        "isWatching": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-1776/watchers",
+        "watchCount": 1
+      },
+      "worklog": {
+        "maxResults": 20,
+        "startAt": 0,
+        "total": 0,
+        "worklogs": []
+      },
+      "workratio": -1
+    },
+    "id": "913040",
+    "key": "IT0066-1776",
+    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/913040"
+  },
+  "IT0066-2090": {
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
+    "fields": {
+      "aggregateprogress": {
+        "percent": 98,
+        "progress": 793500,
+        "total": 807900
+      },
+      "aggregatetimeestimate": 14400,
+      "aggregatetimeoriginalestimate": 626400,
+      "aggregatetimespent": 793500,
+      "assignee": null,
+      "attachment": [],
+      "comment": {
+        "comments": [],
+        "maxResults": 0,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/931548/comment",
+        "startAt": 0,
+        "total": 0
+      },
+      "components": [],
+      "created": "2025-05-28T09:37:55.274+0200",
+      "creator": {
+        "accountId": "61f3cc5f571f760071866a86",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "24x24": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "32x32": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "48x48": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png"
+        },
+        "displayName": "Tayfun Ozakinci",
+        "emailAddress": "tayfun.ozakinci@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61f3cc5f571f760071866a86",
+        "timeZone": "Europe/Brussels"
+      },
+      "customfield_10000": "{}",
+      "customfield_10001": null,
+      "customfield_10002": [],
+      "customfield_10003": null,
+      "customfield_10004": null,
+      "customfield_10005": null,
+      "customfield_10006": null,
+      "customfield_10007": null,
+      "customfield_10008": null,
+      "customfield_10009": null,
+      "customfield_10010": null,
+      "customfield_10011": null,
+      "customfield_10012": {
+        "id": "10016",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10016",
+        "value": "To Do"
+      },
+      "customfield_10013": "ghx-label-4",
+      "customfield_10014": null,
+      "customfield_10015": null,
+      "customfield_10016": null,
+      "customfield_10017": "green",
+      "customfield_10019": "2|i01i4v:",
+      "customfield_10020": null,
+      "customfield_10021": null,
+      "customfield_10022": null,
+      "customfield_10023": null,
+      "customfield_10024": null,
+      "customfield_10025": null,
+      "customfield_10027": null,
+      "customfield_10028": null,
+      "customfield_10029": null,
+      "customfield_10030": null,
+      "customfield_10031": null,
+      "customfield_10034": null,
+      "customfield_10035": null,
+      "customfield_10036": null,
+      "customfield_10037": null,
+      "customfield_10038": null,
+      "customfield_10039": null,
+      "customfield_10040": {
+        "id": "10020",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10020",
+        "value": "Software"
+      },
+      "customfield_10044": {
+        "id": "10031",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/customFieldOption/10031",
+        "value": "Barco Employee"
+      },
+      "customfield_10045": null,
+      "customfield_10049": null,
+      "customfield_10054": null,
+      "customfield_10055": null,
+      "customfield_10057": null,
+      "customfield_10059": null,
+      "customfield_10060": null,
+      "customfield_10061": null,
+      "customfield_10062": null,
+      "customfield_10063": null,
+      "customfield_10064": null,
+      "customfield_10065": null,
+      "customfield_10066": null,
+      "customfield_10067": null,
+      "customfield_10068": null,
+      "customfield_10069": null,
+      "customfield_10070": null,
+      "customfield_10077": null,
+      "customfield_10078": null,
+      "customfield_10079": null,
+      "customfield_10081": null,
+      "customfield_10082": null,
+      "customfield_10121": null,
+      "customfield_10122": null,
+      "customfield_10123": null,
+      "customfield_10124": null,
+      "customfield_10125": null,
+      "customfield_10128": null,
+      "customfield_10129": null,
+      "customfield_10130": null,
+      "customfield_10131": null,
+      "customfield_10132": null,
+      "customfield_10133": null,
+      "customfield_10167": null,
+      "customfield_10200": [],
+      "customfield_10201": null,
+      "customfield_10211": null,
+      "customfield_10213": null,
+      "customfield_10214": null,
+      "customfield_10281": null,
+      "customfield_10282": null,
+      "customfield_10283": null,
+      "customfield_10284": null,
+      "customfield_10318": null,
+      "customfield_11320": null,
+      "customfield_11322": null,
+      "customfield_11355": null,
+      "customfield_11356": null,
+      "customfield_11357": null,
+      "customfield_11390": null,
+      "customfield_11423": null,
+      "customfield_11456": null,
+      "customfield_12523": null,
+      "customfield_12524": null,
+      "customfield_12525": null,
+      "customfield_12526": null,
+      "customfield_12527": null,
+      "customfield_12528": null,
+      "customfield_12529": null,
+      "customfield_12530": null,
+      "customfield_12531": null,
+      "customfield_12532": [],
+      "customfield_12533": null,
+      "customfield_12534": null,
+      "customfield_12536": null,
+      "customfield_12537": null,
+      "customfield_12538": null,
+      "customfield_12539": null,
+      "customfield_12540": null,
+      "customfield_12541": null,
+      "customfield_12542": null,
+      "customfield_12543": null,
+      "customfield_12544": null,
+      "customfield_12545": null,
+      "customfield_12546": null,
+      "customfield_12547": null,
+      "customfield_12580": null,
+      "customfield_12613": null,
+      "customfield_12614": null,
+      "customfield_12615": null,
+      "customfield_12616": null,
+      "customfield_12617": null,
+      "customfield_12618": null,
+      "customfield_12619": null,
+      "customfield_12620": null,
+      "customfield_12621": null,
+      "customfield_12622": null,
+      "customfield_12623": null,
+      "customfield_12624": null,
+      "customfield_12625": null,
+      "customfield_12626": null,
+      "customfield_12627": null,
+      "customfield_12628": null,
+      "customfield_12629": null,
+      "customfield_12630": null,
+      "customfield_12631": null,
+      "customfield_12632": null,
+      "customfield_12633": null,
+      "customfield_12634": null,
+      "customfield_12635": null,
+      "customfield_12636": null,
+      "customfield_12637": null,
+      "customfield_12638": null,
+      "customfield_12639": null,
+      "customfield_12640": null,
+      "customfield_12641": null,
+      "customfield_12642": null,
+      "customfield_12643": null,
+      "customfield_12644": null,
+      "customfield_12645": null,
+      "customfield_12646": null,
+      "customfield_12647": null,
+      "customfield_12680": null,
+      "customfield_12713": null,
+      "customfield_12714": null,
+      "customfield_12715": null,
+      "customfield_12716": null,
+      "customfield_12717": null,
+      "customfield_12718": null,
+      "customfield_12719": null,
+      "description": null,
+      "duedate": null,
+      "fixVersions": [],
+      "issuelinks": [],
+      "issuerestriction": {
+        "issuerestrictions": {},
+        "shouldDisplay": false
+      },
+      "issuetype": {
+        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
+        "hierarchyLevel": 1,
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/issuetypes/epic.svg",
+        "id": "10000",
+        "name": "Epic",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issuetype/10000",
+        "subtask": false
+      },
+      "labels": [],
+      "lastViewed": null,
+      "priority": {
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/help_blue.gif",
+        "id": "10000",
+        "name": "t.b.d.",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/priority/10000"
+      },
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "project": {
+        "avatarUrls": {
+          "16x16": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=xsmall",
+          "24x24": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=small",
+          "32x32": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=medium",
+          "48x48": "https://barco-nv.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408"
+        },
+        "id": "11801",
+        "key": "IT0066",
+        "name": "IT - Azure Data Platform",
+        "projectCategory": {
+          "description": "IT projects",
+          "id": "10012",
+          "name": "IT",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/projectCategory/10012"
+        },
+        "projectTypeKey": "software",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/project/11801",
+        "simplified": false
+      },
+      "reporter": {
+        "accountId": "61f3cc5f571f760071866a86",
+        "accountType": "atlassian",
+        "active": true,
+        "avatarUrls": {
+          "16x16": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "24x24": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "32x32": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png",
+          "48x48": "https://secure.gravatar.com/avatar/0f9d5eb6583bcb14d4ccc0ddae1c761b?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTO-2.png"
+        },
+        "displayName": "Tayfun Ozakinci",
+        "emailAddress": "tayfun.ozakinci@barco.com",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/user?accountId=61f3cc5f571f760071866a86",
+        "timeZone": "Europe/Brussels"
+      },
+      "resolution": null,
+      "resolutiondate": null,
+      "security": null,
+      "status": {
+        "description": "The issue is reported and ready for the assignee to start work on it.",
+        "iconUrl": "https://barco-nv.atlassian.net/images/icons/statuses/generic.png",
+        "id": "10003",
+        "name": "Reported",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/status/10003",
+        "statusCategory": {
+          "colorName": "blue-gray",
+          "id": 2,
+          "key": "new",
+          "name": "To Do",
+          "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+        }
+      },
+      "statusCategory": {
+        "colorName": "blue-gray",
+        "id": 2,
+        "key": "new",
+        "name": "To Do",
+        "self": "https://barco-nv.atlassian.net/rest/api/2/statuscategory/2"
+      },
+      "statuscategorychangedate": "2025-05-28T09:37:55.857+0200",
+      "subtasks": [],
+      "summary": "Data Quality",
+      "timeestimate": null,
+      "timeoriginalestimate": null,
+      "timespent": null,
+      "timetracking": {},
+      "updated": "2025-05-28T09:37:56.068+0200",
+      "versions": [],
+      "votes": {
+        "hasVoted": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2090/votes",
+        "votes": 0
+      },
+      "watches": {
+        "isWatching": false,
+        "self": "https://barco-nv.atlassian.net/rest/api/2/issue/IT0066-2090/watchers",
+        "watchCount": 1
+      },
+      "worklog": {
+        "maxResults": 20,
+        "startAt": 0,
+        "total": 0,
+        "worklogs": []
+      },
+      "workratio": -1
+    },
+    "id": "931548",
+    "key": "IT0066-2090",
+    "self": "https://barco-nv.atlassian.net/rest/api/2/issue/931548"
+  },
   "IT0066-2540": {
     "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
     "fields": {
       "aggregateprogress": {
         "percent": 100,
-        "progress": 608400,
-        "total": 608400
+        "progress": 651600,
+        "total": 651600
       },
       "aggregatetimeestimate": 0,
       "aggregatetimeoriginalestimate": 0,
-      "aggregatetimespent": 608400,
+      "aggregatetimespent": 651600,
       "assignee": null,
       "attachment": [],
       "comment": {

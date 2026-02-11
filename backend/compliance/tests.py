@@ -337,6 +337,125 @@ class ComplianceApiTests(TestCase):
         self.assertEqual(payload["count"], 1)
         self.assertEqual(payload["epics"][0]["jira_key"], "ABC-203")
 
+    def test_metrics_endpoint_aggregates_latest_active_snapshot_per_sprint(self):
+        sprint_other_active = SprintSnapshot.objects.create(
+            jira_sprint_id="777",
+            sprint_name="Sprint X",
+            sprint_state="active",
+            sync_timestamp=self.sprint_current.sync_timestamp - timedelta(days=1),
+        )
+        epic_other = EpicSnapshot.objects.create(
+            sprint_snapshot=sprint_other_active,
+            jira_issue_id="3011",
+            jira_key="ABC-204",
+            summary="Other active sprint epic",
+            status_name="In Progress",
+            resolution_name="",
+            is_done=False,
+            jira_url="https://example.atlassian.net/browse/ABC-204",
+            missing_squad_labels=False,
+            squad_label_warnings=[],
+        )
+        epic_other.teams.add(self.team_mobile)
+
+        response = self.client.get("/api/metrics")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["scope"]["scope_mode"], "aggregate")
+        self.assertEqual(payload["scope"]["sprint_snapshot_count"], 2)
+        self.assertIn(self.sprint_current.id, payload["scope"]["sprint_snapshot_ids"])
+        self.assertIn(sprint_other_active.id, payload["scope"]["sprint_snapshot_ids"])
+        self.assertEqual(payload["summary"]["total_epics"], 4)
+        self.assertEqual(payload["summary"]["compliant_epics"], 1)
+        self.assertEqual(payload["summary"]["non_compliant_epics"], 3)
+
+    def test_metrics_endpoint_aggregates_latest_sync_batch_when_multiple_snapshots_share_timestamp(self):
+        sprint_same_batch = SprintSnapshot.objects.create(
+            jira_sprint_id="101",
+            sprint_name="Sprint 11",
+            sprint_state="active",
+            sync_timestamp=self.sprint_current.sync_timestamp,
+        )
+        epic_extra = EpicSnapshot.objects.create(
+            sprint_snapshot=sprint_same_batch,
+            jira_issue_id="3004",
+            jira_key="ABC-204",
+            summary="Another epic in latest batch",
+            status_name="In Progress",
+            resolution_name="",
+            is_done=False,
+            jira_url="https://example.atlassian.net/browse/ABC-204",
+            missing_squad_labels=False,
+            squad_label_warnings=[],
+        )
+        epic_extra.teams.add(self.team_mobile)
+        DoDTaskSnapshot.objects.create(
+            epic_snapshot=epic_extra,
+            jira_issue_id="4004",
+            jira_key="ABC-214",
+            summary="DoD - Automated tests",
+            category="automated_tests",
+            status_name="Done",
+            resolution_name="Done",
+            is_done=True,
+            has_evidence_link=True,
+            evidence_link="https://example.test/cases/4",
+            non_compliance_reason="",
+        )
+
+        response = self.client.get("/api/metrics")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["scope"]["scope_mode"], "aggregate")
+        self.assertEqual(payload["scope"]["sprint_snapshot_count"], 2)
+        self.assertEqual(payload["summary"]["total_epics"], 4)
+        self.assertEqual(payload["summary"]["compliant_epics"], 2)
+        self.assertEqual(payload["summary"]["non_compliant_epics"], 2)
+
+    def test_non_compliant_payload_includes_sprint_snapshot_metadata(self):
+        response = self.client.get("/api/epics/non-compliant")
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertGreaterEqual(payload["count"], 1)
+        sample = payload["epics"][0]
+        self.assertIn("sprint_snapshot_id", sample)
+        self.assertIn("jira_sprint_id", sample)
+        self.assertIn("sprint_name", sample)
+
+    @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
+    def test_nudge_endpoint_resolves_epic_from_aggregate_latest_batch_scope(self):
+        sprint_same_batch = SprintSnapshot.objects.create(
+            jira_sprint_id="101",
+            sprint_name="Sprint 11",
+            sprint_state="active",
+            sync_timestamp=self.sprint_current.sync_timestamp,
+        )
+        aggregate_epic = EpicSnapshot.objects.create(
+            sprint_snapshot=sprint_same_batch,
+            jira_issue_id="3999",
+            jira_key="XYZ-999",
+            summary="Aggregate scope nudge target",
+            status_name="In Progress",
+            resolution_name="",
+            is_done=False,
+            jira_url="https://example.atlassian.net/browse/XYZ-999",
+            missing_squad_labels=False,
+            squad_label_warnings=[],
+        )
+        aggregate_epic.teams.add(self.team_mobile)
+
+        response = self.client.post(
+            f"/api/epics/{aggregate_epic.jira_key}/nudge",
+            data=json.dumps({"recipients": ["mobile@example.com"]}),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["epic_key"], aggregate_epic.jira_key)
+
     @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
     def test_nudge_endpoint_sends_email_and_creates_log(self):
         with self.assertLogs("dod.audit", level="INFO") as captured:
